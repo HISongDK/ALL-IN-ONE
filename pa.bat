@@ -27,6 +27,7 @@ echo 推送代码
 echo;
 git push
 
+explorer https://github.com/SongDeKang/ALL-IN-ONE
 
 
 :: 暂停命令 输出为空
