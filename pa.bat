@@ -17,11 +17,15 @@ echo;
 
 echo 添加变更
 git add .
+git status
+echo;
 set /p message=请输入 commit 信息:
 echo 提交代码
 echo "%message%"
 git commit -m "%message%"
 echo 推送代码
+echo;
+@REM git push
 
 
 
