@@ -42,10 +42,11 @@ ul {
 }
 
 .game {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -70%); */
+  /* 这样居中,元素宽高变化时,位置也会变化 */
   display: flex;
   flex-direction: row;
 }
