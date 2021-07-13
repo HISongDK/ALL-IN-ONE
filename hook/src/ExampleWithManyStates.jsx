@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 function ExampleWithManyStates() {
   // 声明多个变量
-  const [age, setAge] = useState(24);
-  const [fruit, setFruit] = useState("apple");
-  const [todos, setTodos] = useState([{ text: "Learn Hooks" }]);
+  const [age] = useState(24);
+  const [fruit] = useState("apple");
+  const [todos] = useState([{ text: "Learn Hooks" }]);
   return (
     <div>
       <p>年龄: {age}</p>
