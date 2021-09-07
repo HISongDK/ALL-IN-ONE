@@ -1,11 +1,9 @@
 import React,{ useState,useEffect } from 'react'
+import useFriendStatus from './useFriendStatus'
 
 function FriendStatus(props) {
-	const [isOnline,setIsOnline]=useState(null)
 
-	function handleStatusChange(status){
-		setIsOnline(status.isOnline)
-	}
+	const isOnline = useFriendStatus(props.friendID)
 
 	useEffect(()=>{
 		// 订阅及取消订阅好友状态 伪代码
