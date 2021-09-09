@@ -40,7 +40,7 @@ module.exports = defineConfig({
         '@typescript-eslint/no-unused-vars': 'off',
         'vue/html-indent': [
             'error',
-            4,
+            2,
             {
                 attribute: 1,
                 baseIndent: 1,
