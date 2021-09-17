@@ -8,6 +8,9 @@
     "prepare": "husky install",
     "pretty-quick": "pretty-quick --staged"
   },
+  "pre-commit": [
+    "pretty-quick"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SongDeKang/ALL-IN-ONE.git"
@@ -19,10 +22,10 @@
   },
   "homepage": "https://github.com/SongDeKang/ALL-IN-ONE#readme",
   "devDependencies": {
-    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.4.0",
-    "pretty-quick": "^3.1.1",
-    "husky": "^7.0.0"
+    "pretty-quick": "^3.1.1"
   },
   "dependencies": {}
 }
