@@ -20,9 +20,9 @@
   "homepage": "https://github.com/SongDeKang/ALL-IN-ONE#readme",
   "devDependencies": {
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.2",
     "prettier": "^2.4.0",
-    "pretty-quick": "^3.1.1"
+    "pretty-quick": "^3.1.1",
+    "husky": "^7.0.0"
   },
   "dependencies": {}
 }
