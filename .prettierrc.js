@@ -3,6 +3,8 @@ module.exports = {
   printWidth: 80,
   // 使用 4 个空格缩进
   tabWidth: 2,
+
+  
   // 不使用缩进符，而使用空格
   useTabs: false,
   // 行尾不需要有分号
