@@ -287,12 +287,22 @@ class LRUCache {
     get(key) {
         const hasKey = this.cache.has(key)
 
-        if (!hasKey) return -1 // 这么写可读性有点差
+        // if (!hasKey) return -1 // 这么写可读性有点差
 
-        const val = this.cache.get(key)
-        this.cache.delete(key)
-        this.cache.set(key, val)
-        return val
+        // const val = this.cache.get(key)
+        // this.cache.delete(key)
+        // this.cache.set(key, val)
+        // return val
+
+        if (hasKey) {
+            const val = this.cache.get(key)
+            this.cache.delete(key)
+            this.cache.set(key, val)
+
+            return val
+        } else {
+            return -1
+        }
     }
     put(key, val) {
         const hasKey = this.cache.has(key)
