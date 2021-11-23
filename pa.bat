@@ -7,12 +7,13 @@ chcp 65001
 echo;
 echo 当前目录为: %cd%
 
-if not %cd% == C:\Users\song\Desktop\ALL-IN-ONE (
+if not "%cd%" == "C:\Users\song\Desktop\ALL-IN-ONE" (
 echo 跳转目录到: ALL-IN-ONE
-cd C:\Users\14944\Desktop\ALL-IN-ONE
+cd "C:\Users\song\Desktop\ALL-IN-ONE"
 echo 当前目录为: !cd!
+if "!cd!" == "C:\Users\song\Desktop\ALL-IN-ONE" ( echo 跳转成功 ) else ( echo 跳转失败 )
 echo;
-) if !cd! == C:\Users\song\Desktop\ALL-IN-ONE ( echo 跳转成功 ) else ( echo 跳转失败 )
+) 
 
 echo 添加变更
 git add .
