@@ -387,3 +387,49 @@ function parse(json) {
 }
 console.log(JSON.stringify({ name: 'song', age: 24 }))
 console.log(parse('{"name":"song","age":24}'))
+/**
+|--------------------------------------------------
+| 14. 将 DOM 转化为 树结构对象
+|--------------------------------------------------
+*/
+/**
+ *  题目描述：
+    <div>
+        <span></span>
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+ *  将上方的DOM转化为下面的树结构对象
+    {
+        tag: 'DIV',
+        children: [
+            { tag: 'SPAN', children: [] },
+            {
+                tag: 'UL',
+                children: [
+                    { tag: 'LI', children: [] },
+                    { tag: 'LI', children: [] }
+                ]
+            }
+        ]
+    }
+ */
+
+// 实现如下：
+function dom2tree(dom /* 直接接受 dom 节点么，good idea */) {
+    // 肯定是要递归的
+    let obj = {}
+    obj.children = []
+    obj.tag = dom.tagName
+
+    Array.from(dom.children).forEach((item) =>
+        obj.children.push(dom2tree(item)),
+    )
+
+    return obj
+}
+const domNode = document.getElementById('dom2tree')
+console.dir(domNode)
+console.log(dom2tree(domNode))
