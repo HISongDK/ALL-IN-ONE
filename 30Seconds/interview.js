@@ -321,3 +321,59 @@ class LRUCache {
         }
     }
 }
+/**
+|--------------------------------------------------
+| 12. 简单实现发布订阅
+|--------------------------------------------------
+*/
+// 题目描述：实现一个发布订阅模式拥有 on emit once off 方法
+class EventEmitter {
+    constructor() {
+        // 挂载到实例上一个可进行操作的对象
+        this.cache = {}
+    }
+    // ON 方法
+    on(name, fn) {
+        // 获取是否已经有监听的名称
+        const tasks = this.cache[name]
+        if (tasks) {
+            // 如果已添加过监听，就把继续添加监听的执行函数
+            this.cache[name].push(fn)
+        } else {
+            // 之前无添加监听,将执行函数作为数组项赋值给该名称
+            this.cache[name] = [fn]
+        }
+    }
+    // OFF 方法
+    off(name, fn /* 移除对某个名称的某个执行函数的监听 */) {
+        const tasks = this.cache[name]
+        if (tasks) {
+            // 获取数组中该执行函数的索引
+            const index = tasks.findIndex((item) => item === fn)
+            if (index > -1) {
+                this.cache[name].splice(index, 1)
+            }
+        }
+    }
+    // EMIT 触发对应的监听名称
+    emit(name, once = false, ...args) {
+        // 复制一份，防止回调中继续 on 导致死循环 （没太理解先跳过）
+        const tasks = this.cache[name]?.slice()
+
+        if (tasks) {
+            for (const task of tasks) {
+                task(...args)
+            }
+        }
+
+        if (once) {
+            // 只触发一次，就是触发后删除对该名称的订阅
+            delete this.cache[name]
+        }
+    }
+    // ONCE 方法，只触发一次，就是调用 emit 时 once 参数为 true
+    once(name, ...args) {
+        // 挺有意思的，这种封装
+        this.emit(name, true, ...args)
+    }
+}
