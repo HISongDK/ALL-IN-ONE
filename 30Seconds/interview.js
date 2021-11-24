@@ -377,3 +377,13 @@ class EventEmitter {
         this.emit(name, true, ...args)
     }
 }
+/**
+|--------------------------------------------------
+| 13. 实现 JSON.parse
+|--------------------------------------------------
+*/
+function parse(json) {
+    return eval(`(${json})`)
+}
+console.log(JSON.stringify({ name: 'song', age: 24 }))
+console.log(parse('{"name":"song","age":24}'))
