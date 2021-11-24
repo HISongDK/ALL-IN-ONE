@@ -433,3 +433,57 @@ function dom2tree(dom /* 直接接受 dom 节点么，good idea */) {
 const domNode = document.getElementById('dom2tree')
 console.dir(domNode)
 console.log(dom2tree(domNode))
+/**
+|--------------------------------------------------
+| 15. 将树结构转换为 DOM
+|--------------------------------------------------
+*/
+/* 
+    {
+        tag: 'DIV',
+        children: [
+            { tag: 'SPAN', children: [] },
+            {
+                tag: 'UL',
+                children: [
+                    { tag: 'LI', children: [] },
+                    { tag: 'LI', children: [] }
+                ]
+            }
+        ]
+    }
+
+    将上方的树结构对象转化为下面的DOM
+
+    <div>
+        <span></span>
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+*/
+// 实现如下：（直接抄了，不细看）
+function _render(vnode) {
+    // 数字转为字符串
+    if (typeof vnode === 'number') {
+        vnode = String(vnode)
+    }
+    // 字符串直接就是文本节点
+    if (typeof vnode === 'string') {
+        return document.createTextNode(vnode)
+    }
+    // 正常的 DOM 结构处理
+    const dom = document.createElement(vnode.tag)
+    if (vnode.attrs) {
+        // 遍历属性（问题是题目上您也每给 attrs 的数据结构啊）
+        Object.keys(vnode.attrs).forEach((key) => {
+            const value = vnode.attrs[key]
+            dom.setAttribute(key, value)
+        })
+    }
+    // 子数组递归
+    vnode.children.forEach((child) => dom.appendChild(_render(child)))
+
+    return dom
+}
