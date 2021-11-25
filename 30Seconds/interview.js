@@ -487,3 +487,93 @@ function _render(vnode) {
 
     return dom
 }
+// TODO: 以下为复制，没时间了，尽量看一遍完事
+/**
+|--------------------------------------------------
+| 16、判断一个对象有环引用
+|--------------------------------------------------
+*/
+// 题目描述：验证一个对象有无环引用
+
+var obj = {
+    a: {
+        c: [1, 2],
+    },
+    b: 1,
+}
+obj.a.c.d = obj
+console.log(cycleDetector(obj)) // true
+
+// 实现思路：用一个数组存储每一个遍历过的对象，下次找到数组中存在，则说明环引用
+
+function cycleDetector(obj) {
+    const arr = [obj] // 如题所示先放入数组
+    let flag = false // 标识，直接返回true false应该也无不可，这样更清晰一点
+
+    function cycle(o) {
+        const keys = Object.keys(o) // 获取该对象所有键名
+        for (const key of keys) {
+            const temp = o[key]
+            // 遍历对象，判断为引用类型的元素进行处理
+            if (typeof temp === 'object' && temp !== null) {
+                if (arr.indexOf(temp) >= 0) {
+                    // 数组中能找到，就将标识改为 true
+                    flag = true
+                    return
+                }
+                // 否则将该元素放入数组
+                arr.push(temp)
+                // 对该对象进行递归操作。
+                // 看到可以这么递归和上面的对象类型判断，我才知道 Object.keys() 也适用于数组和函数
+                cycle(temp)
+            }
+        }
+    }
+
+    cycle(obj)
+
+    return flag
+}
+/**
+|--------------------------------------------------
+| 17、计算一个对象的层数
+|--------------------------------------------------
+*/
+// 题目描述：给你一个对象，统计一下它的层数
+
+const obj = {
+    a: { b: [1] },
+    c: { d: { e: { f: 1 } } },
+}
+
+console.log(loopGetLevel(obj)) // 4
+
+// 实现如下:
+function loopGetLevel(obj) {
+    // 外层函数内定义变量，定义内层函数操作
+    // 这种闭包在这好像很常用
+    var res = 1 // 一个层级标识
+
+    function computedLevel(obj, level) {
+        var level = level ? level : 0 // level 有值用值，否则初始为 0
+        if (typeof obj === 'object') {
+            // 参数是引用类型进行操作
+            for (var key in obj) {
+                // 遍历，是引用类型就继续递归 加level
+                // 否则就把 level 赋值给 res
+                // 操作下一个元素
+                if (typeof obj[key] === 'object') {
+                    computedLevel(obj[key], level + 1)
+                } else {
+                    res = level + 1 > res ? level + 1 : res
+                }
+            }
+        } else {
+            // 已经加过计算过的level，就赋值给res
+            res = level > res ? level : res
+        }
+    }
+    computedLevel(obj)
+
+    return res
+}
