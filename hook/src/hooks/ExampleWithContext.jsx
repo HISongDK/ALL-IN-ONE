@@ -3,7 +3,7 @@ import store from '../context/storeContext'
 
 function ExampleWithContext() {
     /**
-     * 使用 useContext 获取上下问状态
+     * 使用 useContext 获取上下文状态
      */
     const [state, dispatch] = useContext(store)
 
