@@ -20,7 +20,7 @@ function SearchList() {
   }
 
   // 防抖
-  const debounce = (fn, delay = 5000) => {
+  const debounce = (fn, delay = 500) => {
     return (e) => {
       console.log(e)
       if (timerRef.current) clearTimeout(timerRef.current)
