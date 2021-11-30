@@ -1,7 +1,7 @@
-let myName = 'Tom';
+let myName = 'Tom'
 
 interface Foo {
-  notEmpth: string;
+  notEmpth: string
 }
 
-export {};
+export {}

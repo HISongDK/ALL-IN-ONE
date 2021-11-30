@@ -1,6 +1,5 @@
-import logo from './logo.svg'
-import './App.css'
 import Component from './component'
+import SearchList from './SearchList'
 
 function App() {
   let a = 1
@@ -12,6 +11,9 @@ function App() {
     <div className="App">
       <Component a={a}></Component>
       <button onClick={handleClick}>ADD-a</button>
+      <br />
+      <br />
+      <SearchList />
     </div>
   )
 }
