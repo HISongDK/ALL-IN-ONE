@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
+import Component from './component'
 
 function App() {
+  let a = 1
+  const handleClick = () => {
+    console.log(a)
+    a = a + 1
+  }
   return (
     <div className="App">
-      <header className="App-header" style={{ height: 'auto' }}>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;React
-        </a>
-      </header>
+      <Component a={a}></Component>
+      <button onClick={handleClick}>ADD-a</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
