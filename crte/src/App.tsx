@@ -7,6 +7,8 @@ import './index.css'
 
 import { useStoreState, useStoreActions } from 'easy-peasy'
 
+import TodoList from './components/TodoList'
+
 function App() {
   const todos = useStoreState((state: any) => state.todos.list)
   const del = useStoreActions((actions: any) => actions.todos.delete)
@@ -22,6 +24,8 @@ function App() {
           {item}
         </li>
       ))}
+      <hr />
+      <TodoList></TodoList>
     </div>
   )
 }
