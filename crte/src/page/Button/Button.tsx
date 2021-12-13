@@ -4,8 +4,8 @@ interface Props {
   text: string
 }
 
-function Button({ text }: Props): ReactElement {
-  return <div>{{ text }}</div>
+function Button({ text = '按钮' }: Props): ReactElement {
+  return <div>{text}</div>
 }
 
-export default <Button text="Hello World" />
+export default Button

@@ -1,9 +1,8 @@
-import React, { ReactElement, useState, Fragment } from 'react'
-import { NavLink, Link, Routes, Route, BrowserRouter } from 'react-router-dom'
+import React, { ReactElement, useState } from 'react'
+import { Link, Switch, Route } from 'react-router-dom'
 import routesConfig from '../../router/config'
 
 import { Layout, Card, Text, ExternalLink, Menu, NavMenu } from 'tea-component'
-import Button from '../Button/Button'
 
 const { Header, Body, Footer, Sider, Content } = Layout
 
@@ -56,6 +55,7 @@ export default function Home() {
               <Menu.Item title="二级菜单" {...getMenuItemProps('2-2')} />
               {routesConfig.map((route) => (
                 <Menu.Item
+                  key={route.path}
                   title={route.title}
                   render={() => <Link to={route.path}></Link>}
                 ></Menu.Item>
@@ -79,13 +79,15 @@ export default function Home() {
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
               <Card.Body>内容卡片</Card.Body>
-              <Fragment>
-                <Routes>
-                  {routesConfig.map((route) => (
-                    <Route path={route.path} element={Button}></Route>
-                  ))}
-                </Routes>
-              </Fragment>
+              <Switch>
+                {routesConfig.map((route) => (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    component={route.component}
+                  ></Route>
+                ))}
+              </Switch>
             </Card>
           </Content.Body>
           <Content.Footer>
