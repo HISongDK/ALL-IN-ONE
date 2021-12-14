@@ -51,15 +51,18 @@ export default function Home() {
             />
 
             <Menu.SubMenu defaultOpened title="一级菜单" icon={icon}>
-              <Menu.Item title="二级菜单" {...getMenuItemProps('2-1')} />
-              <Menu.Item title="二级菜单" {...getMenuItemProps('2-2')} />
-              {routesConfig.map((route) => (
-                <Menu.Item
-                  key={route.path}
-                  title={route.title}
-                  render={() => <Link to={route.path}></Link>}
-                ></Menu.Item>
-              ))}
+              {/* <Menu.Item title="二级菜单" {...getMenuItemProps('2-1')} />
+              <Menu.Item title="二级菜单" {...getMenuItemProps('2-2')} /> */}
+              {routesConfig.map((route) => {
+                console.log(route.title)
+                return (
+                  <Menu.Item
+                    key={route.path}
+                    title={<Link to={route.path}>{route.title}</Link>}
+                    // render={() => <Link to={route.path}>{route.title}</Link>}
+                  />
+                )
+              })}
             </Menu.SubMenu>
           </Menu>
         </Sider>
@@ -79,6 +82,9 @@ export default function Home() {
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
               <Card.Body>内容卡片</Card.Body>
+              {/* 
+                注册路由
+              */}
               <Switch>
                 {routesConfig.map((route) => (
                   <Route
