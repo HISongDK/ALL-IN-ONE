@@ -18,7 +18,7 @@ interface IProps {
 //   )
 // }
 
-const Result = ({ code, text }: IProps) => {
+const Result = ({ code = 404, text = '找不到页面。。。' }: IProps) => {
   //   const { code, text } = props
 
   return (
@@ -27,7 +27,7 @@ const Result = ({ code, text }: IProps) => {
         fontSize: '20px',
       }}
     >
-      {code + ':' + text}
+      {code + ': ' + text}
     </div>
   )
 }

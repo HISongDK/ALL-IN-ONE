@@ -50,9 +50,7 @@ export default function Home() {
               {...getMenuItemProps('1')}
             />
 
-            <Menu.SubMenu defaultOpened title="一级菜单" icon={icon}>
-              {/* <Menu.Item title="二级菜单" {...getMenuItemProps('2-1')} />
-              <Menu.Item title="二级菜单" {...getMenuItemProps('2-2')} /> */}
+            <Menu.SubMenu defaultOpened title="调试练习" icon={icon}>
               {routesConfig.map((route) => {
                 console.log(route.title)
                 return (
@@ -81,37 +79,40 @@ export default function Home() {
           <Content.Body>
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
-              <Card.Body>内容卡片</Card.Body>
-              {/* 
-                注册路由
-              */}
-              <Switch>
-                {routesConfig.map((route) => (
-                  <Route
-                    key={route.path}
-                    path={route.path}
-                    component={route.component}
-                  ></Route>
-                ))}
-              </Switch>
+              <Card.Body>
+                内容卡片
+                <hr />
+                {/* 
+                  注册路由
+                */}
+                <Switch>
+                  {routesConfig.map((route) => (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      component={route.component}
+                    ></Route>
+                  ))}
+                </Switch>
+              </Card.Body>
             </Card>
           </Content.Body>
-          <Content.Footer>
+          {/* <Content.Footer>
             <div className="demo-layout-footer">
               (可选项)自定义页脚
               <br />
               京公网安备 11010802017518 粤B2-20090059-1
             </div>
-          </Content.Footer>
+          </Content.Footer> */}
         </Content>
       </Body>
-      <Footer style={{ textAlign: 'center' }}>
+      {/* <Footer style={{ textAlign: 'center' }}>
         <div className="demo-layout-footer">
           (可选项)自定义页脚
           <br />
           京公网安备 11010802017518 粤B2-20090059-1
         </div>
-      </Footer>
+      </Footer> */}
     </Layout>
   )
 }
