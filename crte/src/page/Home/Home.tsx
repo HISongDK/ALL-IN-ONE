@@ -1,5 +1,12 @@
-import React, { ReactElement, useState } from 'react'
-import { Link, Switch, Route } from 'react-router-dom'
+import React, { ReactElement, useEffect, useState } from 'react'
+import {
+  Link,
+  NavLink,
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+} from 'react-router-dom'
 import routesConfig from '../../router/config'
 
 import { Layout, Card, Text, ExternalLink, Menu, NavMenu } from 'tea-component'
@@ -12,12 +19,19 @@ const icon: [string, string] = /** @type {[string, string]} */ [
 ]
 
 export default function Home() {
+  const history = useHistory()
+  const { pathname } = useLocation()
+
   const [selected, setSelected] = useState('overview')
 
   const getMenuItemProps = (id: string) => ({
     selected: selected === id,
     onClick: () => setSelected(id),
   })
+
+  const pageJump = (path: string) => {
+    history.push(path)
+  }
 
   return (
     <Layout className="demo-layout-l">
@@ -51,16 +65,16 @@ export default function Home() {
             />
 
             <Menu.SubMenu defaultOpened title="调试练习" icon={icon}>
-              {routesConfig.map((route) => {
-                console.log(route.title)
-                return (
-                  <Menu.Item
-                    key={route.path}
-                    title={<Link to={route.path}>{route.title}</Link>}
-                    // render={() => <Link to={route.path}>{route.title}</Link>}
-                  />
-                )
-              })}
+              {routesConfig.map((route) => (
+                <Menu.Item
+                  key={route.path}
+                  // title={<NavLink to={route.path}>{route.title}</NavLink>}
+                  // render={() => <Link to={route.path}>{route.title}</Link>}
+                  title={<span>{route.title}</span>}
+                  selected={pathname === route.path}
+                  onClick={() => pageJump(route.path)}
+                />
+              ))}
             </Menu.SubMenu>
           </Menu>
         </Sider>
