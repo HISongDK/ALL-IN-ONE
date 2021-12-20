@@ -94,8 +94,6 @@ export default function Home() {
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
               <Card.Body>
-                内容卡片
-                <hr />
                 {/* 
                   注册路由
                 */}
