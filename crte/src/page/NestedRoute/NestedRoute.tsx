@@ -1,11 +1,16 @@
 import React from 'react'
-import { Link, Route, useHistory } from 'react-router-dom'
+import { Link, Redirect, Route, useHistory } from 'react-router-dom'
 import SubRoute1 from './SubRoute1/SubRoute1'
+import SubRoute2 from './SubRoute2/SubRoute2'
+
+let arr = [1, 2]
 
 function NestedRoute() {
   const history = useHistory()
   const changeRoute = () => {
-    history.push('/SubRoute1')
+    const [a, b] = arr
+    arr = arr.reverse()
+    history.push(`/nestedRoute/subRoute${a}`)
   }
   return (
     <div>
@@ -14,10 +19,15 @@ function NestedRoute() {
       <hr />
       <ul>
         <li>
-          <Link to={'SubRoute1'}>sub1</Link>
+          <Link to={'/nestedRoute/subRoute1'}>sub1</Link>
+        </li>
+        <li>
+          <Link to={'/nestedRoute/subRoute2'}>sub2</Link>
         </li>
       </ul>
-      <Route path={'SubRoute1'} component={SubRoute1}></Route>
+      <Route path={'/nestedRoute/subRoute1'} component={SubRoute1}></Route>
+      <Route path={'/nestedRoute/subRoute2'} component={SubRoute2}></Route>
+      <Redirect to={'/nestedRoute/subRoute1'} />
     </div>
   )
 }

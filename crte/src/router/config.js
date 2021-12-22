@@ -11,7 +11,10 @@ const routes = [
     path: '/nestedRoute',
     component: NestedRoute,
     title: '嵌套路由',
-    children: [{ path: '/nestedRoute/subRoute1', component: SubRoute1 }],
+    // children: [
+    //   { path: '/', component: NestedRoute },
+    //   { path: '/subRoute1', component: SubRoute1 },
+    // ],
   },
   { path: '/subEmit', component: SubEmit, title: '子组件触发父组件渲染' },
   { path: '/useReducer', component: UseReducer, title: 'useReducer 参数控制' },

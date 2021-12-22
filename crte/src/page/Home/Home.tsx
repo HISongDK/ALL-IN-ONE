@@ -99,14 +99,14 @@ export default function Home() {
                   注册路由
                 */}
                 <Switch>
-                  {routesConfig.map((route) => (
+                  {routesConfig.map((route: any) => (
                     <Route
                       key={route.path}
                       path={route.path}
-                      component={route.component}
+                      // component={route.component}
                       render={() =>
                         route.children ? (
-                          <>
+                          <Switch>
                             {route.children.map((subRoute: any) => (
                               <Route
                                 key={subRoute.path}
@@ -119,7 +119,7 @@ export default function Home() {
                                 to={route['children'][0].path}
                               ></Redirect>
                             }
-                          </>
+                          </Switch>
                         ) : (
                           <Route
                             path={route.path}
@@ -129,6 +129,7 @@ export default function Home() {
                       }
                     ></Route>
                   ))}
+                  {<Redirect to={routesConfig[0].path}></Redirect>}
                 </Switch>
               </Card.Body>
             </Card>
