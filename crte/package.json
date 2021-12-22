@@ -18,8 +18,8 @@
     "eslint": "eslint src --ext .ts",
     "eslint:fix": "eslint src --ext .ts --fix",
     "start": "craco start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

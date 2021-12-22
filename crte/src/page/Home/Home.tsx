@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
   useHistory,
+  Redirect,
 } from 'react-router-dom'
 import routesConfig from '../../router/config'
 
@@ -103,6 +104,29 @@ export default function Home() {
                       key={route.path}
                       path={route.path}
                       component={route.component}
+                      render={() =>
+                        route.children ? (
+                          <>
+                            {route.children.map((subRoute: any) => (
+                              <Route
+                                key={subRoute.path}
+                                path={subRoute.path}
+                                component={subRoute.component}
+                              />
+                            ))}
+                            {
+                              <Redirect
+                                to={route['children'][0].path}
+                              ></Redirect>
+                            }
+                          </>
+                        ) : (
+                          <Route
+                            path={route.path}
+                            component={route.component}
+                          ></Route>
+                        )
+                      }
                     ></Route>
                   ))}
                 </Switch>

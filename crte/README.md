@@ -11,12 +11,20 @@
 ### 主要技术
 
 - React
-- TypeScript
+  - react-router-dom
+  - easy-peasy
 - craco
+  - craco-less
+- TypeScript
 
 ### 代码规范及格式
 
 - ESLint
+  - eslint-config-alloy
+  - eslint-config-prettier
+  - eslint-config-prettier
+  - @typescript-eslint/parser
+  - @typescript-eslint/eslint-plugin
 - prettier
 
 ### less & sass
