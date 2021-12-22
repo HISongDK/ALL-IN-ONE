@@ -12,8 +12,14 @@
 
 - React
 - TypeScript
+- craco
 
 ### 代码规范及格式
 
 - ESLint
 - prettier
+
+### less & sass
+
+1. sass: create-react-app 集成 sass ，只需要安装 sass 即可使用
+2. less: 因为使用的 craco 打包项目，可以直接安装 craco-less,在 craco 的配置文件中添加一下 plugin 即可

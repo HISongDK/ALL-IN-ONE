@@ -1,5 +1,7 @@
 import React, { ReactElement, useEffect, useReducer, useContext } from 'react'
 import './style.css'
+import './style.scss'
+import './style.less'
 
 const forceUpdateContext = React.createContext<() => void>(() => {})
 

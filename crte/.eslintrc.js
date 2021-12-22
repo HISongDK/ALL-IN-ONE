@@ -22,5 +22,7 @@ module.exports = {
     // Your global variables (setting to false means it's not allowed to be reassigned)
     // myGlobal: false
   },
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-require-imports': 0,
+  },
 }
