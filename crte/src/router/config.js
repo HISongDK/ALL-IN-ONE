@@ -5,8 +5,10 @@ import UseReducer from '../page/UseReducer/UseReducer'
 import SubEmit from '../page/SubEmit/SubEmit'
 import NestedRoute from '../page/NestedRoute/NestedRoute'
 import SubRoute1 from '../page/NestedRoute/SubRoute1/SubRoute1'
+import CrossDomain from '../page/CrossDomain/CrossDomain'
 
 const routes = [
+  { path: '/crossDomain', component: CrossDomain, title: '配置跨域代理' },
   {
     path: '/nestedRoute',
     component: NestedRoute,

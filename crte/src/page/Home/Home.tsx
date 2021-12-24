@@ -59,12 +59,6 @@ export default function Home() {
             title="产品名称"
             icon="https://via.placeholder.com/32.png?text=icon"
           >
-            <Menu.Item
-              icon={icon}
-              title="一级菜单"
-              {...getMenuItemProps('1')}
-            />
-
             <Menu.SubMenu defaultOpened title="调试练习" icon={icon}>
               {routesConfig.map((route) => (
                 <Menu.Item
