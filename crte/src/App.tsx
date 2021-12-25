@@ -9,12 +9,22 @@ import { useStoreState, useStoreActions } from 'easy-peasy'
 
 import TodoList from './components/TodoList'
 import Home from './page/Home/Home'
+import { Redirect, useHistory } from 'react-router-dom'
 
 function App() {
+  const history = useHistory()
+
+  const isLogin = localStorage.getItem('user_login_info')
+  console.log(isLogin)
+  if (!isLogin) {
+    // return <Redirect to={'/login'}></Redirect>
+    history.push('/login')
+  }
+
   const todos = useStoreState((state: any) => state.todos.list)
   const del = useStoreActions((actions: any) => actions.todos.delete)
-  console.log(todos)
-  console.log(del)
+  // console.log(todos)
+  // console.log(del)
   return (
     // <div className="App">
     //   {/* <SearchList /> */}
