@@ -8,6 +8,7 @@ module.exports = {
     alias: {
       '@': pathResolve('src'),
       '@page': pathResolve('src/page'),
+      '@image': pathResolve('src/static/image'),
     },
   },
   plugins: [

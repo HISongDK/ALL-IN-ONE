@@ -1,7 +1,13 @@
 import React from 'react'
+import HookForm from './HookForm'
+import './style.less'
 
 function index() {
-  return <div>先整个登录页看看</div>
+  return (
+    <div className="my-login__bg">
+      <HookForm />
+    </div>
+  )
 }
 
 export default index
