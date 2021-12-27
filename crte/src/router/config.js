@@ -6,8 +6,14 @@ import SubEmit from '../page/SubEmit/SubEmit'
 import NestedRoute from '../page/NestedRoute/NestedRoute'
 import SubRoute1 from '../page/NestedRoute/SubRoute1/SubRoute1'
 import CrossDomain from '@page/CrossDomain/CrossDomain'
+import DynamicRoute from '../page/DynamicRoute/DynamicRoute'
 
 const routes = [
+  {
+    path: '/dynamicRoute/:params?',
+    component: DynamicRoute,
+    title: '动态路由传参调试',
+  },
   { path: '/crossDomain', component: CrossDomain, title: '配置跨域代理' },
   {
     path: '/nestedRoute',
