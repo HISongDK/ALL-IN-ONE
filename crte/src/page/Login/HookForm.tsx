@@ -3,6 +3,8 @@ import { Form, Input, Button } from 'tea-component'
 import './hookForm.scss'
 
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import service from '../../api'
+import { useHistory } from 'react-router-dom'
 
 interface IFormInput {
   username: string
@@ -10,13 +12,23 @@ interface IFormInput {
 }
 
 function HookForm(): ReactElement {
-  const { control, handleSubmit, formState } = useForm<IFormInput>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValidating },
+  } = useForm<IFormInput>({
     mode: 'all',
   })
 
+  const history = useHistory()
+
   // 表单提交处理函数
-  const onSubmit: SubmitHandler<IFormInput> = (val: any) => {
-    console.log(val)
+  const onSubmit: SubmitHandler<IFormInput> = async (val: any) => {
+    const res = await service.post('/api/login', val)
+    if (res.data.code === 200) {
+      localStorage.setItem('token', res.data.token)
+      history.push('/')
+    }
   }
   return (
     <div className="my-login__hook-form">
@@ -29,14 +41,16 @@ function HookForm(): ReactElement {
             defaultValue=""
             rules={{
               validate: (value) => {
-                return !value || value.length < 4 ? '昵称太短了哦' : undefined
+                // return !value || value.length < 4 ? '用户名太短了哦' : undefined
+                return undefined // 不做校验
               },
             }}
             render={({ field }) => (
               <Form.Item
                 label="用户名"
-                // status={formState.isValidating ? 'validating' : getStatus(meta)}
-                // message={errors.name?.message}
+                required
+                // status={isValidating ? 'validating' : getStatus(meta)}
+                message={errors.username?.message}
               >
                 <Input
                   {...field}
@@ -53,25 +67,26 @@ function HookForm(): ReactElement {
             defaultValue=""
             rules={{
               validate: (value) => {
-                return !value || value.length < 4 ? '昵称太短了哦' : undefined
+                // return !value || value.length < 4 ? '密码太短了哦' : undefined
+                return undefined // 不校验
               },
             }}
             render={({ field }) => (
               <Form.Item
                 label="密码"
-                // status={formState.isValidating ? 'validating' : getStatus(meta)}
-                // message={errors.name?.message}
+                required
+                // status={isValidating ? 'validating' : getStatus(meta)}
+                message={errors.password?.message}
               >
                 <Input {...field} autoComplete="off" placeholder="请输入密码" />
               </Form.Item>
             )}
           />
         </Form>
+        <Button type="primary" htmlType="submit" style={{ marginTop: '30px' }}>
+          确认登录
+        </Button>
       </form>
-
-      <Button type="primary" style={{ marginTop: '30px' }}>
-        确认登录
-      </Button>
     </div>
   )
 }

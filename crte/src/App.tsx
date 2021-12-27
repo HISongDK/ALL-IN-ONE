@@ -7,7 +7,7 @@ import Home from './page/Home/Home'
 import { Redirect } from 'react-router-dom'
 
 function App() {
-  const isLogin = localStorage.getItem('user_login_info')
+  const isLogin = localStorage.getItem('token')
   if (!isLogin) {
     // 本来昨天试的直接这么写有时候生效有时候不生效
     // 今天这么写又完全没问题了，真是莫名其妙
