@@ -25,6 +25,7 @@ function HookForm(): ReactElement {
   // 表单提交处理函数
   const onSubmit: SubmitHandler<IFormInput> = async (val: any) => {
     const res = await service.post('/api/login', val)
+    console.log(res)
     if (res.data.code === 200) {
       localStorage.setItem('token', res.data.token)
       history.push('/')

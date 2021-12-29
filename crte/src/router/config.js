@@ -7,8 +7,10 @@ import NestedRoute from '../page/NestedRoute/NestedRoute'
 import SubRoute1 from '../page/NestedRoute/SubRoute1/SubRoute1'
 import CrossDomain from '@page/CrossDomain/CrossDomain'
 import DynamicRoute from '../page/DynamicRoute/DynamicRoute'
+import Env from '../page/Env/Env'
 
 const routes = [
+  { path: '/env', component: Env, title: '环境变量' },
   {
     path: '/dynamicRoute/:params?',
     component: DynamicRoute,
