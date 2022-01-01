@@ -8,11 +8,12 @@ function SearchList() {
   const timerRef = useRef(null)
 
   // 搜索
-  const search = (val) => {
-    console.log('执行搜索', val)
-    let arr = []
+  const search = (value) => {
+    // console.log('执行搜索', value)
+    const arr = []
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of list) {
-      if (item.indexOf(val) > -1) {
+      if (item.indexOf(value) > -1) {
         arr.push(item)
       }
     }
@@ -22,7 +23,7 @@ function SearchList() {
   // 防抖
   const debounce = (fn, delay = 500) => {
     return (e) => {
-      console.log(e)
+      // console.log(e)
       if (timerRef.current) clearTimeout(timerRef.current)
       timerRef.current = setTimeout(fn, delay, e)
     }
@@ -38,7 +39,7 @@ function SearchList() {
 
   return (
     <div>
-      <input value={val} onChange={handleChangeInput}></input>
+      <input value={val} onChange={handleChangeInput} />
       <ul>
         {showList.map((item) => (
           <li>{item}</li>

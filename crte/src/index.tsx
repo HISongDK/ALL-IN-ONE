@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Routes, Switch, Route } from 'react-router-dom'
-import App from './App'
-import Login from '@page/Login'
-
 // 引入 easy-peasy 状态管理
 import { StoreProvider } from 'easy-peasy'
+import Login from '@page/Login'
+import App from '@/App'
+
 import store from './store/store'
 // 引入 tea css
 import 'tea-component/dist/tea.css'
