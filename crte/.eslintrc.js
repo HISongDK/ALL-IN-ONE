@@ -6,10 +6,13 @@ module.exports = {
         paths: ['.'],
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
       },
-      alias: [
-        ['@', 'src'],
-        ['@page', 'src/page'],
-      ],
+      alias: {
+        map: [
+          ['@', './src'],
+          ['@page', './src/page'],
+        ],
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
+      },
     },
   },
   root: true,
