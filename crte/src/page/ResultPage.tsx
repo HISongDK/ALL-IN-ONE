@@ -12,7 +12,7 @@ interface IResult {
 function ResultPage(props: IResult) {
   const { code, text } = props
 
-  const setPic = (code: number) => {
+  const setPic = () => {
     switch (code) {
       case 403:
         return img403
@@ -26,7 +26,7 @@ function ResultPage(props: IResult) {
   return (
     <div className="result-page">
       <div className="bg-pic">
-        <img src={setPic(code)} className="bg-pic-img" />
+        <img src={setPic()} className="bg-pic-img" alt="" />
         <div className="desc-text">{text}</div>
       </div>
     </div>

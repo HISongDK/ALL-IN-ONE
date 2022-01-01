@@ -8,7 +8,7 @@ let arr = [1, 2]
 function NestedRoute() {
   const history = useHistory()
   const changeRoute = () => {
-    const [a, b] = arr
+    const [a] = arr
     arr = arr.reverse()
     history.push(`/nestedRoute/subRoute${a}`)
   }

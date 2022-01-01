@@ -24,15 +24,21 @@ interface IState {
 }
 
 class App extends React.Component<IProps, IState> {
-  public state = {
-    count: 0,
+  constructor(props: IProps) {
+    super(props)
+
+    this.state = {
+      count: 0,
+    }
   }
 
   public render() {
+    const { name } = this.props
+    const { count } = this.state
     return (
       <div>
-        {this.props.name}
-        {this.state.count}
+        {name}
+        {count}
       </div>
     )
   }

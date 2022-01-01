@@ -14,6 +14,7 @@ function HookForm(): ReactElement {
   const {
     control,
     handleSubmit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: { errors, isValidating },
   } = useForm<IFormInput>({
     mode: 'all',
@@ -24,6 +25,7 @@ function HookForm(): ReactElement {
   // 表单提交处理函数
   const onSubmit: SubmitHandler<IFormInput> = async (val: any) => {
     const res = await service.post('/api/login', val)
+    // eslint-disable-next-line no-console
     console.log(res)
     if (res.data.code === 200) {
       localStorage.setItem('token', res.data.token)
@@ -40,7 +42,7 @@ function HookForm(): ReactElement {
             control={control}
             defaultValue=""
             rules={{
-              validate: (value) => {
+              validate: () => {
                 // return !value || value.length < 4 ? '用户名太短了哦' : undefined
                 return undefined // 不做校验
               },
@@ -66,7 +68,7 @@ function HookForm(): ReactElement {
             control={control}
             defaultValue=""
             rules={{
-              validate: (value) => {
+              validate: () => {
                 // return !value || value.length < 4 ? '密码太短了哦' : undefined
                 return undefined // 不校验
               },
