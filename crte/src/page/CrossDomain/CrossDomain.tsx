@@ -9,11 +9,12 @@ function CrossDomain(): ReactElement {
     service
       .get('/api/cross-domain')
       .then((res) => {
+        // eslint-disable-next-line
         console.log(res)
       })
       .catch((err) => {
         message.error({
-          content: '报错了，看看是不是跨域',
+          content: `报错了，看看是不是跨域${err}`,
         })
       })
   }, [])

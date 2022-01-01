@@ -1,3 +1,4 @@
+import CrossDomain from '@page/CrossDomain/CrossDomain'
 import Button from '../page/Button/Button'
 import Icon from '../page/Icon/Icon'
 import Result from '../page/Result'
@@ -5,7 +6,6 @@ import UseReducer from '../page/UseReducer/UseReducer'
 import SubEmit from '../page/SubEmit/SubEmit'
 import NestedRoute from '../page/NestedRoute/NestedRoute'
 // import SubRoute1 from '../page/NestedRoute/SubRoute1/SubRoute1'
-import CrossDomain from '@page/CrossDomain/CrossDomain'
 import DynamicRoute from '../page/DynamicRoute/DynamicRoute'
 import Env from '../page/Env/Env'
 

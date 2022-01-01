@@ -4,7 +4,7 @@ import { BrowserRouter as Routes, Switch, Route } from 'react-router-dom'
 // 引入 easy-peasy 状态管理
 import { StoreProvider } from 'easy-peasy'
 import Login from '@page/Login'
-import App from '@/App'
+import App from './App'
 
 import store from './store/store'
 // 引入 tea css

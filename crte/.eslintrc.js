@@ -6,13 +6,6 @@ module.exports = {
         paths: ['.'],
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
       },
-      alias: {
-        map: [
-          ['@', './src'],
-          ['@page', './src/page'],
-        ],
-        extensions: ['.tsx', '.ts', '.jsx', '.js'],
-      },
     },
   },
   root: true,
@@ -83,7 +76,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-explicit-any': 0,
 
+    // 暂时只知道避免报错说一些开发依赖要放在生产依赖
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    // 避免无后缀名报错
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -95,5 +90,11 @@ module.exports = {
         'd.ts': 'never',
       },
     ],
+    /**
+     * 禁用此条规则，不检测模块是否引入到，留给 TS 控制应该也没什么问题
+     * 因为暂时无法兼容 alias 别名
+     * 别无他法，出此下策
+     */
+    'import/no-unresolved': 0,
   },
 }
