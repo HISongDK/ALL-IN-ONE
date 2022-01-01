@@ -5,10 +5,39 @@ import './style.less'
 
 const forceUpdateContext = React.createContext<() => void>(() => {})
 
+// 最内层组件
+function ChildrenCom() {
+  const forceUpdate = useContext(forceUpdateContext)
+  const renderFather = () => {
+    // eslint-disable-next-line
+    console.log('子组件触发：')
+    forceUpdate()
+  }
+  return (
+    <div>
+      <button type="button" onClick={renderFather}>
+        内层子组件
+      </button>
+    </div>
+  )
+}
+
+// 中间层组件
+function MiddleComponent() {
+  return (
+    <div>
+      中间级子组件
+      <ChildrenCom />
+    </div>
+  )
+}
+
+// 外层父组件
 function SubEmit(): ReactElement {
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0)
 
   useEffect(() => {
+    // eslint-disable-next-line
     console.log('父组件渲染')
   }, [ignored])
 
@@ -23,28 +52,6 @@ function SubEmit(): ReactElement {
       <forceUpdateContext.Provider value={forceUpdate}>
         <MiddleComponent />
       </forceUpdateContext.Provider>
-    </div>
-  )
-}
-
-function MiddleComponent() {
-  return (
-    <div>
-      中间级子组件
-      <ChildrenCom />
-    </div>
-  )
-}
-
-function ChildrenCom() {
-  const forceUpdate = useContext(forceUpdateContext)
-  const renderFather = () => {
-    console.log('子组件触发：')
-    forceUpdate()
-  }
-  return (
-    <div>
-      <button onClick={renderFather}>内层子组件</button>
     </div>
   )
 }

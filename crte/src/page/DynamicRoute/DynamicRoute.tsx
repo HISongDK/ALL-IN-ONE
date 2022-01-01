@@ -3,7 +3,9 @@ import { useParams, useHistory } from 'react-router-dom'
 
 function DynamicRoute() {
   const { params } = useParams<{ params: string }>()
-  alert('动态路由参数：' + params)
+
+  // eslint-disable-next-line no-alert
+  alert(`动态路由参数：${params}`)
 
   const history = useHistory()
 

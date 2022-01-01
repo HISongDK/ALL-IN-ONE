@@ -1,10 +1,9 @@
 import React, { ReactElement } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Form, Input, Button } from 'tea-component'
-import './hookForm.scss'
-
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import service from '../../api'
-import { useHistory } from 'react-router-dom'
+import './hookForm.scss'
 
 interface IFormInput {
   username: string

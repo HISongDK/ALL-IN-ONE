@@ -15,19 +15,21 @@ function NestedRoute() {
   return (
     <div>
       试试怎么嵌套路由 <hr />
-      <button onClick={changeRoute}>切换路由</button>
+      <button type="button" onClick={changeRoute}>
+        切换路由
+      </button>
       <hr />
       <ul>
         <li>
-          <Link to={'/nestedRoute/subRoute1'}>sub1</Link>
+          <Link to="/nestedRoute/subRoute1">sub1</Link>
         </li>
         <li>
-          <Link to={'/nestedRoute/subRoute2'}>sub2</Link>
+          <Link to="/nestedRoute/subRoute2">sub2</Link>
         </li>
       </ul>
-      <Route path={'/nestedRoute/subRoute1'} component={SubRoute1}></Route>
-      <Route path={'/nestedRoute/subRoute2'} component={SubRoute2}></Route>
-      <Redirect to={'/nestedRoute/subRoute1'} />
+      <Route path="/nestedRoute/subRoute1" component={SubRoute1} />
+      <Route path="/nestedRoute/subRoute2" component={SubRoute2} />
+      <Redirect to="/nestedRoute/subRoute1" />
     </div>
   )
 }

@@ -1,18 +1,15 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React from 'react'
 import {
-  Link,
-  NavLink,
   Switch,
   Route,
   useLocation,
   useHistory,
   Redirect,
 } from 'react-router-dom'
+import { Layout, Card, Text, ExternalLink, Menu, NavMenu } from 'tea-component'
 import routesConfig from '../../router/config'
 
-import { Layout, Card, Text, ExternalLink, Menu, NavMenu } from 'tea-component'
-
-const { Header, Body, Footer, Sider, Content } = Layout
+const { Header, Body, Sider, Content } = Layout
 
 const icon: [string, string] = /** @type {[string, string]} */ [
   `https://via.placeholder.com/16.png?text=icon`,
@@ -22,13 +19,6 @@ const icon: [string, string] = /** @type {[string, string]} */ [
 export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
-
-  const [selected, setSelected] = useState('overview')
-
-  const getMenuItemProps = (id: string) => ({
-    selected: selected === id,
-    onClick: () => setSelected(id),
-  })
 
   const pageJump = (path: string) => {
     history.push(path)
@@ -76,6 +66,7 @@ export default function Home() {
         <Content>
           <Content.Header
             showBackButton
+            // eslint-disable-next-line
             onBackButtonClick={console.log}
             title="内容标题"
             subtitle={
@@ -108,22 +99,22 @@ export default function Home() {
                                 component={subRoute.component}
                               />
                             ))}
-                            {
-                              <Redirect
-                                to={route['children'][0].path}
-                              ></Redirect>
-                            }
+                            {/* <Redirect to={route.children[0].path} /> */}
+                            <Route
+                              path="/"
+                              component={route.children[0].component}
+                            />
                           </Switch>
                         ) : (
                           <Route
                             path={route.path}
                             component={route.component}
-                          ></Route>
+                          />
                         )
                       }
-                    ></Route>
+                    />
                   ))}
-                  {<Redirect to={routesConfig[0].path}></Redirect>}
+                  <Redirect to={routesConfig[0].path} />
                 </Switch>
               </Card.Body>
             </Card>
