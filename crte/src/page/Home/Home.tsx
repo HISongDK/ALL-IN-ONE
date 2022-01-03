@@ -24,6 +24,8 @@ export default function Home() {
     history.push(path)
   }
 
+  const firstRoute: any = routesConfig[0]
+
   return (
     <Layout className="demo-layout-l">
       <Header>
@@ -89,52 +91,21 @@ export default function Home() {
                       key={route.path}
                       path={route.path}
                       // component={route.component}
-                      render={() =>
-                        route.children ? (
-                          <Switch>
-                            {route.children.map((subRoute: any) => (
-                              <Route
-                                key={subRoute.path}
-                                path={subRoute.path}
-                                component={subRoute.component}
-                              />
-                            ))}
-                            {/* <Redirect to={route.children[0].path} /> */}
-                            <Route
-                              path="/"
-                              component={route.children[0].component}
-                            />
-                          </Switch>
-                        ) : (
-                          <Route
-                            path={route.path}
-                            component={route.component}
-                          />
-                        )
-                      }
+                      render={() => (
+                        <Route path={route.path} component={route.component} />
+                      )}
                     />
                   ))}
-                  <Redirect to={routesConfig[0].path} />
+                  <Redirect exact from="/" to={routesConfig[0].path} />
+                  <Route
+                    render={(props) => <firstRoute.component {...props} />}
+                  />
                 </Switch>
               </Card.Body>
             </Card>
           </Content.Body>
-          {/* <Content.Footer>
-            <div className="demo-layout-footer">
-              (可选项)自定义页脚
-              <br />
-              京公网安备 11010802017518 粤B2-20090059-1
-            </div>
-          </Content.Footer> */}
         </Content>
       </Body>
-      {/* <Footer style={{ textAlign: 'center' }}>
-        <div className="demo-layout-footer">
-          (可选项)自定义页脚
-          <br />
-          京公网安备 11010802017518 粤B2-20090059-1
-        </div>
-      </Footer> */}
     </Layout>
   )
 }

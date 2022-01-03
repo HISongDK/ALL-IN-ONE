@@ -13,10 +13,12 @@ module.exports = {
   },
   plugins: [
     {
+      // 配置 craco-less 插件，以支持 less 使用
       plugin: CracoLessPlugin,
     },
   ],
   devServer: {
+    // 跨域代理配置
     proxy: {
       '/api': {
         target: 'http://localhost:9000/',

@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
 function DynamicRoute() {
   const { params } = useParams<{ params: string }>()
 
-  // eslint-disable-next-line no-alert
-  alert(`动态路由参数：${params}`)
+  // eslint-disable-next-line
+  console.log(`动态路由参数：${params}`)
 
   const history = useHistory()
 
   if (!params.includes('1')) {
-    history.goBack()
+    // eslint-disable-next-line
+    alert('参数无效')
+    // history.goBack()
   }
 
   return (
