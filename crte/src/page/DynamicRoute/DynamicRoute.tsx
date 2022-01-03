@@ -10,7 +10,8 @@ function DynamicRoute() {
 
   const history = useHistory()
 
-  if (!params.includes('1')) {
+  // 因为是可选参数，所以要加上可选链，否则容易报错
+  if (!params?.includes('1')) {
     // eslint-disable-next-line
     alert('参数无效')
     // history.goBack()
