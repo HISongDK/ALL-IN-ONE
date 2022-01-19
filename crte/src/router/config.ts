@@ -9,8 +9,10 @@ import NestedRoute from '@page/NestedRoute/NestedRoute'
 import DynamicRoute from '@page/DynamicRoute/DynamicRoute'
 import Env from '@page/Env/Env'
 import RouteParams from '@/page/RouteParams/RouteParams'
+import UploadCom from '../page/Upload/Upload'
 
 const routes = [
+  { path: '/upload', component: UploadCom, title: '上传组件' },
   { path: '/routeParams', component: RouteParams, title: '路由传参' },
   { path: '/env', component: Env, title: '环境变量' },
   {
