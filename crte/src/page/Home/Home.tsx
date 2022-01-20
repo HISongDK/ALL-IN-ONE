@@ -6,15 +6,10 @@ import {
   useHistory,
   Redirect,
 } from 'react-router-dom'
-import { Layout, Card, Text, ExternalLink, Menu, NavMenu } from 'tea-component'
+import { Layout, Card, ExternalLink, Menu, NavMenu } from 'tea-component'
 import routesConfig from '../../router/config'
 
 const { Header, Body, Sider, Content } = Layout
-
-const icon: [string, string] = /** @type {[string, string]} */ [
-  `https://via.placeholder.com/16.png?text=icon`,
-  `https://via.placeholder.com/16/006eff/444444`,
-]
 
 export default function Home() {
   const history = useHistory()
@@ -29,34 +24,15 @@ export default function Home() {
   return (
     <Layout className="demo-layout-l">
       <Header>
-        <NavMenu
-          left={
-            <>
-              <NavMenu.Item type="logo">
-                <img
-                  src="https://via.placeholder.com/32.png?text=LOGO"
-                  alt="logo"
-                />
-              </NavMenu.Item>
-              <NavMenu.Item>总览</NavMenu.Item>
-            </>
-          }
-        />
+        <NavMenu left={<NavMenu.Item>某人练习的地方</NavMenu.Item>} />
       </Header>
       <Body>
         <Sider>
-          <Menu
-            collapsable
-            theme="dark"
-            title="产品名称"
-            icon="https://via.placeholder.com/32.png?text=icon"
-          >
-            <Menu.SubMenu defaultOpened title="调试练习" icon={icon}>
+          <Menu collapsable theme="dark">
+            <Menu.SubMenu defaultOpened title="调试练习">
               {routesConfig.map((route) => (
                 <Menu.Item
                   key={route.path}
-                  // title={<NavLink to={route.path}>{route.title}</NavLink>}
-                  // render={() => <Link to={route.path}>{route.title}</Link>}
                   title={<span>{route.title}</span>}
                   selected={pathname === route.path}
                   onClick={() => pageJump(route.path)}
@@ -68,23 +44,18 @@ export default function Home() {
         <Content>
           <Content.Header
             showBackButton
-            // eslint-disable-next-line
-            onBackButtonClick={console.log}
-            title="内容标题"
-            subtitle={
-              <>
-                说明文字 <Text theme="label">带颜色说明文字</Text>
-              </>
+            onBackButtonClick={() => history.goBack()}
+            operation={
+              <ExternalLink weak href="https://github.com/HISongDK">
+                GitHub
+              </ExternalLink>
             }
-            operation={<ExternalLink weak>内容帮助</ExternalLink>}
           />
           <Content.Body>
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
               <Card.Body>
-                {/* 
-                  注册路由
-                */}
+                {/* 注册路由 */}
                 <Switch>
                   {routesConfig.map((route: any) => (
                     <Route
