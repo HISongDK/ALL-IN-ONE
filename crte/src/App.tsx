@@ -8,9 +8,6 @@ import './index.css'
 function App() {
   const isLogin = localStorage.getItem('token')
   if (!isLogin) {
-    // 本来昨天试的直接这么写有时候生效有时候不生效
-    // 今天这么写又完全没问题了，真是莫名其妙
-    // 还是有什么莫名其妙的 bug 的话，先重启试试
     return <Redirect to="/login" />
   }
 
