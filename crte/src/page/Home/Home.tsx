@@ -1,15 +1,16 @@
 import React from 'react'
 import {
-  Switch,
   Route,
-  useLocation,
-  useHistory,
+  Switch,
   Redirect,
+  useHistory,
+  useLocation,
 } from 'react-router-dom'
 import { Layout, Card, ExternalLink, Menu, NavMenu } from 'tea-component'
 import routesConfig from '../../router/config'
 
 const { Header, Body, Sider, Content } = Layout
+const firstRoute: any = routesConfig[0]
 
 export default function Home() {
   const history = useHistory()
@@ -18,8 +19,6 @@ export default function Home() {
   const pageJump = (path: string) => {
     history.push(path)
   }
-
-  const firstRoute: any = routesConfig[0]
 
   return (
     <Layout className="demo-layout-l">
