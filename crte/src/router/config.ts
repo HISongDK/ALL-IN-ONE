@@ -8,10 +8,12 @@ import NestedRoute from '@page/NestedRoute/NestedRoute'
 // import SubRoute1 from '@page/NestedRoute/SubRoute1/SubRoute1'
 import DynamicRoute from '@page/DynamicRoute/DynamicRoute'
 import Env from '@page/Env/Env'
-import RouteParams from '@/page/RouteParams/RouteParams'
-import UploadCom from '../page/Upload/Upload'
+import RouteParams from '@page/RouteParams/RouteParams'
+import UploadCom from '@page/Upload/Upload'
+import Cascade from '@page/Cascade/Cascade'
 
 const routes = [
+  { path: '/casCade', component: Cascade, title: '省市下拉级联' },
   { path: '/upload', component: UploadCom, title: '上传组件' },
   { path: '/routeParams', component: RouteParams, title: '路由传参' },
   { path: '/env', component: Env, title: '环境变量' },
