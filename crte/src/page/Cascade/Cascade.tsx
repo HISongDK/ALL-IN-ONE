@@ -1,23 +1,23 @@
 import React from 'react'
 import { Select, Card, Cascader, Space } from 'antd'
-import areas from './省市'
+import areas from './area2'
 
 const { Option } = Select
 
+const formatAreaOptions = (data: { [key: string]: Array<string> }) => {
+  function getOpts(strArr: string[]): any[] {
+    return strArr.map((key) => ({
+      value: key,
+      label: key,
+      children: data[key] && getOpts(data[key]), // 递归用的不太对，不过也就先这样
+    }))
+  }
+
+  return getOpts(Object.keys(data))
+}
+
 function Cascade() {
-  // eslint-disable-next-line
-  console.log('---  areas  ---\n', areas)
-  const areasFormat = areas.map((area) => ({
-    [area.provinceName]: area.citys.map((city) => city.citysName),
-  }))
-  console.log('---  areasFormat  ---\n', areasFormat)
-
-  const areaObj: any = {}
-  areas.forEach((area) => {
-    areaObj[area.provinceName] = area.citys.map((city) => city.citysName)
-  })
-  console.log('---  areaObj  ---\n', areaObj)
-
+  const areaOpts = formatAreaOptions(areas)
   return (
     <div>
       antd 级联下拉框 <hr />
@@ -40,7 +40,7 @@ function Cascade() {
           </Select>
         </Card>
         <Card title="级联列表">
-          <Cascader />
+          <Cascader options={areaOpts} />
         </Card>
       </Space>
     </div>
