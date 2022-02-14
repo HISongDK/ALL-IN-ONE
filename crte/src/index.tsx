@@ -12,6 +12,8 @@ import 'tea-component/dist/tea.css'
 // 引入 antd 样式
 import 'antd/dist/antd.min.css'
 
+import './index.css'
+
 ReactDOM.render(
   <StoreProvider store={store}>
     <Routes>

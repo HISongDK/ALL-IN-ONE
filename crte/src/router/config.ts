@@ -11,8 +11,10 @@ import Env from '@page/Env/Env'
 import RouteParams from '@page/RouteParams/RouteParams'
 import UploadCom from '@page/Upload/Upload'
 import Cascade from '@page/Cascade/Cascade'
+import Filter from '@page/Filter/Filter'
 
 const routes = [
+  { path: '/filter', component: Filter, title: '多条件筛选' },
   { path: '/casCade', component: Cascade, title: '省市下拉级联' },
   { path: '/upload', component: UploadCom, title: '上传组件' },
   { path: '/routeParams', component: RouteParams, title: '路由传参' },
