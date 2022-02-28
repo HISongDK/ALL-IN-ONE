@@ -2,6 +2,7 @@
     "name": "v2te",
     "version": "0.1.0",
     "private": true,
+    "homepage": "/vue-app",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
@@ -9,7 +10,6 @@
     },
     "dependencies": {
         "core-js": "^3.8.3",
-        "qiankun": "^2.6.3",
         "vue": "^2.6.14",
         "vue-router": "^3.5.1",
         "vuex": "^3.6.2"

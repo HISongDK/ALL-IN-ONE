@@ -1,17 +1,22 @@
-import React from 'react'
-import { Link, Route } from 'react-router-dom'
-import Routes from '@/router'
+import React, { useEffect } from 'react'
+import { registerMicroApps, start } from 'qiankun'
+// import './style.scss'
 
 function App() {
-  return (
-    <>
-      <Link to="/MicroPage">MicroPage</Link>
-      <hr />
-      {Routes.map(({ path, component }) => (
-        <Route key={path} path={path} component={component} />
-      ))}
-    </>
-  )
+  useEffect(() => {
+    registerMicroApps([
+      {
+        name: 'vueApp',
+        entry: '//localhost:8080',
+        container: '#container',
+        activeRule: '/app-vue',
+      },
+    ])
+
+    start({ prefetch: 'all' })
+  })
+
+  return <div id="container" />
 }
 
 export default App

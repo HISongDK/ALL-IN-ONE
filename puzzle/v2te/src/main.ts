@@ -24,6 +24,11 @@ function render(props: any = {}) {
     }).$mount(container ? container.querySelector('#app') : '#app')
 }
 
+console.log(
+    '---  window.__POWERED_BY_QIANKUN__  ---\n',
+    window.__POWERED_BY_QIANKUN__,
+)
+
 // 独立运行时
 if (!window.__POWERED_BY_QIANKUN__) {
     render()
