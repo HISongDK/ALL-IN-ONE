@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
 import { registerMicroApps, start } from 'qiankun'
-// import './style.scss'
+import { Route, Link } from 'react-router-dom'
+import microApps from './micro'
+import routes from './router/index'
 
 function App() {
   useEffect(() => {
-    registerMicroApps([
-      {
-        name: 'vueApp',
-        entry: '//localhost:8080',
-        container: '#container',
-        activeRule: '/app-vue',
-      },
-    ])
-
-    start({ prefetch: 'all' })
-  })
-
-  return <div id="container" />
+    registerMicroApps(microApps)
+    start()
+  }, [])
+  return (
+    <>
+      {routes.map((route) => (
+        <>
+          <Link to={route.path}>{route.name}</Link>
+          <Route path={route.path} component={route.component} />
+        </>
+      ))}
+    </>
+  )
 }
 
 export default App

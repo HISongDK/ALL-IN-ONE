@@ -11,7 +11,7 @@ let router = null
 function render() {
     router = createRouter({
         history: createWebHistory(
-            window.__POWERED_BY_QIANKUN__ ? '/app-vue/' : '/',
+            window.__POWERED_BY_QIANKUN__ ? '/vue3/' : '/',
         ),
         routes,
     })
