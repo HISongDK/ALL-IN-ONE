@@ -1,10 +1,10 @@
-const APP_NAME = require('./package.json').name
+const { name } = require('./package.json')
 const path = require('path')
 
 module.exports = {
     devServer: {
         port: 9527,
-        allowedHosts: 'all',
+        // allowedHosts: 'all',
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
@@ -16,7 +16,7 @@ module.exports = {
             },
         },
         output: {
-            library: APP_NAME,
+            library: `${name}-[name]`,
             libraryTarget: 'umd',
         },
     },

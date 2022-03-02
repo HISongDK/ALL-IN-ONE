@@ -1,3 +1,13 @@
+:root.dark {
+  --bg: #000;
+  --color: #fff;
+}
+
+:root.light {
+  --bg: #fff;
+  --color: #000;
+}
+
 html,
 body,
 #root {
@@ -8,12 +18,7 @@ body,
   background-color: var(--bg) !important;
 }
 
-:root.dark {
-  --bg: #000;
-  --color: #fff;
-}
-
-:root.light {
-  --bg: #fff;
-  --color: #000;
+.ant-layout {
+  width: 100%;
+  min-height: 100%;
 }

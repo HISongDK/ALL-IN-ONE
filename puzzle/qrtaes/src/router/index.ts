@@ -7,9 +7,9 @@ interface IRoute {
   component: React.FC
 }
 
-enum PATH {
-  VUE2_PATH = '/vue2',
-  VUE3_PATH = '/vue3',
+export enum PATH {
+  VUE2_PATH = '/vue2/',
+  VUE3_PATH = '/vue3/',
 }
 
 const routes: IRoute[] = [

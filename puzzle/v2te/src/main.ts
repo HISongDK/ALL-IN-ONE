@@ -12,7 +12,7 @@ let instance: any = null
 function render(props: any = {}) {
     const { container } = props
     router = new VueRouter({
-        base: window.__POWERED_BY_QIANKUN__ ? '/vue2/' : '/',
+        base: window.__POWERED_BY_QIANKUN__ ? '/vue2' : '/',
         mode: 'history',
         routes,
     })
@@ -23,11 +23,6 @@ function render(props: any = {}) {
         render: (h) => h(App),
     }).$mount(container ? container.querySelector('#app') : '#app')
 }
-
-console.log(
-    '---  window.__POWERED_BY_QIANKUN__  ---\n',
-    window.__POWERED_BY_QIANKUN__,
-)
 
 // 独立运行时
 if (!window.__POWERED_BY_QIANKUN__) {
