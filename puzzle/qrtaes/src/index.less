@@ -1,0 +1,47 @@
+:root {
+  --bg: #f0f2f5;
+  --color: #000;
+  --sider-bg: #995559;
+}
+
+:root.dark {
+  --bg: #000;
+  --color: #fff;
+  --sider-bg: #001529;
+}
+
+:root.light {
+  --bg: #f0f2f5;
+  --color: #000;
+  --sider-bg: #995559;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color: var(--color) !important;
+  background-color: var(--bg) !important;
+}
+
+.logo {
+  color: var(--color);
+  font-size: 22px;
+}
+
+.ant-layout {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+
+  .ant-layout-sider {
+    .ant-layout-sider-children {
+      .ant-menu {
+        color: var(--color);
+        background: var(--sider-bg);
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { CheckCircleOutlined, IssuesCloseOutlined } from '@ant-design/icons'
 import Vue2 from '@pages/Vue2'
 import Vue3 from '@pages/Vue3'
 
-interface IRoute {
+export interface IRoute {
   path: string
   name?: string
   icon?: any
