@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import { registerMicroApps, start } from 'qiankun'
 import { Route, useHistory } from 'react-router-dom'
-import { Layout, Button, Menu, Breadcrumb } from 'antd'
-import { UserOutlined, LaptopOutlined } from '@ant-design/icons'
+import { Layout, Menu, Breadcrumb } from 'antd'
 import microApps from './micro'
 import routes from './router/index'
 
 const { Header, Sider, Content } = Layout
-const { SubMenu } = Menu
 
 function App() {
   const history = useHistory()
@@ -40,12 +38,11 @@ function App() {
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-              <Menu.Item key="1">option1</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-              <Menu.Item key="5">option5</Menu.Item>
-            </SubMenu>
+            {routes.map(({ path, icon, name }) => (
+              <Menu.Item icon={icon} onClick={() => history.push(path)}>
+                {name}
+              </Menu.Item>
+            ))}
           </Menu>
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
