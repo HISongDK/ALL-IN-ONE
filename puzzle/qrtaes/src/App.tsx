@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { loadMicroApp, registerMicroApps, start } from 'qiankun'
+import { registerMicroApps, start } from 'qiankun'
 import { Route, Link, useHistory, Redirect } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Switch, Row } from 'antd'
 import { SmileOutlined, SmileTwoTone } from '@ant-design/icons'
@@ -14,12 +14,8 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
-    // registerMicroApps(microApps)
-    // start()
-    const microApp = loadMicroApp(microApps[0])
-    return () => {
-      microApp.unmount()
-    }
+    registerMicroApps(microApps)
+    start()
   }, [])
 
   const changeTheme = (checked: boolean) => {
