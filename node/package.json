@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "type": "commonjs",
+    "type": "module",
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -16,6 +16,7 @@
         "express": "^4.17.2",
         "inquirer": "^8.2.0",
         "morgan": "^1.10.0",
-        "progress": "^2.0.3"
+        "progress": "^2.0.3",
+        "socket.io": "^4.4.1"
     }
 }
