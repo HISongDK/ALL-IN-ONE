@@ -6,9 +6,18 @@ import { SmileOutlined, SmileTwoTone } from '@ant-design/icons'
 import { useBreadcrumbs } from '@utils/hooks'
 import microApps from './micro'
 import routes from './router/index'
-import { PATH } from '@/router'
 
 const { Header, Sider, Content } = Layout
+
+// 构建路由
+const genRoutes = () => (
+  <>
+    {routes.map((route) => (
+      <Route key={route.path} path={route.path} component={route.component} />
+    ))}
+    <Redirect to={routes[routes.length - 1].path} />
+  </>
+)
 
 function App() {
   const history = useHistory()
@@ -51,7 +60,11 @@ function App() {
             style={{ height: '100%', borderRight: 0 }}
           >
             {routes.map(({ path, icon, name }) => (
-              <Menu.Item icon={icon} onClick={() => history.push(path)}>
+              <Menu.Item
+                key={path}
+                icon={icon}
+                onClick={() => history.push(path)}
+              >
                 {name}
               </Menu.Item>
             ))}
@@ -72,15 +85,7 @@ function App() {
               minHeight: 280,
             }}
           >
-            {routes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                component={route.component}
-              />
-            ))}
-            {/* 微前端根据路由匹配 */}
-            <Redirect to={PATH.VUE2_PATH} />
+            {genRoutes()}
           </Content>
         </Layout>
       </Layout>

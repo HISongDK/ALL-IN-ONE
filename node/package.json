@@ -17,6 +17,7 @@
         "inquirer": "^8.2.0",
         "morgan": "^1.10.0",
         "progress": "^2.0.3",
-        "socket.io": "^4.4.1"
+        "socket.io": "^4.4.1",
+        "socket.io-client": "^4.4.1"
     }
 }
