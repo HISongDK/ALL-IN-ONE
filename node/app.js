@@ -6,11 +6,10 @@ import chalk from 'chalk'
 import http from 'http'
 
 const app = express()
-const httpServer = http.createServer(app)
-
 const port = 9000
 
 // 初始化 socket.io
+const httpServer = http.createServer(app)
 const io = new Server(httpServer, {
     cors: true,
 })
@@ -46,8 +45,16 @@ app.post('/login', (req, res) => {
  * Socket.IO 示例
  */
 io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg)
+    console.log('User connected')
+
+    socket.on('msg', (msg) => {
+        console.log('msg: ' + msg)
+
+        socket.emit('msg', `返回消息：${msg}`)
+    })
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
     })
 })
 
