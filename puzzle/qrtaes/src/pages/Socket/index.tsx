@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import './style.scss'
 
-const socket = io('172.29.40.56:9000')
+const socket = io('localhost:3000')
 
 function Socket() {
   const [curMsaVal, setCurMsaVal] = useState('')

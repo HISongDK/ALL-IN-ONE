@@ -3,6 +3,7 @@ import { CheckCircleOutlined, IssuesCloseOutlined } from '@ant-design/icons'
 import Vue2 from '@pages/Vue2'
 import Vue3 from '@pages/Vue3'
 import Socket from '@pages/Socket'
+import ApiTest from '@pages/ApiTest'
 
 export interface IRoute {
   path: string
@@ -15,6 +16,7 @@ export enum PATH {
   VUE2_PATH = '/vue2/',
   VUE3_PATH = '/vue3/',
   SOCKET = '/socket',
+  API = '/api',
 }
 
 const routes: IRoute[] = [
@@ -34,6 +36,11 @@ const routes: IRoute[] = [
     name: 'socket 示例',
     path: PATH.SOCKET,
     component: Socket,
+  },
+  {
+    name: '接口调用测试',
+    path: PATH.API,
+    component: ApiTest,
   },
 ]
 
