@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
 
 mongoose
     .connect(db)
-    .then((data) => {
-        console.log('---  data  ---\n', data)
+    .then(() => {
+        console.log(chalk.blue('\n连接数据库成功\n'))
 
         httpServer.listen(
             port,
@@ -57,6 +57,6 @@ mongoose
             ),
         )
     })
-    .catch((err) => {
-        console.log('---  err  ---\n', err)
+    .catch(() => {
+        console.log(chalk.red('\n连接数据库失败\n'))
     })
