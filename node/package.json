@@ -1,7 +1,7 @@
 {
     "name": "node",
     "version": "1.0.0",
-    "description": "## 先测试下前端配置跨域代理",
+    "description": "NodeJS 学习",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
