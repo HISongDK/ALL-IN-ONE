@@ -1,4 +1,5 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { Server } from 'socket.io'
 import cors from 'cors'
 import logger from 'morgan' // 日志器
@@ -7,6 +8,7 @@ import http from 'http'
 
 import router from './router/index.js'
 
+const db = 'mongodb://localhost/learn_node_db'
 const app = express()
 const port = 9000
 
@@ -41,11 +43,20 @@ io.on('connection', (socket) => {
     })
 })
 
-httpServer.listen(
-    port,
-    console.log(
-        `服务正在监听 ${port} 端口\n打开链接: ${chalk.green(
-            `http://localhost:${port}`,
-        )}`,
-    ),
-)
+mongoose
+    .connect(db)
+    .then((data) => {
+        console.log('---  data  ---\n', data)
+
+        httpServer.listen(
+            port,
+            console.log(
+                `服务正在监听 ${port} 端口\n打开链接: ${chalk.green(
+                    `http://localhost:${port}`,
+                )}`,
+            ),
+        )
+    })
+    .catch((err) => {
+        console.log('---  err  ---\n', err)
+    })
