@@ -2,8 +2,6 @@
 const areas1 = require('./省市')
 const areas2 = require('./省市区县')
 
-// console.log('---  areas  ---\n', areas)
-
 /**
  * 省市文件处理
  */
