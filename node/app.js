@@ -5,8 +5,10 @@ import cors from 'cors'
 import logger from 'morgan' // 日志器
 import chalk from 'chalk'
 import http from 'http'
-
 import router from './router/index.js'
+
+const { log } = console
+const { red, blue, green } = chalk
 
 const db = 'mongodb://localhost/learn_node_db'
 const app = express()
@@ -43,20 +45,30 @@ io.on('connection', (socket) => {
     })
 })
 
+/**
+ * 启动服务
+ */
+const launchServer = () => {
+    httpServer.listen(
+        port,
+        log(
+            `服务正在监听 ${port} 端口\n打开链接: ${green(
+                `http://localhost:${port}`,
+            )}`,
+        ),
+    )
+}
+
+/**
+ * 连接数据库
+ */
 mongoose
     .connect(db)
     .then(() => {
-        console.log(chalk.blue('\n连接数据库成功\n'))
-
-        httpServer.listen(
-            port,
-            console.log(
-                `服务正在监听 ${port} 端口\n打开链接: ${chalk.green(
-                    `http://localhost:${port}`,
-                )}`,
-            ),
-        )
+        log(blue('\n连接数据库成功\n'))
+        //数据库连接成功才启动服务
+        launchServer()
     })
     .catch(() => {
-        console.log(chalk.red('\n连接数据库失败\n'))
+        log(red('\n连接数据库失败\n'))
     })
