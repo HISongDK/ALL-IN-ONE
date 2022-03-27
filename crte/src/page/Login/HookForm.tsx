@@ -28,7 +28,7 @@ function HookForm(): ReactElement {
     // eslint-disable-next-line no-console
     console.log(res)
     if (res.data.code === 200) {
-      localStorage.setItem('token', res.data.token)
+      sessionStorage.setItem('token', res.data.token)
       history.push('/')
     }
   }

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import Home from './page/Home/Home'
 
 function App() {
-  const isLogin = localStorage.getItem('token')
+  const isLogin = sessionStorage.getItem('token')
   if (!isLogin) {
     return <Redirect to="/login" />
   }
