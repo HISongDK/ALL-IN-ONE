@@ -17,7 +17,7 @@ const port = 9000
 // express 应用中间件
 app.use(logger('dev')) // app use logger传参调用的函数之后，每次请求路由，控制台会输出相关信息
 app.use(express.static('public'))
-app.use(express.urlencoded({ extended: false })) // 处理 post 请求，获取请求体
+app.use(express.urlencoded({ extended: true })) // 处理 post 请求，获取请求体
 app.use(express.json())
 app.use(cors()) // 解决跨域问题
 
@@ -52,7 +52,7 @@ const launchServer = () => {
     httpServer.listen(
         port,
         log(
-            `服务正在监听 ${port} 端口\n打开链接: ${green(
+            `服务正在监听 ${port} 端口\n访问: ${green(
                 `http://localhost:${port}`,
             )}`,
         ),
@@ -62,13 +62,9 @@ const launchServer = () => {
 /**
  * 连接数据库
  */
-mongoose
-    .connect(db)
-    .then(() => {
-        log(blue('\n连接数据库成功\n'))
-        //数据库连接成功才启动服务
-        launchServer()
-    })
-    .catch(() => {
-        log(red('\n连接数据库失败\n'))
-    })
+mongoose.connect(db).then(() => {
+    log(blue('\n\n * 连接数据库成功\n'))
+    //数据库连接成功才启动服务
+    launchServer()
+})
+// TODO: 怎么监听连接数据库失败呢？
