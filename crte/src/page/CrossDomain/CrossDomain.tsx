@@ -7,7 +7,7 @@ import service from '../../api/index'
 function CrossDomain(): ReactElement {
   useEffect(() => {
     service
-      .get('/api/cross-domain')
+      .get('/cross-domain')
       .then((res) => {
         // eslint-disable-next-line
         console.log(res)

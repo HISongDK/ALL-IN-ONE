@@ -19,13 +19,13 @@ module.exports = {
   ],
   devServer: {
     // 跨域代理配置
-    proxy: {
-      '/api': {
-        target: 'http://localhost:9000/',
-        pathRewrite: {
-          '^/api': '',
-        },
-      },
-    },
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:9000/',
+    //     pathRewrite: {
+    //       '^/api': '',
+    //     },
+    //   },
+    // },
   },
 }

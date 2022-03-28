@@ -24,7 +24,7 @@ function HookForm(): ReactElement {
 
   // 表单提交处理函数
   const onSubmit: SubmitHandler<IFormInput> = async (val: any) => {
-    const res = await service.post('/api/login', val)
+    const res = await service.post('/login', val)
     // eslint-disable-next-line no-console
     console.log(res)
     if (res.data.code === 200) {
