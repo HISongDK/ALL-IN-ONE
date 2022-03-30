@@ -9,10 +9,12 @@
  * omit the third argument,omitFirstRow,to include the first row(title row) of the CSV string.
  */
 
-const CSVToArray = (data, delimiter = ',', omitFirstRow = false) => {
-    data.slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
+const CSVToArray = (data, delimiter = ',', omitFirstRow = false) =>
+    data
+        .slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
         .split('\n')
         .map((v) => v.split(delimiter))
-}
 
 CSVToArray('a,b\nc,d')
+CSVToArray('a;b\nc;d', ';')
+CSVToArray('col1,col2\na,b\nc,d', ',', true)
