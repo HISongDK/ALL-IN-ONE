@@ -12,8 +12,12 @@ import RouteParams from '@page/RouteParams/RouteParams'
 import UploadCom from '@page/Upload/Upload'
 import Cascade from '@page/Cascade/Cascade'
 import Filter from '@page/Filter/Filter'
+import Toast from '@page/Toast'
+import SearchTree from '@page/SearchTree'
 
 const routes = [
+  { path: '/searchTree', component: SearchTree, title: '树状列表搜索' },
+  { path: '/toast', component: Toast, title: '弹窗提示' },
   { path: '/filter', component: Filter, title: '多条件筛选' },
   { path: '/casCade', component: Cascade, title: '省市下拉级联' },
   { path: '/upload', component: UploadCom, title: '上传组件' },

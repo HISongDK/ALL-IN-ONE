@@ -1,0 +1,46 @@
+ul.search-tree {
+  background: #fff;
+
+  li {
+    position: relative;
+    margin-left: 20px;
+    color: #000;
+
+    &.is-node {
+      &::before {
+        position: absolute;
+        top: 10px;
+        left: -20px;
+        display: block;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-top-color: #333;
+        content: '';
+      }
+    }
+
+    &.is-search-value {
+      color: #0577f9;
+      background: #eaf5ff;
+    }
+
+    &.is-node.is-close {
+      &::before {
+        position: absolute;
+        top: 7px;
+        left: -20px;
+        display: block;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-left-color: #333;
+        content: '';
+      }
+
+      ul {
+        display: none;
+      }
+    }
+  }
+}

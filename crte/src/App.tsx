@@ -3,10 +3,11 @@ import { Redirect } from 'react-router-dom'
 import Home from './page/Home/Home'
 
 function App() {
-  const isLogin = sessionStorage.getItem('token')
-  if (!isLogin) {
-    return <Redirect to="/login" />
-  }
+  // TODO: 登录相关先去掉
+  // const isLogin = sessionStorage.getItem('token')
+  // if (!isLogin) {
+  // return <Redirect to="/login" />
+  // }
 
   return <Home />
 }
