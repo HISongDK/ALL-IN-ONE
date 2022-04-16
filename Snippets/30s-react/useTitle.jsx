@@ -1,3 +1,10 @@
+/**
+ * Sets the title of the page
+ *
+ * Use typeof to determine if the Document is defined or not
+ * Use the useRef hook to store the original title of the Document,if defined
+ * Use the useEffect hook to set Document.title to the passed value when the component mounts and clean up when unmounting
+ */
 /* eslint-disable */
 const useTitle = (title) => {
     const documentDefined = typeof document !== 'undefined'
