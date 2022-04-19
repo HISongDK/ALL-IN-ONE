@@ -1,3 +1,4 @@
+/* eslint-disable */
 const container = document.getElementById('root')
 
 class TestLifeCycle extends React.Component {
