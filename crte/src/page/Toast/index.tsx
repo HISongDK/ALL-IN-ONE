@@ -1,7 +1,7 @@
 import React from 'react'
 import Toast from './Toast'
 
-export default function () {
+export default function toast() {
   const showToast = () => {
     Toast('弹出')
     Toast({
