@@ -6,10 +6,11 @@ import {
   useHistory,
   useLocation,
 } from 'react-router-dom'
-import { Layout, Card, ExternalLink, Menu, NavMenu } from 'tea-component'
+// import { Layout, Card, ExternalLink, Menu, NavMenu } from 'tea-component'
+import { Layout, Card } from '@douyinfe/semi-ui'
 import routesConfig from '../../router/config'
 
-const { Header, Body, Sider, Content } = Layout
+const { Header, Sider, Content } = Layout
 const firstRoute: any = routesConfig[0]
 
 export default function Home() {
@@ -23,11 +24,11 @@ export default function Home() {
   return (
     <Layout className="demo-layout-l">
       <Header>
-        <NavMenu left={<NavMenu.Item>某人练习的地方</NavMenu.Item>} />
+        {/* <NavMenu left={<NavMenu.Item>某人练习的地方</NavMenu.Item>} /> */}
       </Header>
-      <Body>
+      <Content>
         <Sider>
-          <Menu collapsable theme="dark">
+          {/* <Menu collapsable theme="dark">
             <Menu.SubMenu defaultOpened title="调试练习">
               {routesConfig.map((route) => (
                 <Menu.Item
@@ -38,44 +39,46 @@ export default function Home() {
                 />
               ))}
             </Menu.SubMenu>
-          </Menu>
+          </Menu> */}
         </Sider>
         <Content>
-          <Content.Header
+          {/* 
+					<Header
             showBackButton
-            onBackButtonClick={() => history.goBack()}
+            onBackButtonClick={() => history.goBack()} 
             operation={
               <ExternalLink weak href="https://github.com/HISongDK">
                 GitHub
               </ExternalLink>
             }
           />
-          <Content.Body>
+					*/}
+          <Content>
             {/* 内容区域一般使用 Card 组件显示内容 */}
             <Card>
-              <Card.Body>
-                {/* 注册路由 */}
-                <Switch>
-                  {routesConfig.map((route: any) => (
-                    <Route
-                      key={route.path}
-                      path={route.path}
-                      // component={route.component}
-                      render={() => (
-                        <Route path={route.path} component={route.component} />
-                      )}
-                    />
-                  ))}
-                  <Redirect exact from="/" to={routesConfig[0].path} />
+              {/* <Card.Body> */}
+              {/* 注册路由 */}
+              <Switch>
+                {routesConfig.map((route: any) => (
                   <Route
-                    render={(props) => <firstRoute.component {...props} />}
+                    key={route.path}
+                    path={route.path}
+                    // component={route.component}
+                    render={() => (
+                      <Route path={route.path} component={route.component} />
+                    )}
                   />
-                </Switch>
-              </Card.Body>
+                ))}
+                <Redirect exact from="/" to={routesConfig[0].path} />
+                <Route
+                  render={(props) => <firstRoute.component {...props} />}
+                />
+              </Switch>
+              {/* </Card.Body> */}
             </Card>
-          </Content.Body>
+          </Content>
         </Content>
-      </Body>
+      </Content>
     </Layout>
   )
 }
