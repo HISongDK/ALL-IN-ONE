@@ -19,7 +19,7 @@ app.use(logger('dev')) // app use logger传参调用的函数之后，每次请�
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true })) // 处理 post 请求，获取请求体
 app.use(express.json())
-// app.use(cors()) // 解决跨域问题
+app.use(cors()) // 解决跨域问题
 
 // 应用路由
 app.use(router)

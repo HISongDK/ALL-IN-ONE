@@ -13,3 +13,11 @@
 ## Socket.IO
 
 前些天，也看了下 webSocket 相关。好不容易是调通的，虽说也忘得差不多了。
+
+## MongoDB 数据库
+
+好久没看，在 wsl 的 ubuntu 上怎么启动都不会了
+
+```sh
+sudo service mongodb start
+```

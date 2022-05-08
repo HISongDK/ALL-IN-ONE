@@ -1,5 +1,4 @@
 import express from 'express'
-import axios from 'axios'
 import { UserModel } from '../models/index.js'
 const router = express.Router() // 得到路由器对象
 /**
