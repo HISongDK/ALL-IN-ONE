@@ -6,7 +6,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const Service = axios.create({
-  // baseURL: 'http://localhost:9000',
+  baseURL: 'http://localhost:9000',
   headers: {
     get: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -16,3 +16,5 @@ const Service = axios.create({
     },
   },
 })
+
+export default Service

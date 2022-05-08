@@ -33,7 +33,7 @@ const node = [
 
 function Parent() {
   const onChange = (id: any) => {
-    // alert(`当前点击项：${id}`)
+    console.log(`当前点击项：${id}`)
   }
   return <SearchTree data={node} onChange={onChange} />
 }

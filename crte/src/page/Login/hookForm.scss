@@ -13,13 +13,17 @@
   background: rgb(0 0 0 / 50%);
   border-radius: 8px;
 
+  form {
+    width: 70%;
+  }
+
   p {
     margin-bottom: 30px;
     font-size: 30px;
     font-family: serif;
   }
 
-  label {
-    color: #999;
+  .ant-form-item-label > label {
+    color: #fff;
   }
 }

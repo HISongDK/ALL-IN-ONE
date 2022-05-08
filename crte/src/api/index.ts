@@ -1,3 +1,15 @@
-import service from './service'
+import Service from './http'
 
-export default service
+interface ILoginReq {
+  username: string
+  password: string
+}
+
+const Request = {
+  async login(data: ILoginReq): Promise<any> {
+    const res = await Service.post('/login', data)
+    return res.data
+  },
+}
+
+export default Request

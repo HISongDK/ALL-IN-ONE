@@ -7,8 +7,7 @@ import Login from '@page/Login'
 import App from './App'
 
 import store from './store/store'
-// 引入 tea css
-import 'tea-component/dist/tea.css'
+
 // 引入 antd 样式
 import 'antd/dist/antd.min.css'
 

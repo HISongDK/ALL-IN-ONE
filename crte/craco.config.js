@@ -21,8 +21,9 @@ module.exports = {
     // 别名配置
     alias: {
       '@': pathResolve('src'),
-      '@page': pathResolve('./src/page'),
-      '@image': pathResolve('./src/static/image'),
+      '@api': pathResolve('src/api'),
+      '@page': pathResolve('src/page'),
+      '@image': pathResolve('src/static/image'),
     },
     plugins: [
       // webpack构建进度条

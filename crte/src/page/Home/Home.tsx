@@ -6,56 +6,62 @@ import {
   useHistory,
   useLocation,
 } from 'react-router-dom'
-// import { Layout, Card, ExternalLink, Menu, NavMenu } from 'tea-component'
-import { Layout, Card, Nav } from '@douyinfe/semi-ui'
+import { Layout, Card, Menu, Breadcrumb } from 'antd'
 import routesConfig from '../../router/config'
+import './index.scss'
 
 const { Header, Sider, Content } = Layout
+
 const firstRoute: any = routesConfig[0]
+
+const items = routesConfig.map((route) => ({
+  key: route.path,
+  label: route.title,
+}))
 
 export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  const pageJump = (path: string) => {
-    history.push(path)
+  const pageJump = ({ key }: any) => {
+    history.push(key)
   }
 
   return (
     <Layout>
-      <Header style={{ height: '80px' }}>
-        <Nav>某人练习的地方</Nav>
-      </Header>
+      <Header>某人练习的地方</Header>
       <Layout>
         <Sider>
-          <Nav
-            bodyStyle={{ height: '100%' }}
-            items={routesConfig.map((route) => ({
-              itemKey: route.path,
-              text: route.title,
-            }))}
-            onSelect={({ itemKey }) => pageJump(itemKey as string)}
-          />
+          <Menu items={items} theme="dark" onClick={pageJump} />
         </Sider>
-        <Content>
-          <Card>
-            {/* 注册路由 */}
-            <Switch>
-              {routesConfig.map((route: any) => (
+        <Layout style={{ padding: '0 24px 24px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>
+              {routesConfig.find((route) => route.path === pathname)?.title ||
+                'Not Found'}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <Content>
+            <Card>
+              {/* 注册路由 */}
+              <Switch>
+                {routesConfig.map((route: any) => (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    render={() => (
+                      <Route path={route.path} component={route.component} />
+                    )}
+                  />
+                ))}
+                <Redirect exact from="/" to={routesConfig[0].path} />
                 <Route
-                  key={route.path}
-                  path={route.path}
-                  // component={route.component}
-                  render={() => (
-                    <Route path={route.path} component={route.component} />
-                  )}
+                  render={(props) => <firstRoute.component {...props} />}
                 />
-              ))}
-              <Redirect exact from="/" to={routesConfig[0].path} />
-              <Route render={(props) => <firstRoute.component {...props} />} />
-            </Switch>
-          </Card>
-        </Content>
+              </Switch>
+            </Card>
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
   )
