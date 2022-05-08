@@ -30,16 +30,16 @@ module.exports = {
         profile: true,
       }),
 
-      // new CircularDependencyPlugin({
-      //   exclude: /node_modules/,
-      //   include: /src/,
-      //   failOnError: true,
-      //   allowAsyncCycles: false,
-      //   cwd: process.cwd(),
-      // }),
+      new CircularDependencyPlugin({
+        exclude: /node_modules/,
+        include: /src/,
+        failOnError: true,
+        allowAsyncCycles: false,
+        cwd: process.cwd(),
+      }),
 
       // 查看打包的进度
-      // new SimpleProgressWebpackPlugin(),
+      // new SimpleProgressWebpackPlugin(), // 和 webpackbar 有冲突可能，两个都开启就跑不起来
       // 查看打包分析
       new BundleAnalyzerPlugin(),
       // 替换moment为dayjs

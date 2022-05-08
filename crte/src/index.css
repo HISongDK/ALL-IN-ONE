@@ -1,5 +1,4 @@
-/* 导入 semi 样式 */
-@import '~@douyinfe/semi-ui/dist/css/semi.min.css';
+@import './static/style/normal.css';
 
 html,
 body,
