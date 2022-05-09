@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect } from 'react'
 import classNames from 'classnames'
 import { message } from 'antd'
-import service from '@/api/service'
+import service from '@api/service'
 import './style.less'
 
 function CrossDomain(): ReactElement {

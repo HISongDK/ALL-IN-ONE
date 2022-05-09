@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, message } from 'antd'
-import Request from '@/api'
+import Request from '@api/index'
 import './hookForm.scss'
 
 interface IFormInput {

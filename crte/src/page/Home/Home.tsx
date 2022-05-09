@@ -7,7 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { Layout, Card, Menu, Breadcrumb } from 'antd'
-import routesConfig from '../../router/config'
+import routesConfig from '@/router'
 import './index.scss'
 
 const { Header, Sider, Content } = Layout
