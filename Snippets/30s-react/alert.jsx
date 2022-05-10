@@ -26,9 +26,8 @@ const Alert = ({ isDefaultShown = false, timeout = 250, type, message }) => {
                 className={`alert ${type} ${isLeaving ? 'leaving' : ''}`}
                 role="alert"
             >
-                <button className="close" onClick={closeAlert}>
-                    {message}
-                </button>
+                <button className="close" onClick={closeAlert} />
+                {message}
             </div>
         )
     )
