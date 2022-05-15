@@ -4,8 +4,8 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import './style.less'
 
 function UploadCom() {
-  const [imgUrl, setImg] = useState('')
-  const [loading, setLoad] = useState(false)
+  const [imgUrl] = useState('')
+  const [loading] = useState(false)
 
   const uploadButton = (
     <div>

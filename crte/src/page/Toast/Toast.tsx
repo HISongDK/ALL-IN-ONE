@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import './index.scss'
 
 function Toast(props: any) {

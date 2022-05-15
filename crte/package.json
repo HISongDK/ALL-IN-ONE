@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "start:node": "cd ../node && nodemon app.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",

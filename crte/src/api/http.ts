@@ -3,7 +3,7 @@
  *
  * @AxiosResponse
  */
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 
 const Service = axios.create({
   baseURL: 'http://localhost:9000',
