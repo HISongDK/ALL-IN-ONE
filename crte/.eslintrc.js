@@ -63,6 +63,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': [1, { ignore: ['children'] }],
     'react/require-default-props': 0,
+    'react/no-array-index-key': 0,
     // camelcase: 0,
     'react-hooks/exhaustive-deps': 1,
 

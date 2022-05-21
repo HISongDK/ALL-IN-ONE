@@ -12,7 +12,7 @@ const { red, blue, green } = chalk
 
 const db = 'mongodb://localhost/learn_node_db'
 const app = express()
-const port = 9000
+const port = 9001
 
 // express 应用中间件
 app.use(logger('dev')) // app use logger传参调用的函数之后，每次请求路由，控制台会输出相关信息
