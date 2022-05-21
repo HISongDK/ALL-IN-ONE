@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "start:node": "cd ../node && nodemon app.js",
+    "start:node": "cd ../node && sudo service mongodb start && nodemon app.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",

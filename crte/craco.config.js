@@ -23,6 +23,7 @@ module.exports = {
       '@': pathResolve('src'),
       '@api': pathResolve('src/api'),
       '@page': pathResolve('src/page'),
+      '@utils': pathResolve('src/utils'),
       '@image': pathResolve('src/static/image'),
     },
     plugins: [

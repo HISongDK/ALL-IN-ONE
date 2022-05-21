@@ -26,7 +26,7 @@ const useFetch = (url, options) => {
     return { response, error, abort }
 }
 
-const ImageFetch = (props) => {
+const ImageFetch = () => {
     const res = useFetch('https://dog.ceo/api/breeds/image/random', {})
     if (!res.response) return <div>Loading...</div>
 

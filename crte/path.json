@@ -5,6 +5,7 @@
       "@/*": ["src/*"],
       "@api/*": ["src/api/*"],
       "@page/*": ["src/page/*"],
+      "@utils/*": ["src/utils/*"],
       "@image/*": ["src/static/image/*"]
     }
   }
