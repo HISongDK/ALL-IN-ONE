@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFetch } from '@utils/hooks'
-import { Button } from 'antd'
+import { useReducerUpdate } from '@utils/ahook/useUpdate'
+import { Button, Card } from 'antd'
 import Modal from '@/components/Modal/Modal'
 
 function ImageFetch({ style }: any) {
@@ -25,9 +26,20 @@ function ImageFetch({ style }: any) {
 function Dogs() {
   const [visible, setVisible] = useState(false)
   const [isWantSee, setIsWantSee] = useState(false)
+
+  const update = useReducerUpdate()
+
+  useEffect(() => {
+    console.log('  useEffect  ')
+  }, [])
+
   return (
     <>
       <Button onClick={() => setVisible(true)}>Click me!</Button>
+      <Card title="useUpdate">
+        <div>Time: {new Date().toLocaleString()}</div>
+        <Button onClick={update}>Update</Button>
+      </Card>
       <Modal
         visible={visible}
         title="Hi there!"
