@@ -1,0 +1,14 @@
+.collapse-button {
+  display: block;
+  width: 100%;
+}
+
+.collapse-content {
+  &.collapsed {
+    display: none;
+  }
+
+  &.expanded {
+    display: block;
+  }
+}

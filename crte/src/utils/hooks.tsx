@@ -36,6 +36,7 @@ export const useFetch = (url: string, options: any) => {
        * 先清理副作用，天然防抖的好办法啊
        */
     }
+    // eslint-disable-next-line
   }, [])
 
   return { response, error, abort }
