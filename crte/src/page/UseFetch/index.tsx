@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useFetch } from '@utils/hooks'
+import { useFetch, useMergeState } from '@utils/hooks'
 import { useReducerUpdate } from '@utils/ahook/useUpdate'
-import { Button, Card, Space } from 'antd'
+import { Button, Card, Space, Input } from 'antd'
 import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
 
@@ -28,6 +28,8 @@ function Dogs() {
   const [visible, setVisible] = useState(false)
   const [isWantSee, setIsWantSee] = useState(false)
 
+  const [data, setData] = useMergeState<any>({ name: 'dksong', age: 24 })
+
   const update = useReducerUpdate()
 
   useEffect(() => {
@@ -49,6 +51,18 @@ function Dogs() {
             <h1>This is a collapse</h1>
             <p>Hello world!</p>
           </Collapse>
+        </Card>
+
+        <Card title="useMergeState">
+          <Space>
+            <Input
+              value={data.name}
+              onChange={(e) => setData({ name: e.target.value })}
+            />
+            <Button onClick={() => setData({ age: data.age - 1 })}>-</Button>
+            {data.age}
+            <Button onClick={() => setData({ age: data.age + 1 })}>+</Button>
+          </Space>
         </Card>
       </Space>
 
