@@ -14,7 +14,15 @@
   border-radius: 8px;
 
   form {
-    width: 70%;
+    width: 315px;
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 315px;
+      padding-left: 15px;
+    }
   }
 
   p {
