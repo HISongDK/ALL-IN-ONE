@@ -34,14 +34,16 @@ export default function Home() {
         <Sider>
           <Menu items={items} theme="dark" onClick={pageJump} />
         </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
+        <Layout
+          style={{ padding: '0 24px 24px', height: '100%', overflow: 'auto' }}
+        >
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>
               {routesConfig.find((route) => route.path === pathname)?.title ||
                 'Not Found'}
             </Breadcrumb.Item>
           </Breadcrumb>
-          <Content>
+          <Content style={{ minHeight: 'unset' }}>
             <Card>
               {/* 注册路由 */}
               <Switch>

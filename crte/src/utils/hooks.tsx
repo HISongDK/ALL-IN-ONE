@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 export const useFetch = (url: string, options: any) => {
   const [response, setResponse] = useState<any>(null)
@@ -73,4 +73,41 @@ export const useLocalStorage = (key: string, defaultValue?: any) => {
   }
 
   return [storeValue, setValue]
+}
+
+export const useCopyToClipboard = (text: string) => {
+  const copyToClipboard = (str: string) => {
+    const el = document.createElement('textarea')
+    el.value = str
+    el.setAttribute('readonly', '')
+    el.style.position = 'absolute'
+    el.style.left = '-9999px'
+    document.body.appendChild(el)
+
+    const selected =
+      Number(document.getSelection()?.rangeCount) > 0
+        ? document.getSelection()?.getRangeAt(0)
+        : false
+
+    el.select()
+    const success = document.execCommand('copy')
+    document.body.removeChild(el)
+
+    if (selected) {
+      document.getSelection()?.removeAllRanges()
+      document.getSelection()?.addRange(selected)
+    }
+
+    return success
+  }
+
+  const [copied, setCopied] = useState(false)
+
+  const copy = useCallback<() => void>(() => {
+    setCopied(copyToClipboard(text))
+  }, [text])
+
+  useEffect(() => () => setCopied(false), [text])
+
+  return [copied, copy]
 }
