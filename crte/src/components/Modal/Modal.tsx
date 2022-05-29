@@ -7,12 +7,21 @@ interface IModalProps {
   title: string
   content: any
   footer?: any
+  okText?: string
   onOk?: () => void
   onCancel: () => void
 }
 
 export default function Modal(props: IModalProps) {
-  const { visible = false, title, content, footer, onOk, onCancel } = props
+  const {
+    visible = false,
+    title,
+    content,
+    footer,
+    okText = '确定',
+    onOk,
+    onCancel,
+  } = props
   const keydownHandler = ({ key }: KeyboardEvent) => {
     console.log('\n--- key  ---\n\n', key)
 
@@ -50,7 +59,7 @@ export default function Modal(props: IModalProps) {
               onClick={onOk}
               style={{ marginLeft: '1rem' }}
             >
-              确定
+              {okText}
             </Button>
           </div>
         )}

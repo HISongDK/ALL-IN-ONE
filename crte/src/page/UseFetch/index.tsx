@@ -51,6 +51,7 @@ function ImageFetch({ style }: any) {
 function Dogs() {
   const [visible, setVisible] = useState(false)
   const [isWantSee, setIsWantSee] = useState(false)
+  const [isRefreshBtn, setIsRefreshBtn] = useState(false)
 
   const [data, setData] = useMergeState<any>({ name: 'dksong', age: 24 })
 
@@ -131,10 +132,22 @@ function Dogs() {
             'Do you want to see some dogs?'
           )
         }
-        onOk={() => setIsWantSee(true)}
+        okText={isRefreshBtn ? '刷新' : undefined}
+        onOk={() => {
+          if (isRefreshBtn) {
+            // 我这么个重渲染也是醉了
+            setIsWantSee(false)
+            setTimeout(() => setIsWantSee(true))
+          } else {
+            setIsWantSee(false)
+            setIsWantSee(true)
+            setIsRefreshBtn(true)
+          }
+        }}
         onCancel={() => {
           setVisible(false)
           setIsWantSee(false)
+          setIsRefreshBtn(false)
         }}
       />
     </>
