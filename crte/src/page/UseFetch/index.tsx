@@ -5,6 +5,7 @@ import { CopyOutlined, CheckOutlined } from '@ant-design/icons'
 import { useCopyToClipboard, useFetch, useMergeState } from '@/utils/hooks'
 import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
+import TestUseCallback from './TestUseCallback'
 
 function ListItem({ item }: any) {
   const [copied, copy] = useCopyToClipboard(item)
@@ -97,6 +98,10 @@ function Dogs() {
               return <ListItem key={item} item={item} />
             }}
           />
+        </Card>
+
+        <Card title="useCallback 测试">
+          <TestUseCallback />
         </Card>
       </Space>
 
