@@ -6,6 +6,7 @@ import { useCopyToClipboard, useFetch, useMergeState } from '@/utils/hooks'
 import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
+import FetchLearn from './FetchLearn'
 
 function ListItem({ item }: any) {
   const [copied, copy] = useCopyToClipboard(item)
@@ -155,6 +156,8 @@ function Dogs() {
           setIsRefreshBtn(false)
         }}
       />
+
+      <FetchLearn />
     </>
   )
 }
