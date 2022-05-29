@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { useLocalStorage } from '@utils/hooks'
+import { useLocalStorage } from '@/utils/hooks'
 import HookForm from './HookForm'
 import routes from '@/router'
 import './style.less'

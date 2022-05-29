@@ -2,8 +2,8 @@ import React, { ReactElement, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, message, Checkbox } from 'antd'
 import dayjs from 'dayjs'
-import { useLocalStorage } from '@utils/hooks'
 import Request from '@api/index'
+import { useLocalStorage } from '@/utils/hooks'
 import './hookForm.scss'
 
 interface IFormInput {

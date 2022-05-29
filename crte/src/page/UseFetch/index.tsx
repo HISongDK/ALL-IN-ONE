@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useCopyToClipboard, useFetch, useMergeState } from '@utils/hooks'
 import { useReducerUpdate } from '@utils/ahook/useUpdate'
 import { Button, Card, Space, Input, List, message } from 'antd'
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons'
+import { useCopyToClipboard, useFetch, useMergeState } from '@/utils/hooks'
 import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { useLocalStorage } from '@utils/hooks'
+import { useLocalStorage } from '@/utils/hooks'
 import Home from './page/Home/Home'
 
 function App() {
