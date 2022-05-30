@@ -1,11 +1,11 @@
 import { message } from 'antd'
 
-const request = async (url: string, options: RequestInit) => {
-  const headers = options.headers || {}
+const request = async (url: string, options?: RequestInit) => {
+  const headers = options?.headers || {}
   options = {
     ...options,
     headers: { ...headers, 'Content-Type': 'application/json;charset:utf-8' },
-    body: JSON.stringify(options.body),
+    body: JSON.stringify(options?.body),
   }
 
   try {

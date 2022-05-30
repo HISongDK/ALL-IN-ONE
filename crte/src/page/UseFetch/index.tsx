@@ -7,6 +7,7 @@ import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
 import FetchLearn from './FetchLearn'
+import Service from './service'
 
 function ListItem({ item }: any) {
   const [copied, copy] = useCopyToClipboard(item)
@@ -59,8 +60,14 @@ function Dogs() {
 
   const update = useReducerUpdate()
 
+  const getUserInfo = async () => {
+    const res = await Service.getUserInfo()
+    console.log('\n--- res ruanyf  ---\n\n', res)
+  }
+
   useEffect(() => {
     console.log('  useEffect  ')
+    getUserInfo()
   }, [])
 
   return (
