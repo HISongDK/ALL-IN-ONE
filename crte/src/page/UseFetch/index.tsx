@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useReducerUpdate } from '@utils/ahook/useUpdate'
 import { Button, Card, Space, Input, List, message } from 'antd'
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons'
-import { useCopyToClipboard, useFetch, useMergeState } from '@/utils/hooks'
+import {
+  useCopyToClipboard,
+  useFetch,
+  useMergeState,
+  useWindowSize,
+} from '@/utils/hooks'
 import Modal from '@/components/Modal/Modal'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
@@ -58,6 +63,8 @@ function Dogs() {
 
   const [data, setData] = useMergeState<any>({ name: 'dksong', age: 24 })
 
+  const { width, height } = useWindowSize()
+
   const update = useReducerUpdate()
 
   const getUserInfo = async () => {
@@ -110,6 +117,10 @@ function Dogs() {
 
         <Card title="useCallback 测试">
           <TestUseCallback />
+        </Card>
+
+        <Card title="useWindowSize">
+          Window size: {width} x {height}
         </Card>
       </Space>
 
