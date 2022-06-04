@@ -14,7 +14,6 @@ function useSearchParam(param: string) {
 
     window.addEventListener('popstate', onChange)
     // 监听需要覆写 history 上对应的方法，手动触发事件
-    window.addEventListener('pushState', onChange)
     window.addEventListener('replaceState', onChange)
     return () => {
       window.removeEventListener('popstate', onChange)

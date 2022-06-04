@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useReducerUpdate } from '@utils/ahook/useUpdate'
 import { Button, Card, Space, Input, List, message } from 'antd'
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons'
+import MultiSelectCheckbox, {
+  optionsProp,
+} from '@/components/MultiSelectCheckbox'
 import {
   useCopyToClipboard,
   useFetch,
@@ -56,6 +59,12 @@ function ImageFetch({ style }: any) {
   )
 }
 
+const options = [
+  { label: 'Item One' },
+  { label: 'Item Two' },
+  { label: 'Item Three' },
+]
+
 function Dogs() {
   const [visible, setVisible] = useState(false)
   const [isWantSee, setIsWantSee] = useState(false)
@@ -76,6 +85,10 @@ function Dogs() {
     console.log('  useEffect  ')
     getUserInfo()
   }, [])
+
+  const handleChange = (checked: optionsProp) => {
+    console.log('\n--- checked  ---\n\n', checked)
+  }
 
   return (
     <>
@@ -121,6 +134,10 @@ function Dogs() {
 
         <Card title="useWindowSize">
           Window size: {width} x {height}
+        </Card>
+
+        <Card title="MultiSelectCheckbox">
+          <MultiSelectCheckbox options={options} onChange={handleChange} />
         </Card>
       </Space>
 
