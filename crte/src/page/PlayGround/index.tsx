@@ -16,6 +16,7 @@ import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
 import FetchLearn from './FetchLearn'
 import Service from './service'
+import Select from '@/components/Select'
 
 function ListItem({ item }: any) {
   const [copied, copy] = useCopyToClipboard(item)
@@ -138,6 +139,19 @@ function Dogs() {
 
         <Card title="MultiSelectCheckbox">
           <MultiSelectCheckbox options={options} onChange={handleChange} />
+        </Card>
+
+        <Card title="Select">
+          <Select
+            values={[
+              ['grapefruit', 'Grapefruit'],
+              ['lime', 'Lime'],
+              ['coconut', 'Coconut'],
+              ['mango', 'Mango'],
+            ]}
+            selectedValue="lime"
+            onValueChange={(val: any) => console.log('select value:', val)}
+          />
         </Card>
       </Space>
 
