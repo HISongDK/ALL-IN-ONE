@@ -1,26 +1,34 @@
 import React, { useEffect } from 'react'
 import { registerMicroApps, start } from 'qiankun'
-import { Route, Link, useHistory, Redirect } from 'react-router-dom'
-import { Layout, Menu, Breadcrumb, Switch, Row } from 'antd'
+import {
+  Link,
+  Route,
+  Switch,
+  // Redirect,
+  useHistory,
+  useLocation,
+} from 'react-router-dom'
+import { Layout, Menu, Breadcrumb, Switch as SwitchButton, Row } from 'antd'
 import { SmileOutlined, SmileTwoTone } from '@ant-design/icons'
 import { useBreadcrumbs } from '@utils/hooks'
 import microApps from './micro'
-import routes from './router/index'
+import routes, { menus } from './router/index'
 
-const { Header, Sider, Content } = Layout
+const { Header, Content } = Layout
 
 // 构建路由
 const genRoutes = () => (
-  <>
+  <Switch>
+    {/* <Redirect to={routes[routes.length - 1].path} /> */}
     {routes.map((route) => (
       <Route key={route.path} path={route.path} component={route.component} />
     ))}
-    <Redirect to={routes[routes.length - 1].path} />
-  </>
+  </Switch>
 )
 
 function App() {
   const history = useHistory()
+  const { pathname } = useLocation()
 
   useEffect(() => {
     registerMicroApps(microApps)
@@ -43,7 +51,25 @@ function App() {
       <Header className="header">
         <Row justify="space-between" align="middle">
           <div className="logo">微前端初试</div>
-          <Switch
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={[pathname]}
+            style={{
+              width: 'auto',
+              height: '100%',
+              borderRight: 0,
+              flex: 1,
+              margin: '0 30px',
+            }}
+          >
+            {menus.map(({ path, title }) => (
+              <Menu.Item key={path} onClick={() => history.push(path)}>
+                {title}
+              </Menu.Item>
+            ))}
+          </Menu>
+          <SwitchButton
             checkedChildren={<SmileTwoTone />}
             unCheckedChildren={<SmileOutlined />}
             defaultChecked
@@ -52,24 +78,6 @@ function App() {
         </Row>
       </Header>
       <Layout>
-        <Sider width={200} className="site-layout-background">
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-          >
-            {routes.map(({ path, icon, name }) => (
-              <Menu.Item
-                key={path}
-                icon={icon}
-                onClick={() => history.push(path)}
-              >
-                {name}
-              </Menu.Item>
-            ))}
-          </Menu>
-        </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             {/* 正常来说该是获取的面包屑路由数组，不过现在没层级路由 */}

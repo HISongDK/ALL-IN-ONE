@@ -12,12 +12,37 @@ export interface IRoute {
   component: React.FC
 }
 
+interface IMenus {
+  path: string
+  title: string
+}
+
 export enum PATH {
-  VUE2_PATH = '/vue2/',
-  VUE3_PATH = '/vue3/',
+  VUE2_PATH = '/vue2',
+  VUE3_PATH = '/vue3',
   SOCKET = '/socket',
   API = '/api',
+  HOME = '/',
 }
+
+export const menus: IMenus[] = [
+  {
+    title: 'vue2 微应用',
+    path: PATH.VUE2_PATH,
+  },
+  {
+    title: 'vue3 微应用',
+    path: PATH.VUE3_PATH,
+  },
+  {
+    title: 'socket 示例',
+    path: PATH.SOCKET,
+  },
+  {
+    title: '接口调用测试',
+    path: PATH.API,
+  },
+]
 
 const routes: IRoute[] = [
   {
@@ -42,6 +67,10 @@ const routes: IRoute[] = [
     path: PATH.API,
     component: ApiTest,
   },
+  {
+    name: '主页',
+    path: PATH.HOME,
+    component: ApiTest,
+  },
 ]
-
 export default routes

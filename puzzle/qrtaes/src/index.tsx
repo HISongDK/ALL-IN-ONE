@@ -7,9 +7,7 @@ import './index.less'
 
 ReactDOM.render(
   <Routes>
-    <Switch>
-      <App />
-    </Switch>
+    <App />
   </Routes>,
   document.getElementById('root'),
 )
