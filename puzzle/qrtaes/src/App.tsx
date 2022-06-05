@@ -29,6 +29,8 @@ const genRoutes = () => (
 function App() {
   const history = useHistory()
   const { pathname } = useLocation()
+  // @ts-ignore
+  console.log('---  window.Vue  ---\n', window?.Vue)
 
   useEffect(() => {
     registerMicroApps(microApps)

@@ -5,10 +5,11 @@ import store from './store'
 import { routes } from './router'
 import './public-path'
 
-const app = createApp(App)
-
 let router = null
+let app: any = null
+
 function render() {
+    app = createApp(App) // NOTE: 我本来是在 render 函数外面创建的实例，切换子应用对应路径就会报错，坑了我好长时间啊
     router = createRouter({
         history: createWebHistory(
             window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/',
@@ -35,7 +36,6 @@ export async function bootstrap() {
  * mount ： 在应用每次进入时调用
  */
 export async function mount(props: any) {
-    console.log('mount', props)
     render()
 }
 
@@ -43,6 +43,5 @@ export async function mount(props: any) {
  * unmount ：应用每次 切出/卸载 均会调用
  */
 export async function unmount() {
-    console.log('unmount')
     app.unmount()
 }
