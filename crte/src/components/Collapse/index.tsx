@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import useToggle, { useReducerToggle } from '@/page/PlayGround/useToggle'
+import useToggle, { useReducerToggle } from '@/utils/hooks/useToggle'
 // import { useToggle } from 'ahooks'
 import './index.scss'
 
