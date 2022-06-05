@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
-function useHash() {
+type ReturnProps = [string, (newHash: string) => void]
+
+export function useHash(): ReturnProps {
   const [hash, setHash] = useState(() => window.location.hash)
 
   const hashHandler = useCallback(() => {
+    console.log(
+      '---  window.location.hash 怎么没有触发  ---\n',
+      window.location.hash,
+    )
     setHash(window.location.hash)
   }, [])
 
@@ -15,7 +21,7 @@ function useHash() {
   }, [])
 
   const updateHash = useCallback(
-    (newHash) => {
+    (newHash: string) => {
       if (newHash !== hash) window.location.hash = newHash
     },
     [hash],
