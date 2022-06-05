@@ -66,6 +66,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     // camelcase: 0,
     'react-hooks/exhaustive-deps': 1,
+    'react/function-component-definition': 0,
 
     'jsx-a11y/href-no-hash': ['off'],
     'jsx-a11y/anchor-is-valid': 0,

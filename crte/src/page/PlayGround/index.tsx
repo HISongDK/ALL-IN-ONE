@@ -16,6 +16,7 @@ import FetchLearn from './FetchLearn'
 import Service from './service'
 import Select from '@/components/Select'
 import DogModal from './DogModal'
+import Tabs, { TabItem } from '../../components/Tabs/index'
 
 const options = [
   { label: 'Item One' },
@@ -127,6 +128,16 @@ function Dogs() {
             {/* TODO: 不知到怎么触发 hashchange 事件，不管了放弃 */}
             replace hash url
           </button>
+        </Card>
+        <Card title="Tabs">
+          <Tabs onTabClick={console.log}>
+            <TabItem label="Tab1" index={0}>
+              Tab 栏1
+            </TabItem>
+            <TabItem label="Tab2" index={1}>
+              Tab 栏2
+            </TabItem>
+          </Tabs>
         </Card>
         <FetchLearn />
       </Space>
