@@ -9,6 +9,7 @@ import {
   useWindowSize,
   useHash,
   useDebounce,
+  useAsync,
 } from '@/utils/hooks'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
@@ -35,6 +36,8 @@ function Dogs() {
   const [hash, updateHash] = useHash()
   const debouncedValue = useDebounce(inpValue)
   const update = useReducerUpdate()
+
+  const imgFetch: any = useAsync((url) => fetch(url).then((res) => res.json()))
 
   // 尝试 fetch 获取信息
   const getUserInfo = async () => {
@@ -138,6 +141,29 @@ function Dogs() {
               Tab 栏2
             </TabItem>
           </Tabs>
+        </Card>
+        <Card title="useAsync">
+          <button
+            onClick={() => {
+              imgFetch.run('https://dog.ceo/api/breeds/image/random')
+            }}
+            disabled={imgFetch.loading}
+            type="button"
+          >
+            Load Image
+          </button>
+          <br />
+          <pre>{JSON.stringify(imgFetch, null, 4)}</pre>
+          {imgFetch.loading && <div>Loading</div>}
+          {imgFetch.error && <div>Error {imgFetch.error}</div>}
+          {imgFetch.value && (
+            <img
+              src={imgFetch.value.message}
+              alt="avatar"
+              width={400}
+              height="auto"
+            />
+          )}
         </Card>
         <FetchLearn />
       </Space>

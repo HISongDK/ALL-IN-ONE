@@ -18,6 +18,7 @@ export function useHash(): ReturnProps {
     return () => {
       window.removeEventListener('hashchange', hashHandler)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const updateHash = useCallback(

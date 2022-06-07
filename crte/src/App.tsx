@@ -6,7 +6,7 @@ import Home from './page/Home/Home'
 function App() {
   const [userInfo] = useLocalStorage('userToken')
 
-  const isLogin = userInfo.expires > Date.now()
+  const isLogin = userInfo?.expires > Date.now()
 
   return isLogin ? <Home /> : <Redirect to="/login" />
 }

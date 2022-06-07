@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const fetchLearn = async () => {
   const url =
@@ -53,7 +53,10 @@ const fetchLearn = async () => {
 }
 
 function FetchLearn() {
-  fetchLearn()
+  useEffect(() => {
+    fetchLearn()
+  }, [])
+
   return (
     <p>
       <br />
