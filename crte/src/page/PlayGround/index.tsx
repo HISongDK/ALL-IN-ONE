@@ -16,6 +16,7 @@ import TestUseCallback from './TestUseCallback'
 import FetchLearn from './FetchLearn'
 import Service from './service'
 import Select from '@/components/Select'
+import Tooltip from '@/components/Tooltip'
 import DogModal from './DogModal'
 import Tabs, { TabItem } from '../../components/Tabs/index'
 
@@ -164,6 +165,11 @@ function Dogs() {
               height="auto"
             />
           )}
+        </Card>
+        <Card title="Tooltip">
+          <Tooltip text="Simple Tooltip">
+            <button>hover me</button>
+          </Tooltip>
         </Card>
         <FetchLearn />
       </Space>
