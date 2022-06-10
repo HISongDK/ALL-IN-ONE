@@ -17,6 +17,7 @@ import FetchLearn from './FetchLearn'
 import Service from './service'
 import Select from '@/components/Select'
 import Tooltip from '@/components/Tooltip'
+import Toggle from '@/components/Toggle'
 import DogModal from './DogModal'
 import Tabs, { TabItem } from '../../components/Tabs/index'
 
@@ -171,6 +172,10 @@ function Dogs() {
             <button>hover me</button>
           </Tooltip>
         </Card>
+        <Card title="toggle">
+          <Toggle />
+        </Card>
+
         <FetchLearn />
       </Space>
       {visible && <DogModal setVisible={setVisible} />}
