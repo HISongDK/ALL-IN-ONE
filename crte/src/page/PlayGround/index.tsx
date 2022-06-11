@@ -10,6 +10,7 @@ import {
   useHash,
   useDebounce,
   useAsync,
+  useHover,
 } from '@/utils/hooks'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
@@ -37,6 +38,7 @@ function Dogs() {
   const { width, height } = useWindowSize()
   const [hash, updateHash] = useHash()
   const debouncedValue = useDebounce(inpValue)
+  const [hoverRef, isHovering] = useHover()
   const update = useReducerUpdate()
 
   const imgFetch: any = useAsync((url) => fetch(url).then((res) => res.json()))
@@ -169,7 +171,9 @@ function Dogs() {
         </Card>
         <Card title="Tooltip">
           <Tooltip text="Simple Tooltip">
-            <button>hover me</button>
+            <button ref={hoverRef}>
+              {isHovering ? 'look up' : 'hover me'}
+            </button>
           </Tooltip>
         </Card>
         <Card title="toggle">
