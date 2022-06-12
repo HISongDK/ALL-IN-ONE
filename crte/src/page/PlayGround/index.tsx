@@ -22,6 +22,7 @@ import Toggle from '@/components/Toggle'
 import DogModal from './DogModal'
 import Tabs, { TabItem } from '../../components/Tabs/index'
 import TagInput from '../../components/TagInput/index'
+import RippleButton from '@/components/RippleButton'
 
 const options = [
   { label: 'Item One' },
@@ -185,6 +186,9 @@ function Dogs() {
           <TagInput tags={['Nodejs', 'MongoDB']} />
         </Card>
 
+        <Card title="RippleButton">
+          <RippleButton>RippleButton</RippleButton>
+        </Card>
         <FetchLearn />
       </Space>
       {visible && <DogModal setVisible={setVisible} />}
