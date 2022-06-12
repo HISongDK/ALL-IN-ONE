@@ -21,6 +21,7 @@ import Tooltip from '@/components/Tooltip'
 import Toggle from '@/components/Toggle'
 import DogModal from './DogModal'
 import Tabs, { TabItem } from '../../components/Tabs/index'
+import TagInput from '../../components/TagInput/index'
 
 const options = [
   { label: 'Item One' },
@@ -178,6 +179,10 @@ function Dogs() {
         </Card>
         <Card title="toggle">
           <Toggle />
+        </Card>
+
+        <Card title="TagInput">
+          <TagInput tags={['Nodejs', 'MongoDB']} />
         </Card>
 
         <FetchLearn />
