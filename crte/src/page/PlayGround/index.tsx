@@ -11,6 +11,7 @@ import {
   useDebounce,
   useAsync,
   useHover,
+  useForm,
 } from '@/utils/hooks'
 import Collapse from '@/components/Collapse'
 import TestUseCallback from './TestUseCallback'
@@ -60,6 +61,13 @@ function Dogs() {
   useEffect(() => {
     updateHash(debouncedValue)
   }, [updateHash, debouncedValue])
+
+  const [formValues, setFormValues] = useForm({ email: '', password: '' })
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    console.log('---  formValues  ---\n', formValues)
+  }
 
   return (
     <>
@@ -189,6 +197,16 @@ function Dogs() {
         <Card title="RippleButton">
           <RippleButton>RippleButton</RippleButton>
         </Card>
+
+        <Card title="useForm">
+          <form onSubmit={handleSubmit}>
+            <input type="email" name="email" onChange={setFormValues} />
+            <input type="password" name="password" onChange={setFormValues} />
+            <button type="submit">提交</button>
+          </form>
+          <pre>{JSON.stringify(formValues, null, 4)}</pre>
+        </Card>
+
         <FetchLearn />
       </Space>
       {visible && <DogModal setVisible={setVisible} />}
