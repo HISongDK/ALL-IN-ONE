@@ -38,13 +38,17 @@ export default function Home() {
           style={{ padding: '0 24px 24px', height: '100%', overflow: 'auto' }}
         >
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>
-              {routesConfig.find((route) => route.path === pathname)?.title ||
-                'Not Found'}
-            </Breadcrumb.Item>
+            {pathname.split('/').map((path) => (
+              <Breadcrumb.Item
+                key={path}
+                onClick={() => history.push(`/${path}`)}
+              >
+                {path}
+              </Breadcrumb.Item>
+            ))}
           </Breadcrumb>
           <Content style={{ minHeight: 'unset' }}>
-            <Card>
+            <Card style={{ minHeight: '100%' }}>
               {/* 注册路由 */}
               <Switch>
                 {routesConfig.map((route: any) => (

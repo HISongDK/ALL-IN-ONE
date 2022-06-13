@@ -1,0 +1,35 @@
+.full-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 20px;
+
+  // NOTE:本来看着layout-content区没变化，以为是 z-index 的问题，调了半天，发现是生效了，就是背景透明看着以为没生效
+  background: #fff;
+}
+
+// antd demo style
+.events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.events .ant-badge-status {
+  width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.notes-month {
+  font-size: 28px;
+  text-align: center;
+}
+
+.notes-month section {
+  font-size: 28px;
+}

@@ -13,9 +13,11 @@ import Cascade from '@page/Cascade/Cascade'
 import Filter from '@page/Filter/Filter'
 import Toast from '@page/Toast'
 import SearchTree from '@page/SearchTree'
-import UseFetch from '@/page/PlayGround'
+import UseFetch from '@page/PlayGround'
+import FiftyProjects from '@page/50Projects/index'
 
 const routes = [
+  { path: '/50days', component: FiftyProjects, title: '50Days' },
   { path: '/playground', component: UseFetch, title: 'Just For Fun' },
   { path: '/searchTree', component: SearchTree, title: '树状列表搜索' },
   { path: '/toast', component: Toast, title: '弹窗提示' },
