@@ -8,8 +8,11 @@ const getListData = (value: Moment) => {
   let listData
   switch (value.date()) {
     case 14:
+      listData = [{ type: 'success', content: '今日始 Day0' }]
+      break
+    case 15:
       listData = [
-        { type: 'success', content: '今日始 Day1' },
+        { type: 'success', content: 'Day1' },
         { type: 'success', content: 'expanding-cards' },
       ]
       break
