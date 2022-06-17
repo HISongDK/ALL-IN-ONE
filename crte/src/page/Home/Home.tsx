@@ -48,7 +48,7 @@ export default function Home() {
             ))}
           </Breadcrumb>
           <Content style={{ minHeight: 'unset' }}>
-            <Card style={{ minHeight: '100%' }}>
+            <Card style={{ height: '100%' }} bodyStyle={{ height: '100%' }}>
               {/* 注册路由 */}
               <Switch>
                 {routesConfig.map((route: any) => (

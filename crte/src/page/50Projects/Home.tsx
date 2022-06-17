@@ -3,23 +3,7 @@ import { useHistory } from 'react-router-dom'
 import type { BadgeProps } from 'antd'
 import { Badge, Calendar } from 'antd'
 import type { Moment } from 'moment'
-
-const getListData = (value: Moment) => {
-  let listData
-  switch (value.date()) {
-    case 14:
-      listData = [{ type: 'success', content: '今日始 Day0' }]
-      break
-    case 15:
-      listData = [
-        { type: 'success', content: 'Day1' },
-        { type: 'success', content: 'expanding-cards' },
-      ]
-      break
-    default:
-  }
-  return listData || []
-}
+import config from './config'
 
 const getMonthData = (value: Moment) => {
   if (value.month() === 8) {
@@ -42,10 +26,10 @@ const Home: React.FC = () => {
   }
 
   const dateCellRender = (value: Moment) => {
-    const listData = getListData(value)
+    const listData = config[value.date()] || []
     return (
       <ul className="events">
-        {listData.map((item, index) => (
+        {listData.map((item: any, index: number) => (
           <li
             key={item.content}
             title={item.content}

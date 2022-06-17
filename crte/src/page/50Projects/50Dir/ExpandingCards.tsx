@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './style.scss'
+import './ProgressStep.scss'
 
 const imgs = [
   {

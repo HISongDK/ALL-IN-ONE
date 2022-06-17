@@ -23,7 +23,7 @@ function FiftyProjects() {
   })
 
   return (
-    <div className={cls({ 'full-screen': fullScreen })}>
+    <div className={cls('project-wrapper', { 'full-screen': fullScreen })}>
       <Switch>
         {routers.map((route) => (
           <Route
