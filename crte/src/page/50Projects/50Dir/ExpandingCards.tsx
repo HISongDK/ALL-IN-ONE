@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './ProgressStep.scss'
+import './ExpandingCards.scss'
 
 const imgs = [
   {

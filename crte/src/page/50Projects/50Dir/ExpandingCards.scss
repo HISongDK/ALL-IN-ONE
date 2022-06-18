@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   font-family: Muli, serif;
@@ -21,7 +22,7 @@
     background-position: center;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 700ms ease-in;
+    transition: all 400ms ease-in;
     block-size: cover;
 
     h3 {

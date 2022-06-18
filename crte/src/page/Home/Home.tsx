@@ -38,10 +38,12 @@ export default function Home() {
           style={{ padding: '0 24px 24px', height: '100%', overflow: 'auto' }}
         >
           <Breadcrumb style={{ margin: '16px 0' }}>
-            {pathname.split('/').map((path) => (
+            {pathname.split('/').map((path, index, pathArray) => (
               <Breadcrumb.Item
                 key={path}
-                onClick={() => history.push(`/${path}`)}
+                onClick={() =>
+                  index !== pathArray.length - 1 && history.push(`/${path}`)
+                }
               >
                 {path}
               </Breadcrumb.Item>

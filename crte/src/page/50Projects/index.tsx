@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import cls from 'classnames'
-import Home from './Home'
 import routers from './router'
 import './style.scss'
 
@@ -32,7 +31,6 @@ function FiftyProjects() {
             component={route.component}
           />
         ))}
-        <Route path="/" component={Home} />
       </Switch>
     </div>
   )

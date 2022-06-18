@@ -3,7 +3,7 @@ const CracoLessPlugin = require('craco-less')
 // const CracoAntDesignPlugin = require('craco-antd')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
-const CircularDependencyPlugin = require('circular-dependency-plugin')
+// const CircularDependencyPlugin = require('circular-dependency-plugin')
 const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const CracoVtkPlugin = require('craco-vtk')
@@ -32,13 +32,13 @@ module.exports = {
         profile: true,
       }),
 
-      new CircularDependencyPlugin({
-        exclude: /node_modules/,
-        include: /src/,
-        failOnError: true,
-        allowAsyncCycles: false,
-        cwd: process.cwd(),
-      }),
+      // new CircularDependencyPlugin({
+      //   exclude: /node_modules/,
+      //   include: /src/,
+      //   failOnError: true,
+      //   allowAsyncCycles: false,
+      //   cwd: process.cwd(),
+      // }),
 
       // 查看打包的进度
       // new SimpleProgressWebpackPlugin(), // 和 webpackbar 有冲突可能，两个都开启就跑不起来

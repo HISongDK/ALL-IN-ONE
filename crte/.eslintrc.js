@@ -48,6 +48,7 @@ module.exports = {
     mocha: true,
   },
   rules: {
+    'no-shadow': 0,
     'no-console': 0,
     'no-unused-vars': 0,
     'no-param-reassign': 0,
@@ -79,6 +80,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 1,
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-shadow': ['error'],
 
     // 暂时只知道避免报错说一些开发依赖要放在生产依赖
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
