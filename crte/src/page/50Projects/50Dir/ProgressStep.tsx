@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import cls from 'classnames'
-import './ProgressStep.scss'
+import './css/ProgressStep.scss'
 
 function ProgressStep() {
   const [active, setActive] = useState(1)

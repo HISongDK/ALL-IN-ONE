@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.blurry_loading_wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  .bg {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: calc(100% + 60px);
+    height: calc(100% + 60px);
+    background: url('https://bing.com/th?id=OHR.MostarBridge_ZH-CN5920156936_1920x1080.jpg&rf=LaDigue_1920x1080.jpg')
+      no-repeat center center/cover;
+    filter: 0;
+  }
+
+  .loading_text {
+    position: relative;
+    z-index: 2;
+    margin: auto;
+    color: #fff;
+    font-size: 50px;
+  }
+}

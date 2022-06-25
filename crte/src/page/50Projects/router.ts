@@ -1,8 +1,9 @@
+import Home from './Home'
 import ExpandingCards from './50Dir/ExpandingCards'
 import ProgressStep from './50Dir/ProgressStep'
 import RotateNavigation from './50Dir/RotateNavigation'
 import HiddenSearch from './50Dir/HiddenSearch'
-import Home from './Home'
+import BlurryLoading from './50Dir/BlurryLoading'
 
 export const FiftyPath = {
   Home: '',
@@ -10,6 +11,7 @@ export const FiftyPath = {
   Day2: 'progress-steps',
   Day3: 'rotate-navigation',
   Day4: 'hidden-search',
+  Day5: 'blurry-loading',
 }
 
 export default [
@@ -28,6 +30,10 @@ export default [
   {
     path: FiftyPath.Day4,
     component: HiddenSearch,
+  },
+  {
+    path: FiftyPath.Day5,
+    component: BlurryLoading,
   },
   { path: FiftyPath.Home, component: Home },
 ]

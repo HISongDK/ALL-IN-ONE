@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
-import cls from 'classnames'
-import './HiddenSearch.scss'
 import { SearchOutlined } from '@ant-design/icons'
+import cls from 'classnames'
+import './css/HiddenSearch.scss'
 
 function HiddenSearch() {
   const inpRef = useRef<any>()

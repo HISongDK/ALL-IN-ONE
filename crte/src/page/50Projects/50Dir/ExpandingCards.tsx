@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './ExpandingCards.scss'
+import './css/ExpandingCards.scss'
 
 const imgs = [
   {

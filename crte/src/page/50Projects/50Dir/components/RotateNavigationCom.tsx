@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import cls from 'classnames'
 import Calendar from './Calendar'
 import { FiftyPath } from '../../router'
-import './RotateNavigation.scss'
+import '../css/RotateNavigation.scss'
 
 function RotateNavigation({ children }: any) {
   const [showNav, setShowNav] = useState(false)
