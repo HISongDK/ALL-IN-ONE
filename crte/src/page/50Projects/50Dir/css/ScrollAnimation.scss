@@ -1,0 +1,44 @@
+.scroll_animation_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // flex-direction column 时 align-items 才是控制水平布局
+  height: 100vh;
+  padding: 10px 0;
+  overflow: auto;
+  overflow-x: hidden;
+  font-family: serif;
+  text-align: center;
+
+  // background-color: #f5f5d5; // 阮一峰网站背景色
+  background-color: #efedd6;
+
+  h1 {
+    font-weight: bolder;
+  }
+
+  .box {
+    width: 350px;
+    height: 180px;
+    margin: 10px;
+    line-height: 180px;
+    background-color: #4682b4;
+    border-radius: 10px;
+    box-shadow: 3px 5px 6px rgb(0 0 0 / 30%);
+    transform: translateX(400%); // 初始向右位移隐藏
+    transition: transform 0.3s ease;
+
+    &.show {
+      transform: translateX(0) !important; // 当前显示项
+    }
+
+    &.box:nth-of-type(even) {
+      // 权重比 .show 要高，需注意
+      transform: translateX(-400%);
+    }
+
+    h2 {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}

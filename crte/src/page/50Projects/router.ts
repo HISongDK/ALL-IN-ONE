@@ -4,6 +4,7 @@ import ProgressStep from './50Dir/ProgressStep'
 import RotateNavigation from './50Dir/RotateNavigation'
 import HiddenSearch from './50Dir/HiddenSearch'
 import BlurryLoading from './50Dir/BlurryLoading'
+import ScrollAnimation from './50Dir/ScrollAnimation'
 
 export const FiftyPath = {
   Home: '',
@@ -12,6 +13,7 @@ export const FiftyPath = {
   Day3: 'rotate-navigation',
   Day4: 'hidden-search',
   Day5: 'blurry-loading',
+  Day6: 'scroll-animation',
 }
 
 export default [
@@ -34,6 +36,10 @@ export default [
   {
     path: FiftyPath.Day5,
     component: BlurryLoading,
+  },
+  {
+    path: FiftyPath.Day6,
+    component: ScrollAnimation,
   },
   { path: FiftyPath.Home, component: Home },
 ]

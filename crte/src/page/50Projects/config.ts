@@ -20,6 +20,10 @@ const calendarConfig: any = {
     { type: 'success', content: 'Day5' },
     { type: 'processing', content: 'blurry-loading' },
   ],
+  20220702: [
+    { type: 'success', content: 'Day6' },
+    { type: 'processing', content: 'scroll-animation' },
+  ],
 }
 
 export default calendarConfig
