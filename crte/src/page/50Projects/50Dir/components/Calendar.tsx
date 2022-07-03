@@ -17,6 +17,7 @@ const Home: React.FC = () => {
           <li
             key={item.content}
             title={item.content}
+            style={{ cursor: !index ? 'default' : 'pointer' }}
             onClick={() => index && history.push(`/50days/${item.content}`)}
           >
             <Badge

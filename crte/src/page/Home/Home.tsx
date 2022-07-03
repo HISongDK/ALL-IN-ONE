@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Route,
   Switch,
@@ -22,6 +22,7 @@ const items = routesConfig.map((route) => ({
 export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
+  const selectKey = useMemo(() => `/${pathname.split('/')[1]}`, [pathname])
 
   const pageJump = ({ key }: any) => {
     history.push(key)
@@ -32,7 +33,12 @@ export default function Home() {
       <Header>某人练习的地方</Header>
       <Layout>
         <Sider>
-          <Menu items={items} theme="dark" onClick={pageJump} />
+          <Menu
+            selectedKeys={[selectKey]}
+            items={items}
+            theme="dark"
+            onClick={pageJump}
+          />
         </Sider>
         <Layout
           style={{ padding: '0 24px 24px', height: '100%', overflow: 'auto' }}
