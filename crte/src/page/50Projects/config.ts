@@ -24,6 +24,10 @@ const calendarConfig: any = {
     { type: 'success', content: 'Day6' },
     { type: 'processing', content: 'scroll-animation' },
   ],
+  20220703: [
+    { type: 'success', content: 'Day7' },
+    { type: 'processing', content: 'split-landing-page' },
+  ],
 }
 
 export default calendarConfig
