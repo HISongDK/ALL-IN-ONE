@@ -28,6 +28,10 @@ const calendarConfig: any = {
     { type: 'success', content: 'Day7' },
     { type: 'processing', content: 'split-landing-page' },
   ],
+  20220704: [
+    { type: 'success', content: 'Day8' },
+    { type: 'processing', content: 'form-wave' },
+  ],
 }
 
 export default calendarConfig

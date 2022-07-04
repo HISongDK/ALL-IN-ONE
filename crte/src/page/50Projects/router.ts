@@ -6,6 +6,7 @@ import HiddenSearch from './50Dir/HiddenSearch'
 import BlurryLoading from './50Dir/BlurryLoading'
 import SplitLandingPage from './50Dir/SplitLandingPage'
 import ScrollAnimation from './50Dir/ScrollAnimation'
+import FormWave from './50Dir/FormWave'
 
 export const FiftyPath = {
   Home: '',
@@ -16,6 +17,7 @@ export const FiftyPath = {
   Day5: 'blurry-loading',
   Day6: 'scroll-animation',
   Day7: 'split-landing-page',
+  Day8: 'form-wave',
 }
 
 export default [
@@ -46,6 +48,10 @@ export default [
   {
     path: FiftyPath.Day7,
     component: SplitLandingPage,
+  },
+  {
+    path: FiftyPath.Day8,
+    component: FormWave,
   },
   { path: FiftyPath.Home, component: Home },
 ]
