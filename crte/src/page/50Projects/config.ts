@@ -30,6 +30,10 @@ const calendarConfig: any = {
   ],
   20220704: [
     { type: 'success', content: 'Day8' },
+    { type: 'warning', content: 'form-wave' },
+  ],
+  20220713: [
+    { type: 'success', content: 'Day8' },
     { type: 'processing', content: 'form-wave' },
   ],
 }
