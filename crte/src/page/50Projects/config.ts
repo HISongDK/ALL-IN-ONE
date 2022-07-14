@@ -36,6 +36,10 @@ const calendarConfig: any = {
     { type: 'success', content: 'Day8' },
     { type: 'processing', content: 'form-wave' },
   ],
+  20220714: [
+    { type: 'success', content: 'Day9' },
+    { type: 'warning', content: 'sound-board' },
+  ],
 }
 
 export default calendarConfig
