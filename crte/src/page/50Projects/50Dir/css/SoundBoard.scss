@@ -1,2 +1,33 @@
 .sound_board_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-family: serif;
+  text-align: center;
+  background-color: rgb(161 100 223);
+
+  button {
+    margin: 1rem;
+    padding: 1.5rem 3rem;
+    color: #fff;
+    font-size: 1.1rem;
+    background-color: rebeccapurple;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 }

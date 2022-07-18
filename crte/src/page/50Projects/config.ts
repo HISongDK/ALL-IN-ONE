@@ -40,6 +40,10 @@ const calendarConfig: any = {
     { type: 'success', content: 'Day9' },
     { type: 'warning', content: 'sound-board' },
   ],
+  20220718: [
+    { type: 'success', content: 'Day9' },
+    { type: 'success', content: 'sound-board' },
+  ],
 }
 
 export default calendarConfig
