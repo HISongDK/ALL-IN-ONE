@@ -2,6 +2,17 @@
   "name": "crte",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "start:node": "cd ../node && sudo service mongodb start && nodemon app.js",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint src --ext .ts",
+    "eslint:fix": "eslint src --ext .ts --fix",
+    "stylelint": "stylelint 'src/**/*.{css,scss,less}'",
+    "stylelint:fix": "stylelint 'src/**/*.{css,scss,less}' --fix"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.4.3",
@@ -20,35 +31,6 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "start": "craco start",
-    "start:node": "cd ../node && sudo service mongodb start && nodemon app.js",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint src --ext .ts",
-    "eslint:fix": "eslint src --ext .ts --fix",
-    "stylelint": "stylelint 'src/**/*.{css,scss,less}'",
-    "stylelint:fix": "stylelint 'src/**/*.{css,scss,less}' --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@types/react": "^17.0.37",
@@ -79,5 +61,23 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpackbar": "^5.0.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
