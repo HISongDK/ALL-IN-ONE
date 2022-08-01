@@ -1,6 +1,7 @@
 import CrossDomain from '@page/CrossDomain/CrossDomain'
 import Button from '@page/Button/Button'
 import Result from '@page/Result'
+import ResultPage from '@page/ResultPage'
 import UseReducer from '@page/UseReducer/UseReducer'
 import SubEmit from '@page/SubEmit/SubEmit'
 import NestedRoute from '@page/NestedRoute/NestedRoute'
@@ -40,6 +41,6 @@ const routes = [
   { path: '/subEmit', component: SubEmit, title: '子组件触发父组件渲染' },
   { path: '/useReducer', component: UseReducer, title: 'useReducer 参数控制' },
   { path: '/button', component: Button, title: '按钮' },
-  { path: '/result', component: Result, title: '结果' },
+  { path: '/result', component: ResultPage, title: '结果' },
 ]
 export default routes
