@@ -18,11 +18,7 @@ module.exports = defineConfig({
     withDefaults: 'readonly',
   },
   extends: [
-    // add more generic rulesets here, such as:
-    // 'eslint:recommended',
-    // 'plugin:vue/vue3-recommended',
     // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
-
     'plugin:vue/vue3-recommended',
     // 此条内容开启会导致 全局定义的 ts 类型报  no-undef 错误，因为
     // https://cn.eslint.org/docs/rules/
@@ -67,8 +63,3 @@ module.exports = defineConfig({
     ],
   },
 })
-
-// 作者：who君
-// 链接：https://juejin.cn/post/6975442828386107400
-// 来源：掘金
-// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
