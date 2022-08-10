@@ -30,7 +30,7 @@ function ResultPage(props: IResult) {
   useEffect(() => {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [handleResize])
 
   return (
     <div className="result-page">
