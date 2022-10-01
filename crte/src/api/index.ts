@@ -7,7 +7,7 @@ interface ILoginReq {
 
 const Request = {
   async login(data: ILoginReq): Promise<any> {
-    const res = await Service.post('/login', data)
+    const res = await Service.post('/api/login', data)
     return res.data
   },
 }

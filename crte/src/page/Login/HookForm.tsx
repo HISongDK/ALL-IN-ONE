@@ -20,26 +20,28 @@ function HookForm(): ReactElement {
   const onFinish = async (values: IFormInput) => {
     const res = await Request.login(values)
 
-    if (res.code === 200) {
-      if (isSaveSeven) {
-        setUser({
-          user: res.data._id,
-          expires: dayjs().add(7, 'day').valueOf(),
-        })
-      } else {
-        setUser({
-          user: res.data._id,
-          expires: dayjs().add(1, 'day').valueOf(),
-        })
-      }
+    console.log('---  res  ---\n', res)
 
-      message.success(res.msg, 0.5)
-      setTimeout(() => {
-        history.push('/')
-      }, 500)
-    } else {
-      message.error(res.msg)
-    }
+    // if (res.code === 200) {
+    //   if (isSaveSeven) {
+    //     setUser({
+    //       user: res.data._id,
+    //       expires: dayjs().add(7, 'day').valueOf(),
+    //     })
+    //   } else {
+    //     setUser({
+    //       user: res.data._id,
+    //       expires: dayjs().add(1, 'day').valueOf(),
+    //     })
+    //   }
+
+    //   message.success(res.msg, 0.5)
+    //   setTimeout(() => {
+    //     history.push('/')
+    //   }, 500)
+    // } else {
+    //   message.error(res.msg)
+    // }
   }
 
   return (

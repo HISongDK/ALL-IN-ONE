@@ -116,13 +116,14 @@ module.exports = {
 
   devServer: {
     // 跨域代理配置
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:9000/',
-    //     pathRewrite: {
-    //       '^/api': '',
-    //     },
-    //   },
-    // },
+    // NOTE: 使用 w2 代理，不在项目中代理
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9000/',
+        pathRewrite: {
+          // '^/api': '',
+        },
+      },
+    },
   },
 }

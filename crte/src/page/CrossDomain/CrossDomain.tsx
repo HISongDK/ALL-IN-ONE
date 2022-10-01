@@ -1,13 +1,13 @@
 import React, { ReactElement, useEffect } from 'react'
 import classNames from 'classnames'
 import { message } from 'antd'
-import service from '@api/service'
 import './style.less'
+import axios from 'axios'
 
 function CrossDomain(): ReactElement {
   useEffect(() => {
-    service
-      .get('/cross-domain')
+    axios
+      .get('http://localhost:8080/cross-domain')
       .then((res) => {
         // eslint-disable-next-line
         console.log(res)
