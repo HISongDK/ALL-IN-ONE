@@ -1,4 +1,4 @@
-import Service from './http'
+import Service from '../utils/request'
 
 interface ILoginReq {
   username: string
@@ -6,10 +6,7 @@ interface ILoginReq {
 }
 
 const Request = {
-  async login(data: ILoginReq): Promise<any> {
-    const res = await Service.post('/api/login', data)
-    return res.data
-  },
+  login: (data: ILoginReq) => Service.post('/api/v1/users/login', data),
 }
 
 export default Request

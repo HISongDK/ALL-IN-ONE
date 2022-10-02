@@ -55,6 +55,7 @@ module.exports = {
     'no-use-before-define': 0,
     'no-underscore-dangle': 0,
     'no-restricted-syntax': 0,
+    'consistent-return': 0,
 
     'react/jsx-filename-extension': [
       1,
@@ -85,7 +86,8 @@ module.exports = {
     '@typescript-eslint/no-shadow': 0,
 
     // 暂时只知道避免报错说一些开发依赖要放在生产依赖
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    // 'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': 0,
     // 避免无后缀名报错
     'import/extensions': 0,
     /**

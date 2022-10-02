@@ -19,29 +19,7 @@ function HookForm(): ReactElement {
   // 表单提交处理函数
   const onFinish = async (values: IFormInput) => {
     const res = await Request.login(values)
-
     console.log('---  res  ---\n', res)
-
-    // if (res.code === 200) {
-    //   if (isSaveSeven) {
-    //     setUser({
-    //       user: res.data._id,
-    //       expires: dayjs().add(7, 'day').valueOf(),
-    //     })
-    //   } else {
-    //     setUser({
-    //       user: res.data._id,
-    //       expires: dayjs().add(1, 'day').valueOf(),
-    //     })
-    //   }
-
-    //   message.success(res.msg, 0.5)
-    //   setTimeout(() => {
-    //     history.push('/')
-    //   }, 500)
-    // } else {
-    //   message.error(res.msg)
-    // }
   }
 
   return (
@@ -55,11 +33,11 @@ function HookForm(): ReactElement {
       >
         <Form.Item
           required
-          name="username"
-          label="用户名"
-          rules={[{ required: true, message: '请输入用户名' }]}
+          name="email"
+          label="邮&emsp;箱"
+          rules={[{ required: true, message: '请输入邮箱' }]}
         >
-          <Input placeholder="请输入用户名" />
+          <Input placeholder="请输入邮箱" />
         </Form.Item>
 
         <Form.Item
