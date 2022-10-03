@@ -11,7 +11,7 @@ import store from './store/store'
 // 引入 antd 样式
 import 'antd/dist/antd.min.css'
 
-import './index.css'
+import './index.scss'
 
 ReactDOM.render(
   <StoreProvider store={store}>

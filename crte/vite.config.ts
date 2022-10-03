@@ -1,9 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-const path = require('path')
+import path from 'path'
 
-// https://vitejs.dev/config/
-const pathResolve = (pathUrl) => path.join(__dirname, pathUrl)
+const pathResolve = (pathUrl: string) => path.join(__dirname, pathUrl)
 
 export default defineConfig({
   plugins: [react()],

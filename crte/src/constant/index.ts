@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const statusMap = {
   401: '未授权，请重新登录(401)',
   403: '拒绝访问(403)',

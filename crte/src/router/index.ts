@@ -16,9 +16,15 @@ import Toast from '@page/Toast'
 import SearchTree from '@page/SearchTree'
 import UseFetch from '@page/PlayGround'
 import FiftyProjects from '@page/50Projects/index'
+import { subMenus } from '@/page/50Projects/router'
 
 const routes = [
-  { path: '/50days', component: FiftyProjects, title: '50Days' },
+  {
+    path: '/50days',
+    component: FiftyProjects,
+    title: '50Days',
+    children: subMenus,
+  },
   { path: '/playground', component: UseFetch, title: 'Just For Fun' },
   { path: '/searchTree', component: SearchTree, title: '树状列表搜索' },
   { path: '/toast', component: Toast, title: '弹窗提示' },

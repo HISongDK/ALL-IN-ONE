@@ -17,12 +17,17 @@ const firstRoute: any = routesConfig[0]
 const items = routesConfig.map((route) => ({
   key: route.path,
   label: route.title,
+  children: route.children,
 }))
 
 export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
-  const selectKey = useMemo(() => `/${pathname.split('/')[1]}`, [pathname])
+
+  const selectKey = useMemo(
+    () => `/${pathname.split('/').slice(1).join('/')}`,
+    [pathname],
+  )
 
   const pageJump = ({ key }: any) => {
     history.push(key)
@@ -32,11 +37,11 @@ export default function Home() {
     <Layout>
       <Header>某人练习的地方</Header>
       <Layout>
-        <Sider>
+        <Sider theme="light" style={{ overflow: 'auto' }}>
           <Menu
             selectedKeys={[selectKey]}
             items={items}
-            theme="dark"
+            mode="inline"
             onClick={pageJump}
           />
         </Sider>

@@ -1,6 +1,5 @@
 import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import qs from 'qs'
 import { looseObj, statusMap } from '@/constant'
 import { getAuthToken, getUrlString } from './auth'
 
@@ -10,7 +9,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // 创建 axios 实例
 const Service = axios.create({
-  // baseURL: baseConfig.baseUrl,
   timeout: 10000,
   withCredentials: true,
 })

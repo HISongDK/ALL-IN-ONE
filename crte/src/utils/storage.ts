@@ -1,6 +1,6 @@
 const storage = {
   set: (key: string, value: any) => {
-    localStorage.set(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value))
   },
   get: (key: string) => {
     const value = localStorage.getItem(key)

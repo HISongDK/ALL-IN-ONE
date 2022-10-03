@@ -5,6 +5,8 @@ import dayjs from 'dayjs'
 import Request from '@api/index'
 import { useLocalStorage } from '@/utils/hooks'
 import './hookForm.scss'
+import { USER_AUTH_TOKEN } from '@/constant'
+import storage from '@/utils/storage'
 
 interface IFormInput {
   username: string
@@ -19,7 +21,10 @@ function HookForm(): ReactElement {
   // 表单提交处理函数
   const onFinish = async (values: IFormInput) => {
     const res = await Request.login(values)
-    console.log('---  res  ---\n', res)
+    if (res) {
+      storage.set(USER_AUTH_TOKEN, res.token)
+    }
+    history.push('/')
   }
 
   return (

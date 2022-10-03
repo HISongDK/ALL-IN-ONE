@@ -61,3 +61,11 @@ export default [
   },
   { path: FiftyPath.Home, component: Home },
 ]
+
+export const subMenus = Object.values(FiftyPath)
+  .filter((key) => !!key)
+  .map((item, index) => ({
+    label: `${index + 1}. ${item}`,
+    value: item,
+    key: `/50days/${item}`,
+  }))
