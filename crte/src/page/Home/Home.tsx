@@ -7,6 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { Layout, Card, Menu, Breadcrumb } from 'antd'
+import UserInfo from './components/UserInfo'
 import routesConfig from '@/router'
 import './index.scss'
 
@@ -35,7 +36,16 @@ export default function Home() {
 
   return (
     <Layout>
-      <Header>某人练习的地方</Header>
+      <Header
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        某人练习的地方
+        <UserInfo />
+      </Header>
       <Layout>
         <Sider theme="light" style={{ overflow: 'auto' }}>
           <Menu
