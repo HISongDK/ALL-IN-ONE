@@ -56,7 +56,7 @@ Service.interceptors.request.use(
 Service.interceptors.response.use(
   (response: AxiosResponse) => {
     removeQueue(response.config)
-    return response?.data?.data ? response?.data?.data : response?.data
+    return response?.data
   },
   (error) => {
     // 错误请求响应后，取消请求 error 无 config,不会清除记录，避免失效
@@ -68,6 +68,8 @@ Service.interceptors.response.use(
       const { status, data } = error.response
       const msg = showStatus(status as any, data?.message)
       message.error(msg)
+    } else {
+      message.error('请求超时或服务异常')
     }
 
     return Promise.reject(error)

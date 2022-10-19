@@ -2,10 +2,10 @@ import React, { ReactElement, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, message, Checkbox } from 'antd'
 import dayjs from 'dayjs'
-import Request from '@api/index'
+import Auth from '@/api/auth'
 import { useLocalStorage } from '@/utils/hooks'
 import './hookForm.scss'
-import { USER_AUTH_TOKEN } from '@/constant'
+import { USER_AUTH_TOKEN, USER_INFO } from '@/constant'
 import storage from '@/utils/storage'
 
 interface IFormInput {
@@ -20,9 +20,10 @@ function HookForm(): ReactElement {
 
   // 表单提交处理函数
   const onFinish = async (values: IFormInput) => {
-    const res = await Request.login(values)
+    const res = await Auth.login(values)
     if (res) {
       storage.set(USER_AUTH_TOKEN, res.token)
+      storage.set(USER_INFO, res.data.user)
     }
     history.push('/')
   }

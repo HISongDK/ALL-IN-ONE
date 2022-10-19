@@ -5,8 +5,8 @@ interface ILoginReq {
   password: string
 }
 
-const Request = {
+const Auth = {
   login: (data: ILoginReq) => Service.post('/api/v1/users/login', data),
 }
 
-export default Request
+export default Auth

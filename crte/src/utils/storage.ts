@@ -10,6 +10,9 @@ const storage = {
       return value
     }
   },
+  remove: (key: string) => {
+    localStorage.removeItem(key)
+  },
 }
 
 export default storage
