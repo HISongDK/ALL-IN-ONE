@@ -1,30 +1,59 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Dropdown, Menu, MenuProps, Modal, Form, Input, message } from 'antd'
+import {
+  Dropdown,
+  Menu,
+  MenuProps,
+  Modal,
+  Form,
+  Input,
+  message,
+  Typography,
+} from 'antd'
 import { MenuOutlined } from '@ant-design/icons'
 import storage from '@/utils/storage'
 import { USER_AUTH_TOKEN, USER_INFO } from '@/constant'
 import User from '@/api/user'
+
+const { Text } = Typography
 
 function UserInfo() {
   const history = useHistory()
   const [updateVisible, setUpdateVisible] = useState(false)
   const [updateLoading, setUpdateLoading] = useState(false)
 
-  const initialValues = {
+  const initialValues = () => ({
     name: storage.get(USER_INFO).name,
     email: storage.get(USER_INFO).email,
-  }
+  })
 
   const [form] = Form.useForm()
 
+  const logout = () => {
+    storage.remove(USER_AUTH_TOKEN)
+    storage.remove(USER_INFO)
+    history.push('/login')
+  }
+
+  const handleLogoff = () => {
+    User.deleteMe().then(() => {
+      message.success('删除用户成功')
+      logout()
+    })
+  }
+
   const menuMethods: any = {
-    logout: () => {
-      storage.remove(USER_AUTH_TOKEN)
-      history.push('/login')
-    },
+    logout,
     update: () => {
       setUpdateVisible(true)
+    },
+    logoff: () => {
+      Modal.confirm({
+        content: '是否确认注销用户',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: handleLogoff,
+      })
     },
   }
 
@@ -43,8 +72,6 @@ function UserInfo() {
       .finally(() => setUpdateLoading(false))
   }
 
-  const a = storage.get(USER_INFO).name
-
   return (
     <>
       <Dropdown
@@ -53,6 +80,7 @@ function UserInfo() {
             onClick={handleClick}
             items={[
               { key: 'logout', label: '退出登录' },
+              { key: 'logoff', label: <Text type="danger">注销用户</Text> },
               { key: 'update', label: '修改信息' },
             ]}
           />
@@ -80,7 +108,7 @@ function UserInfo() {
           onFinish={onFinish}
           preserve={false}
           autoComplete="off"
-          initialValues={initialValues}
+          initialValues={initialValues()}
         >
           <Form.Item
             label="用户名"
