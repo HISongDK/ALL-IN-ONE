@@ -6,7 +6,8 @@ import {
   useHistory,
   useLocation,
 } from 'react-router-dom'
-import { Layout, Card, Menu, Breadcrumb } from 'antd'
+import { Layout, Card, Menu } from 'antd'
+import BreadcrumbNav from './components/BreadcrumbNav'
 import UserInfo from './components/UserInfo'
 import routesConfig from '@/router'
 import './index.scss'
@@ -21,6 +22,9 @@ const items = routesConfig.map((route) => ({
   children: route.children,
 }))
 
+/**
+ * 主页布局
+ */
 export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
@@ -58,18 +62,7 @@ export default function Home() {
         <Layout
           style={{ padding: '0 24px 24px', height: '100%', overflow: 'auto' }}
         >
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            {pathname.split('/').map((path, index, pathArray) => (
-              <Breadcrumb.Item
-                key={path}
-                onClick={() =>
-                  index !== pathArray.length - 1 && history.push(`/${path}`)
-                }
-              >
-                {path}
-              </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
+          <BreadcrumbNav />
           <Content style={{ minHeight: 'unset' }}>
             <Card style={{ height: '100%' }} bodyStyle={{ height: '100%' }}>
               {/* 注册路由 */}
