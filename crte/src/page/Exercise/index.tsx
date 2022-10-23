@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AddDrawer from './AddDrawer'
 
 function Exercise() {
-  return <div>Exercise</div>
+  const [isAddVisible, setIsAddVisible] = useState(false)
+
+  return (
+    <div>
+      <AddDrawer visible={isAddVisible} setVisible={setIsAddVisible} />
+    </div>
+  )
 }
 
 export default Exercise
