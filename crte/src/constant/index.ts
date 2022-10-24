@@ -14,4 +14,6 @@ export const statusMap = {
 export const USER_AUTH_TOKEN = 'user_auth_token'
 export const USER_INFO = 'user_info'
 
+export const SUCCESS = 'success'
+
 export type looseObj = { [key: string]: any }

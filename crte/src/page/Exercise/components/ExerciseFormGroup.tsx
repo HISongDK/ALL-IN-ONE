@@ -1,17 +1,5 @@
 import React from 'react'
-import {
-  Button,
-  Col,
-  DatePicker,
-  Drawer,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-  Divider,
-  InputNumber,
-} from 'antd'
+import { Button, Col, Form, Row, Select, Divider, InputNumber } from 'antd'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 
 const { Option } = Select
@@ -26,7 +14,6 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
     <Form.Item>
       <Button
         block
-        // type="dashed"
         type="primary"
         onClick={() => add()}
         icon={<PlusOutlined />}
@@ -41,7 +28,7 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
         block
         danger
         type="dashed"
-        onClick={() => remove()}
+        onClick={() => remove(removeIndex)}
         icon={<DeleteOutlined />}
       >
         删除{label}
@@ -88,11 +75,11 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
                           },
                         ]}
                       >
-                        <InputNumber min={1} style={{ width: '100%' }} />
-                        {/* <Select placeholder="Please choose the approver">
-                          <Option value="jack">Jack Ma</Option>
-                          <Option value="tom">Tom Liu</Option>
-                        </Select> */}
+                        <InputNumber
+                          min={1}
+                          style={{ width: '100%' }}
+                          placeholder="请输入组数"
+                        />
                       </Form.Item>
                     </Col>
                     <Col span={12}>
@@ -107,11 +94,10 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
                           },
                         ]}
                       >
-                        <DatePicker.RangePicker
+                        <InputNumber
+                          min={0}
                           style={{ width: '100%' }}
-                          getPopupContainer={(trigger) =>
-                            trigger.parentElement!
-                          }
+                          placeholder="请输入单组次数"
                         />
                       </Form.Item>
                     </Col>

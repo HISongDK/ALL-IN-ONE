@@ -1,18 +1,20 @@
-import { PlusOutlined } from '@ant-design/icons'
 import {
   Button,
   Col,
   DatePicker,
   Drawer,
   Form,
-  Input,
   Row,
   Select,
   Space,
-  Divider,
+  message,
 } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import moment from 'moment'
 import React, { useState } from 'react'
+import ExerciseApi from '@api/exercise'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
+import { SUCCESS } from '@/constant'
 
 const { Option } = Select
 
@@ -21,8 +23,19 @@ interface IAddDrawer {
   setVisible: (flag: boolean) => void
 }
 
+const initialValues = {
+  date: moment(),
+  warmUp: [
+    { type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 5 },
+    { type: '上斜俯卧撑', groupCounts: 1, perGroupTimes: 3 },
+  ],
+  exercise: [{ type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 10 }],
+}
+
 const AddDrawer: React.FC<IAddDrawer> = ({ visible, setVisible }) => {
   const [form] = Form.useForm()
+
+  const [loading, setLoading] = useState(false)
 
   const showDrawer = () => {
     setVisible(true)
@@ -32,7 +45,16 @@ const AddDrawer: React.FC<IAddDrawer> = ({ visible, setVisible }) => {
   }
 
   const handleConfirmAdd = () => {
-    form.submit()
+    form.validateFields().then(async (res) => {
+      setLoading(true)
+      res.date = res.date.startOf('day').valueOf()
+      const data = await ExerciseApi.createLog(res)
+      setLoading(false)
+      if (data.status === SUCCESS) {
+        message.success('添加锻炼日志成功')
+        onClose()
+      }
+    })
   }
 
   return (
@@ -51,13 +73,13 @@ const AddDrawer: React.FC<IAddDrawer> = ({ visible, setVisible }) => {
             <Button onClick={onClose} danger>
               取消
             </Button>
-            <Button onClick={handleConfirmAdd} type="primary">
+            <Button onClick={handleConfirmAdd} type="primary" loading={loading}>
               确认
             </Button>
           </Space>
         }
       >
-        <Form layout="vertical" form={form}>
+        <Form layout="vertical" form={form} initialValues={initialValues}>
           <Row>
             <Col span={24}>
               <Form.Item
