@@ -5,9 +5,9 @@ import {
   Drawer,
   Form,
   Row,
-  Select,
   Space,
   message,
+  Input,
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import moment from 'moment'
@@ -16,7 +16,7 @@ import ExerciseApi from '@api/exercise'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
 import { SUCCESS } from '@/constant'
 
-const { Option } = Select
+const { TextArea } = Input
 
 interface IAddDrawer {
   visible: boolean
@@ -90,6 +90,16 @@ const AddDrawer: React.FC<IAddDrawer> = ({ visible, setVisible }) => {
                 <DatePicker
                   style={{ width: '100%' }}
                   placeholder="请选择日期"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <Form.Item name="description" label="状态描述">
+                <TextArea
+                  style={{ width: '100%' }}
+                  placeholder="请填写状态描述"
                 />
               </Form.Item>
             </Col>
