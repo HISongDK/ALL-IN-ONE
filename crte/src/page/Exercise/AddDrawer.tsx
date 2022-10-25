@@ -9,18 +9,20 @@ import {
   message,
   Input,
 } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
 import moment from 'moment'
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ExerciseApi from '@api/exercise'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
-import { SUCCESS } from '@/constant'
+import { looseObj, SUCCESS } from '@/constant'
 
 const { TextArea } = Input
 
 interface IAddDrawer {
   visible: boolean
   setVisible: (flag: boolean) => void
+  emitUpdate: () => void
+  record?: looseObj
+  onClose?: () => void
 }
 
 const initialValues = {
@@ -32,83 +34,107 @@ const initialValues = {
   exercise: [{ type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 10 }],
 }
 
-const AddDrawer: React.FC<IAddDrawer> = ({ visible, setVisible }) => {
+const AddDrawer: React.FC<IAddDrawer> = ({
+  visible,
+  setVisible,
+  emitUpdate,
+  record,
+  onClose: onClearRecord,
+}) => {
   const [form] = Form.useForm()
 
   const [loading, setLoading] = useState(false)
 
-  const showDrawer = () => {
-    setVisible(true)
-  }
+  const [isEdit, recordData] = useMemo(() => {
+    if (!record) return [false]
+    return [!!record, { ...record, date: moment(record.date) }]
+  }, [record])
+
+  useEffect(() => {
+    if (recordData) {
+      form.resetFields()
+      form.setFieldsValue(recordData)
+    }
+  }, [recordData])
+
   const onClose = () => {
     setVisible(false)
+    form.setFieldsValue({})
+    // eslint-disable-next-line no-unused-expressions
+    onClearRecord && onClearRecord()
   }
 
   const handleConfirmAdd = () => {
     form.validateFields().then(async (res) => {
       setLoading(true)
       res.date = res.date.startOf('day').valueOf()
-      const data = await ExerciseApi.createLog(res)
+
+      let data = {}
+      if (isEdit) {
+        data = await ExerciseApi.updateLog({ ...res, _id: recordData?._id })
+      } else {
+        data = await ExerciseApi.createLog(res)
+      }
+
+      onClose()
       setLoading(false)
       if (data.status === SUCCESS) {
-        message.success('添加锻炼日志成功')
-        onClose()
+        message.success(`${isEdit ? '修改' : '添加'}锻炼日志成功`)
       }
+      emitUpdate()
     })
   }
 
   return (
-    <>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        添加锻炼日志
-      </Button>
-      <Drawer
-        title="添加一条日志"
-        width={720}
-        onClose={onClose}
-        visible={visible}
-        bodyStyle={{ paddingBottom: 80 }}
-        extra={
-          <Space>
-            <Button onClick={onClose} danger>
-              取消
-            </Button>
-            <Button onClick={handleConfirmAdd} type="primary" loading={loading}>
-              确认
-            </Button>
-          </Space>
-        }
+    <Drawer
+      title={`${isEdit ? '编辑' : '添加'}日志`}
+      width={720}
+      onClose={onClose}
+      visible={visible}
+      bodyStyle={{ paddingBottom: 80 }}
+      destroyOnClose
+      extra={
+        <Space>
+          <Button onClick={onClose} danger>
+            取消
+          </Button>
+          <Button onClick={handleConfirmAdd} type="primary" loading={loading}>
+            确认
+          </Button>
+        </Space>
+      }
+    >
+      <Form
+        preserve
+        layout="vertical"
+        form={form}
+        initialValues={initialValues}
       >
-        <Form layout="vertical" form={form} initialValues={initialValues}>
-          <Row>
-            <Col span={24}>
-              <Form.Item
-                name="date"
-                label="日期"
-                rules={[{ required: true, message: '日期不能为空' }]}
-              >
-                <DatePicker
-                  style={{ width: '100%' }}
-                  placeholder="请选择日期"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Form.Item name="description" label="状态描述">
-                <TextArea
-                  style={{ width: '100%' }}
-                  placeholder="请填写状态描述"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <ExerciseFormGroup name="warmUp" label="热身组" />
-          <ExerciseFormGroup name="exercise" label="训练组" />
-        </Form>
-      </Drawer>
-    </>
+        <Row>
+          <Col span={24}>
+            <Form.Item
+              name="date"
+              label="日期"
+              rules={[{ required: true, message: '日期不能为空' }]}
+            >
+              <DatePicker style={{ width: '100%' }} placeholder="请选择日期" />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Form.Item name="description" label="状态描述">
+              <TextArea
+                style={{ width: '100%' }}
+                placeholder="请填写状态描述"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <ExerciseFormGroup name="warmUp" label="热身组" />
+        <ExerciseFormGroup name="exercise" label="训练组" />
+      </Form>
+    </Drawer>
   )
 }
 

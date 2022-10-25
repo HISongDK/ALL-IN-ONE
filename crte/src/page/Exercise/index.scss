@@ -1,0 +1,31 @@
+.exercise_wrapper {
+  .add_log_btn {
+    float: right;
+    margin: 0 0 10px;
+  }
+
+  .icon {
+    display: block;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:active {
+      scale: 0.93;
+    }
+
+    &:hover {
+      display: block;
+      background: rgb(0 0 0 / 5%);
+      border-radius: 50%;
+    }
+
+    &.edit {
+      color: #1890ff;
+    }
+
+    &.delete {
+      color: #ff4d4f;
+    }
+  }
+}

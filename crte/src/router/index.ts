@@ -20,6 +20,7 @@ import { subMenus } from '@/page/50Projects/router'
 import Exercise from '@/page/Exercise'
 
 const routes = [
+  { path: '/exercise', component: Exercise, title: '锻炼日志' },
   {
     path: '/50days',
     component: FiftyProjects,
@@ -49,7 +50,6 @@ const routes = [
   { path: '/useReducer', component: UseReducer, title: 'useReducer 参数控制' },
   { path: '/button', component: Button, title: '按钮' },
   { path: '/result', component: ResultPage, title: '结果' },
-  { path: '/exercise', component: Exercise, title: '锻炼日志' },
 ]
 
 export const breadcrumbMap = {
