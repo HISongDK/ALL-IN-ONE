@@ -12,6 +12,7 @@ import {
 import moment from 'moment'
 import React, { useEffect, useMemo, useState } from 'react'
 import ExerciseApi from '@api/exercise'
+import { useHistory } from 'react-router'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
 import { looseObj, SUCCESS } from '@/constant'
 
@@ -41,6 +42,7 @@ const AddDrawer: React.FC<IAddDrawer> = ({
   record,
   onClose: onClearRecord,
 }) => {
+  const history = useHistory()
   const [form] = Form.useForm()
 
   const [loading, setLoading] = useState(false)
@@ -58,6 +60,7 @@ const AddDrawer: React.FC<IAddDrawer> = ({
   }, [recordData])
 
   const onClose = () => {
+    history.replace('/exercise')
     setVisible(false)
     form.setFieldsValue({})
     // eslint-disable-next-line no-unused-expressions
@@ -71,13 +74,15 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
       let data = {}
       if (isEdit) {
-        data = await ExerciseApi.updateLog({ ...res, _id: recordData?._id })
+        data = await ExerciseApi.updateLog({
+          ...res,
+          _id: recordData?._id,
+        }).finally(() => setLoading(false))
       } else {
-        data = await ExerciseApi.createLog(res)
+        data = await ExerciseApi.createLog(res).finally(() => setLoading(false))
       }
 
       onClose()
-      setLoading(false)
       if (data.status === SUCCESS) {
         message.success(`${isEdit ? '修改' : '添加'}锻炼日志成功`)
       }

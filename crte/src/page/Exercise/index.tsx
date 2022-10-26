@@ -1,34 +1,43 @@
 import React, { useEffect, useReducer, useState } from 'react'
+import { useRouteMatch } from 'react-router-dom'
 import moment from 'moment'
-import { Table, Tag, Button, Row, Space } from 'antd'
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import ExerciseApi from '@api/exercise'
+import { Table, Tag, Button, Space, Popconfirm } from 'antd'
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  CloseCircleOutlined,
+} from '@ant-design/icons'
+import { useDeleteLog, useGetExerciseLogs } from '@api/hooks/exercise'
 import { ColumnType } from 'antd/lib/table'
 import AddDrawer from './AddDrawer'
-import { SUCCESS } from '@/constant'
 import { dayMap } from './constants'
 import './index.scss'
 
 function Exercise() {
-  const [isAddVisible, setIsAddVisible] = useState(false)
-  const [data, setData] = useState([])
+  const { params } = useRouteMatch<{ type: string }>()
+
+  const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
   const [record, setRecord] = useState()
 
   const [update, dispatchUpdate] = useReducer(() => ({}), {})
 
+  const { getLogs, data, loading: getLogsLoading } = useGetExerciseLogs()
+  const { deleteLog, loading } = useDeleteLog()
+
   useEffect(() => {
-    ExerciseApi.getLogs({ sort: '-date' }).then((res) => {
-      if (res.status === SUCCESS) {
-        setData(res.data.logs)
-      }
-    })
+    getLogs({ sort: '-date' })
   }, [update])
 
   const handleClickEdit = (record) => {
     setIsAddVisible(true)
     setRecord(record)
   }
-  const handleClickDelete = () => {}
+  const handleClickDelete = (id: string) => {
+    deleteLog(id).then((res) => {
+      dispatchUpdate()
+    })
+  }
 
   const columns: ColumnType<any>[] = [
     {
@@ -97,7 +106,16 @@ function Exercise() {
               className="icon edit"
               onClick={() => handleClickEdit(record)}
             />
-            <DeleteOutlined className="icon delete" />
+            <Popconfirm
+              placement="topRight"
+              title="是否确定删除当前日志？"
+              icon={<CloseCircleOutlined style={{ color: 'red' }} />}
+              onConfirm={() => handleClickDelete(record._id)}
+              okText="确定"
+              cancelText="取消"
+            >
+              <DeleteOutlined className="icon delete" />
+            </Popconfirm>
           </Space>
         )
       },
@@ -121,7 +139,11 @@ function Exercise() {
         emitUpdate={dispatchUpdate}
         onClose={() => setRecord(undefined)}
       />
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        loading={loading || getLogsLoading}
+      />
     </div>
   )
 }
