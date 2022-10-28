@@ -12,7 +12,7 @@ import {
 import moment from 'moment'
 import React, { useEffect, useMemo, useState } from 'react'
 import ExerciseApi from '@api/exercise'
-import { useHistory } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
 import { looseObj, SUCCESS } from '@/constant'
 
@@ -43,6 +43,7 @@ const AddDrawer: React.FC<IAddDrawer> = ({
   onClose: onClearRecord,
 }) => {
   const history = useHistory()
+  const { pathname } = useLocation()
   const [form] = Form.useForm()
 
   const [loading, setLoading] = useState(false)
@@ -60,11 +61,12 @@ const AddDrawer: React.FC<IAddDrawer> = ({
   }, [recordData])
 
   const onClose = () => {
-    history.replace('/exercise')
     setVisible(false)
     form.setFieldsValue({})
     // eslint-disable-next-line no-unused-expressions
     onClearRecord && onClearRecord()
+    // eslint-disable-next-line no-unused-expressions
+    pathname.includes('/add') && history.replace('/exercise')
   }
 
   const handleConfirmAdd = () => {

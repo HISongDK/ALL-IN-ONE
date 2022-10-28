@@ -9,16 +9,19 @@ function BreadcrumbNav() {
 
   return (
     <Breadcrumb style={{ margin: '16px 0' }}>
-      {pathname.split('/').map((path, index, pathArray) => (
-        <Breadcrumb.Item
-          key={path}
-          onClick={() =>
-            index !== pathArray.length - 1 && history.push(`/${path}`)
-          }
-        >
-          {breadcrumbMap[path] || path}
-        </Breadcrumb.Item>
-      ))}
+      {pathname
+        .slice(1)
+        .split('/')
+        .map((path, index, pathArray) => (
+          <Breadcrumb.Item
+            key={path}
+            onClick={() =>
+              index !== pathArray.length - 1 && history.push(`/${path}`)
+            }
+          >
+            {breadcrumbMap[path] || path}
+          </Breadcrumb.Item>
+        ))}
     </Breadcrumb>
   )
 }

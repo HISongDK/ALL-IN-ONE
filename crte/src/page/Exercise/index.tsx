@@ -1,126 +1,61 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
-import moment from 'moment'
-import { Table, Tag, Button, Space, Popconfirm } from 'antd'
-import {
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  CloseCircleOutlined,
-} from '@ant-design/icons'
-import { useDeleteLog, useGetExerciseLogs } from '@api/hooks/exercise'
-import { ColumnType } from 'antd/lib/table'
+import { useRouteMatch, useHistory } from 'react-router-dom'
+import { Button, Tabs } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { useGetExerciseLogs } from '@api/hooks/exercise'
 import AddDrawer from './AddDrawer'
-import { dayMap } from './constants'
+import ExerciseTable from './ExerciseTable'
+import TimeLine from './TimeLine'
 import './index.scss'
 
 function Exercise() {
+  const history = useHistory()
   const { params } = useRouteMatch<{ type: string }>()
 
   const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
   const [record, setRecord] = useState()
 
+  const [activeKey, setActiveKey] = useState(params.type)
+  console.log('---  activeKey  ---\n', activeKey)
+
   const [update, dispatchUpdate] = useReducer(() => ({}), {})
 
-  const { getLogs, data, loading: getLogsLoading } = useGetExerciseLogs()
-  const { deleteLog, loading } = useDeleteLog()
+  const { getLogs, data = [], loading: getLogsLoading } = useGetExerciseLogs()
 
   useEffect(() => {
     getLogs({ sort: '-date' })
   }, [update])
 
-  const handleClickEdit = (record) => {
-    setIsAddVisible(true)
-    setRecord(record)
-  }
-  const handleClickDelete = (id: string) => {
-    deleteLog(id).then((res) => {
-      dispatchUpdate()
-    })
-  }
-
-  const columns: ColumnType<any>[] = [
+  const tabs = [
     {
-      title: '日期',
-      key: 'date',
-      dataIndex: 'date',
-      width: '23%',
-      render(time: string) {
-        return (
-          <>
-            {moment(time).format('YYYY-MM-DD HH:mm:ss')}{' '}
-            <Tag>{dayMap[moment(time).day()]}</Tag>
-          </>
-        )
-      },
+      label: '表格',
+      key: 'table',
+      children: (
+        <ExerciseTable
+          dataSource={data}
+          logsLoading={getLogsLoading}
+          setRecord={setRecord}
+          dispatchUpdate={dispatchUpdate}
+          setIsAddVisible={setIsAddVisible}
+        />
+      ),
     },
     {
-      title: '热身',
-      key: 'warmUp',
-      dataIndex: 'warmUp',
-      width: '23%',
-      render(val: any[]) {
-        return val.map((item) => (
-          <div key={item.type}>
-            {item.type}: {item.groupCounts} * {item.perGroupTimes}
-          </div>
-        ))
-      },
+      label: '时间轴',
+      key: 'timeline',
+      children: <TimeLine dataSource={data} logsLoading={getLogsLoading} />,
     },
     {
-      title: '锻炼',
-      key: 'exercise',
-      dataIndex: 'exercise',
-      width: '23%',
-      render(val: any[]) {
-        return val.map((item) => (
-          <div key={item.type}>
-            {item.type}: {item.groupCounts} * {item.perGroupTimes}
-          </div>
-        ))
-      },
-    },
-    {
-      title: '描述',
-      key: 'description',
-      dataIndex: 'description',
-      width: '23%',
-      render(val: string) {
-        return (
-          <div
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: val?.replace('\n', '<br/>') }}
-          />
-        )
-      },
-    },
-    {
-      title: '操作',
-      key: 'op',
-      width: 100,
-      align: 'center',
-      render(_, record) {
-        return (
-          <Space>
-            <EditOutlined
-              className="icon edit"
-              onClick={() => handleClickEdit(record)}
-            />
-            <Popconfirm
-              placement="topRight"
-              title="是否确定删除当前日志？"
-              icon={<CloseCircleOutlined style={{ color: 'red' }} />}
-              onConfirm={() => handleClickDelete(record._id)}
-              okText="确定"
-              cancelText="取消"
-            >
-              <DeleteOutlined className="icon delete" />
-            </Popconfirm>
-          </Space>
-        )
-      },
+      label: '图表',
+      key: 'chart',
+      children: `Content of Tab Pane 3`,
     },
   ]
+
+  const onTabsChange = (key: string) => {
+    history.replace(`/exercise/${key}`)
+    setActiveKey(key)
+  }
 
   return (
     <div className="exercise_wrapper">
@@ -132,17 +67,20 @@ function Exercise() {
       >
         添加锻炼日志
       </Button>
+
+      <Tabs
+        activeKey={activeKey}
+        onChange={onTabsChange}
+        style={{ marginTop: -10 }}
+        items={tabs}
+      />
+
       <AddDrawer
         visible={isAddVisible}
         setVisible={setIsAddVisible}
         record={record}
         emitUpdate={dispatchUpdate}
         onClose={() => setRecord(undefined)}
-      />
-      <Table
-        columns={columns}
-        dataSource={data}
-        loading={loading || getLogsLoading}
       />
     </div>
   )

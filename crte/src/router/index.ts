@@ -20,9 +20,15 @@ import { subMenus } from '@/page/50Projects/router'
 import Exercise from '@/page/Exercise'
 
 const routes = [
-  { path: '/exercise/:type', component: Exercise, title: '锻炼日志' },
+  {
+    path: '/exercise',
+    route: '/exercise/:type',
+    component: Exercise,
+    title: '锻炼日志',
+  },
   {
     path: '/50days',
+    route: '/50days',
     component: FiftyProjects,
     title: '50Days',
     children: subMenus,

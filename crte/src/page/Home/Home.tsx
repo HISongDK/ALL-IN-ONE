@@ -68,12 +68,17 @@ export default function Home() {
               {/* 注册路由 */}
               <Switch>
                 {routesConfig.map((route: any) => (
+                  // <Route
+                  //   key={route.route}
+                  //   path={route.route}
+                  //   render={() => (
+                  //     <Route path={route.route} component={route.component} />
+                  //   )}
+                  // />
                   <Route
-                    key={route.path}
-                    path={route.path}
-                    render={() => (
-                      <Route path={route.path} component={route.component} />
-                    )}
+                    key={route.route}
+                    path={route.route}
+                    component={route.component}
                   />
                 ))}
                 <Redirect exact from="/" to={routesConfig[0].path} />

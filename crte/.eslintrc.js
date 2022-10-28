@@ -96,5 +96,6 @@ module.exports = {
      * 别无他法，出此下策
      */
     'import/no-unresolved': 0,
+    'import/prefer-default-export': 1,
   },
 }
