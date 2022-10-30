@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import moment from 'moment'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
+import PlusOneGroup from './components/PlusOneGroup'
 import { looseObj } from '@/constant'
 import { dayMap } from './constants'
 
@@ -36,13 +37,18 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
     return data
   }, [dataSource])
 
-  const getText = (data: looseObj, type?: any) => {
+  const getText = (data: looseObj, record: looseObj, type?: any) => {
     return (
       <Text type={type}>
         {data?.map((item, index) => {
           return (
             <Row style={{ marginBottom: index === data.length - 1 ? 8 : 0 }}>
-              {item.type}: {item.groupCounts} x {item.perGroupTimes}
+              {/* {item.type}: {item.groupCounts} x {item.perGroupTimes} */}
+              <PlusOneGroup
+                record={record}
+                index={index}
+                emitLoading={() => {}}
+              />
             </Row>
           )
         })}
@@ -51,7 +57,7 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
   }
 
   return (
-    <Spin spinning={logsLoading}>
+    <Spin spinning={logsLoading} style={{ minHeight: 300, width: '100%' }}>
       <Timeline mode="left" style={{ marginLeft: -500 }}>
         {data?.map((item) => {
           return (
@@ -74,7 +80,7 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
               ) : (
                 <>
                   热身：{getText(item.warmUp, 'secondary')}
-                  锻炼： {getText(item.exercise)}
+                  锻炼： {getText(item.exercise, item)}
                   {!!item.description && (
                     <>
                       描述：

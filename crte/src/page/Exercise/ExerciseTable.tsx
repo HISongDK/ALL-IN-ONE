@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import moment from 'moment'
 import { Space, Popconfirm, Tag, Table } from 'antd'
 import {
@@ -9,6 +9,7 @@ import {
 import { ColumnType } from 'antd/lib/table'
 import { useDeleteLog } from '@api/hooks/exercise'
 import { dayMap } from './constants'
+import PlusOneGroup from './components/PlusOneGroup'
 
 interface IExerciseTable {
   dataSource: any[]
@@ -25,6 +26,8 @@ function ExerciseTable({
   setRecord,
   dispatchUpdate,
 }: IExerciseTable) {
+  const [plusLoading, setPlusLoading] = useState(false)
+
   const { deleteLog, loading } = useDeleteLog()
 
   const handleClickEdit = (record: any) => {
@@ -70,10 +73,18 @@ function ExerciseTable({
       key: 'exercise',
       dataIndex: 'exercise',
       width: '23%',
-      render(val: any[]) {
-        return val.map((item) => (
+      render(val: any[], record: any) {
+        return val.map((item, index) => (
           <div key={item.type}>
-            {item.type}: {item.groupCounts} * {item.perGroupTimes}
+            {item.type}:{' '}
+            <PlusOneGroup
+              index={index}
+              record={record}
+              emitLoading={setPlusLoading}
+            >
+              {item.groupCounts}
+            </PlusOneGroup>
+            x {item.perGroupTimes}
           </div>
         ))
       },
@@ -124,7 +135,7 @@ function ExerciseTable({
       rowKey={() => Math.random()}
       columns={columns}
       dataSource={dataSource}
-      loading={loading || logsLoading}
+      loading={loading || logsLoading || plusLoading}
     />
   )
 }

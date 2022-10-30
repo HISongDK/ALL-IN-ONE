@@ -3,24 +3,23 @@ import { useRouteMatch, useHistory } from 'react-router-dom'
 import { Button, Tabs } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useGetExerciseLogs } from '@api/hooks/exercise'
+import ExerciseContextCom, { useExerciseContext } from '@/store/exercise'
 import AddDrawer from './AddDrawer'
 import ExerciseTable from './ExerciseTable'
 import TimeLine from './TimeLine'
 import './index.scss'
 
-function Exercise() {
+function ExerciseFC() {
   const history = useHistory()
   const { params } = useRouteMatch<{ type: string }>()
 
+  const { getLogs, data = [], getLogsLoading } = useExerciseContext()
+  console.log('---  getLogsLoading  ---\n', getLogsLoading)
+
   const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
   const [record, setRecord] = useState()
-
   const [activeKey, setActiveKey] = useState(params.type)
-  console.log('---  activeKey  ---\n', activeKey)
-
   const [update, dispatchUpdate] = useReducer(() => ({}), {})
-
-  const { getLogs, data = [], loading: getLogsLoading } = useGetExerciseLogs()
 
   useEffect(() => {
     getLogs({ sort: '-date' })
@@ -85,5 +84,11 @@ function Exercise() {
     </div>
   )
 }
+
+const Exercise = () => (
+  <ExerciseContextCom>
+    <ExerciseFC />
+  </ExerciseContextCom>
+)
 
 export default Exercise

@@ -39,3 +39,21 @@ export const useDeleteLog = () => {
 
   return { deleteLog, loading }
 }
+
+// 更新日志
+export const useUpdateLog = () => {
+  const [loading, setLoading] = useState(false)
+
+  const updateLog = (data: looseObj) => {
+    setLoading(true)
+    return ExerciseApi.updateLog(data)
+      .then(() => {
+        message.success('更新日志成功')
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  return { updateLog, loading }
+}

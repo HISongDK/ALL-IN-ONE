@@ -1,3 +1,6 @@
+import React, { useEffect, useMemo, useState } from 'react'
+import { useHistory, useLocation } from 'react-router'
+import moment from 'moment'
 import {
   Button,
   Col,
@@ -9,10 +12,8 @@ import {
   message,
   Input,
 } from 'antd'
-import moment from 'moment'
-import React, { useEffect, useMemo, useState } from 'react'
 import ExerciseApi from '@api/exercise'
-import { useHistory, useLocation } from 'react-router'
+import { useUpdateLog } from '@api/hooks/exercise'
 import ExerciseFormGroup from './components/ExerciseFormGroup'
 import { looseObj, SUCCESS } from '@/constant'
 
@@ -53,6 +54,8 @@ const AddDrawer: React.FC<IAddDrawer> = ({
     return [!!record, { ...record, date: moment(record.date) }]
   }, [record])
 
+  const { updateLog, loading: updateLoading } = useUpdateLog()
+
   useEffect(() => {
     if (recordData) {
       form.resetFields()
@@ -76,10 +79,16 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
       let data = {}
       if (isEdit) {
-        data = await ExerciseApi.updateLog({
+        // data = await ExerciseApi.updateLog({
+        //   ...res,
+        //   _id: recordData?._id,
+        // }).finally(() => setLoading(false))
+        data = await updateLog({
           ...res,
           _id: recordData?._id,
-        }).finally(() => setLoading(false))
+        })
+
+        console.log('---  data  ---\n', data)
       } else {
         data = await ExerciseApi.createLog(res).finally(() => setLoading(false))
       }
@@ -105,7 +114,11 @@ const AddDrawer: React.FC<IAddDrawer> = ({
           <Button onClick={onClose} danger>
             取消
           </Button>
-          <Button onClick={handleConfirmAdd} type="primary" loading={loading}>
+          <Button
+            onClick={handleConfirmAdd}
+            type="primary"
+            loading={loading || updateLoading}
+          >
             确认
           </Button>
         </Space>
