@@ -49,6 +49,7 @@ export const useUpdateLog = () => {
     return ExerciseApi.updateLog(data)
       .then(() => {
         message.success('更新日志成功')
+        return data
       })
       .finally(() => {
         setLoading(false)

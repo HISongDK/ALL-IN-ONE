@@ -4,6 +4,7 @@ import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
 import PlusOneGroup from './components/PlusOneGroup'
 import { looseObj } from '@/constant'
 import { dayMap } from './constants'
+import { useExerciseContext } from '@/store/exercise'
 
 const { Text } = Typography
 
@@ -12,7 +13,16 @@ interface ITimeline {
   logsLoading: boolean
 }
 
+interface IGetText {
+  type: 'warmUp' | 'exercise'
+  data: looseObj
+  record: looseObj
+  textType?: string
+}
+
 function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
+  const { dispatchUpdate } = useExerciseContext()
+
   const data = useMemo(() => {
     const data = dataSource.slice()
 
@@ -37,18 +47,22 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
     return data
   }, [dataSource])
 
-  const getText = (data: looseObj, record: looseObj, type?: any) => {
+  const getText = ({ data, record, textType, type }: IGetText) => {
     return (
-      <Text type={type}>
-        {data?.map((item, index) => {
+      <Text type={textType}>
+        {data?.map((item, index: number) => {
           return (
             <Row style={{ marginBottom: index === data.length - 1 ? 8 : 0 }}>
-              {/* {item.type}: {item.groupCounts} x {item.perGroupTimes} */}
+              {item.type}:
               <PlusOneGroup
-                record={record}
+                type={type}
                 index={index}
-                emitLoading={() => {}}
-              />
+                record={record}
+                emitLoading={dispatchUpdate}
+              >
+                {item.groupCounts}
+              </PlusOneGroup>
+              x {item.perGroupTimes}
             </Row>
           )
         })}
@@ -59,7 +73,7 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
   return (
     <Spin spinning={logsLoading} style={{ minHeight: 300, width: '100%' }}>
       <Timeline mode="left" style={{ marginLeft: -500 }}>
-        {data?.map((item) => {
+        {data?.map((item: looseObj) => {
           return (
             <Timeline.Item
               color={item.isDiscontinue && 'gray'}
@@ -79,8 +93,19 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
                 <br />
               ) : (
                 <>
-                  热身：{getText(item.warmUp, 'secondary')}
-                  锻炼： {getText(item.exercise, item)}
+                  热身：
+                  {getText({
+                    type: 'warmUp',
+                    data: item.warmUp,
+                    record: item,
+                    textType: 'secondary',
+                  })}
+                  锻炼：{' '}
+                  {getText({
+                    type: 'exercise',
+                    data: item.exercise,
+                    record: item,
+                  })}
                   {!!item.description && (
                     <>
                       描述：

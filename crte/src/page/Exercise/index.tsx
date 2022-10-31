@@ -13,13 +13,17 @@ function ExerciseFC() {
   const history = useHistory()
   const { params } = useRouteMatch<{ type: string }>()
 
-  const { getLogs, data = [], getLogsLoading } = useExerciseContext()
-  console.log('---  getLogsLoading  ---\n', getLogsLoading)
+  const {
+    getLogs,
+    data = [],
+    getLogsLoading,
+    update,
+    dispatchUpdate,
+  } = useExerciseContext()
 
   const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
   const [record, setRecord] = useState()
   const [activeKey, setActiveKey] = useState(params.type)
-  const [update, dispatchUpdate] = useReducer(() => ({}), {})
 
   useEffect(() => {
     getLogs({ sort: '-date' })

@@ -79,16 +79,11 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
       let data = {}
       if (isEdit) {
-        // data = await ExerciseApi.updateLog({
-        //   ...res,
-        //   _id: recordData?._id,
-        // }).finally(() => setLoading(false))
         data = await updateLog({
           ...res,
           _id: recordData?._id,
         })
-
-        console.log('---  data  ---\n', data)
+        setLoading(false)
       } else {
         data = await ExerciseApi.createLog(res).finally(() => setLoading(false))
       }
@@ -97,6 +92,7 @@ const AddDrawer: React.FC<IAddDrawer> = ({
       if (data.status === SUCCESS) {
         message.success(`${isEdit ? '修改' : '添加'}锻炼日志成功`)
       }
+
       emitUpdate()
     })
   }

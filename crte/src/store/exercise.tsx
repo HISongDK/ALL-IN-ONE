@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useMemo, useReducer } from 'react'
 import { useGetExerciseLogs } from '@api/hooks/exercise'
 import { looseObj } from '@/constant'
 
@@ -8,10 +8,15 @@ const ExerciseContext = React.createContext<{
   data: any[]
   getLogs: (params: looseObj) => Promise<void>
   getLogsLoading: boolean
+  update: any
+  dispatchUpdate: () => void
 }>({})
 
 const ExerciseContextCom: React.FC<IExerciseContextProps> = ({ children }) => {
   const { getLogs, data = [], loading: getLogsLoading } = useGetExerciseLogs()
+
+  const [update, dispatchUpdate] = useReducer(() => ({}), {})
+
   return (
     <ExerciseContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -19,6 +24,8 @@ const ExerciseContextCom: React.FC<IExerciseContextProps> = ({ children }) => {
         data,
         getLogs,
         getLogsLoading,
+        update,
+        dispatchUpdate,
       }}
     >
       {children}
