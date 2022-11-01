@@ -79,6 +79,7 @@ function ExerciseTable({
             {item.type}:{' '}
             <PlusOneGroup
               index={index}
+              type="exercise"
               record={record}
               emitLoading={setPlusLoading}
             >
