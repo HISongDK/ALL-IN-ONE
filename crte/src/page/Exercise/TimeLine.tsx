@@ -25,7 +25,11 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
 
   const data = useMemo(() => {
     const data = dataSource.slice()
+    const firstIsToday = moment(data[0]?.date).isSame(moment(), 'day')
+    if (!firstIsToday)
+      data.unshift({ date: moment().startOf('day'), isDiscontinue: true })
 
+    // 补全空闲日程
     for (let i = 0; i < data.length; i++) {
       if (i !== data.length - 1) {
         const item = data[i]
@@ -44,7 +48,17 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
       }
     }
 
-    return data
+    // 空闲日合理休息标识
+    const finallyData = data.map((item, index) => {
+      if (item.isDiscontinue) {
+        const lastFiveDays = data.slice(index + 1, index + 6)
+        const hasDiscontinue = lastFiveDays.find((item) => item.isDiscontinue)
+        if (!hasDiscontinue) return { ...item, reasonableRest: true }
+      }
+      return item
+    })
+
+    return finallyData
   }, [dataSource])
 
   const getText = ({ data, record, textType, type }: IGetText) => {
@@ -76,12 +90,17 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
         {data?.map((item: looseObj) => {
           return (
             <Timeline.Item
+              key={item.date}
               color={item.isDiscontinue && 'gray'}
               label={
                 <Space size={4}>
                   {moment(item.date).format('YYYY-MM-DD')}{' '}
                   <Tag
-                    color={item.isDiscontinue ? 'default' : 'processing'}
+                    color={(() => {
+                      if (item.reasonableRest) return 'gold'
+                      if (item.isDiscontinue) return 'default'
+                      return 'processing'
+                    })()}
                     style={{ zoom: '.9' }}
                   >
                     {dayMap[moment(item.date).day()]}
