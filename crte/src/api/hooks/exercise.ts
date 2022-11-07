@@ -58,3 +58,23 @@ export const useUpdateLog = () => {
 
   return { updateLog, loading }
 }
+
+// 日志统计
+export const useStatLog = () => {
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([])
+
+  const getLogStat = (data: looseObj) => {
+    setLoading(true)
+    ExerciseApi.getStat({})
+      .then((res) => {
+        setData(res.data.stat)
+        return data
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  return { getLogStat, loading, data }
+}

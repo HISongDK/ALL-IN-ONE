@@ -8,6 +8,7 @@ import AddDrawer from './AddDrawer'
 import ExerciseTable from './ExerciseTable'
 import TimeLine from './TimeLine'
 import './index.scss'
+import StatCharts from './StatCharts'
 
 function ExerciseFC() {
   const history = useHistory()
@@ -23,7 +24,7 @@ function ExerciseFC() {
 
   const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
   const [record, setRecord] = useState()
-  const [activeKey, setActiveKey] = useState(params.type)
+  const [activeKey, setActiveKey] = useState(params.type || 'timeline')
 
   useEffect(() => {
     getLogs({ sort: '-date' })
@@ -51,7 +52,7 @@ function ExerciseFC() {
     {
       label: '图表',
       key: 'chart',
-      children: `Content of Tab Pane 3`,
+      children: <StatCharts />,
     },
   ]
 
