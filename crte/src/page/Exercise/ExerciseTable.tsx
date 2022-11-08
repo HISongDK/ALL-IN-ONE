@@ -99,7 +99,7 @@ function ExerciseTable({
         return (
           <div
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: val?.replace('\n', '<br/>') }}
+            dangerouslySetInnerHTML={{ __html: val?.replaceAll('\n', '<br/>') }}
           />
         )
       },

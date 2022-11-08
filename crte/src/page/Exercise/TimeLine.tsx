@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import moment from 'moment'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
+import { BaseType } from 'antd/lib/typography/Base'
 import PlusOneGroup from './components/PlusOneGroup'
 import { looseObj } from '@/constant'
 import { dayMap } from './constants'
@@ -17,7 +18,7 @@ interface IGetText {
   type: 'warmUp' | 'exercise'
   data: looseObj
   record: looseObj
-  textType?: string
+  textType?: BaseType
 }
 
 function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
@@ -64,9 +65,12 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
   const getText = ({ data, record, textType, type }: IGetText) => {
     return (
       <Text type={textType}>
-        {data?.map((item, index: number) => {
+        {data?.map((item: any, index: number) => {
           return (
-            <Row style={{ marginBottom: index === data.length - 1 ? 8 : 0 }}>
+            <Row
+              key={index}
+              style={{ marginBottom: index === data.length - 1 ? 8 : 0 }}
+            >
               {item.type}:
               <PlusOneGroup
                 type={type}
