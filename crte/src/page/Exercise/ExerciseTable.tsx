@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 import { ColumnType } from 'antd/lib/table'
 import { useDeleteLog } from '@api/hooks/exercise'
-import { dayMap } from './constants'
+import { dayMap, dayMapNum } from './constants'
 import PlusOneGroup from './components/PlusOneGroup'
 
 interface IExerciseTable {
@@ -49,8 +49,8 @@ function ExerciseTable({
       render(time: string) {
         return (
           <>
-            {moment(time).format('YYYY-MM-DD HH:mm:ss')}{' '}
-            <Tag>{dayMap[moment(time).day()]}</Tag>
+            {moment(time).format('YYYY-MM-DD')}{' '}
+            <Tag>{dayMap[moment(time).day() as dayMapNum]}</Tag>
           </>
         )
       },

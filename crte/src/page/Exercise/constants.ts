@@ -7,3 +7,5 @@ export const dayMap = {
   5: '周五',
   6: '周六',
 }
+
+export type dayMapNum = keyof typeof dayMap
