@@ -89,8 +89,8 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
   }
 
   return (
-    <Spin spinning={logsLoading} style={{ minHeight: 300, width: '100%' }}>
-      <Timeline mode="left" style={{ marginLeft: -500 }}>
+    <Spin spinning={logsLoading}>
+      <Timeline mode="left" style={{ marginLeft: -500, minHeight: 300 }}>
         {data?.map((item: looseObj) => {
           return (
             <Timeline.Item
