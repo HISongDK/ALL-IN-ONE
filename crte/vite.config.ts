@@ -8,6 +8,9 @@ import viteCompression from 'vite-plugin-compression'
 const pathResolve = (pathUrl: string) => path.join(__dirname, pathUrl)
 
 export default defineConfig({
+  // optimizeDeps: {
+  //   include: ['echarts'],
+  // },
   resolve: {
     alias: {
       '@': pathResolve('src'),
@@ -66,6 +69,9 @@ export default defineConfig({
         },
       },
     },
+    // commonjsOptions: {
+    //   esmExternals: true,
+    // },
   },
   server: {
     // port: 3000,

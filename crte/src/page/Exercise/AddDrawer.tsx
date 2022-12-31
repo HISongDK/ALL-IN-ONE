@@ -79,10 +79,13 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
       let data = {}
       if (isEdit) {
-        data = await updateLog({
-          ...res,
-          _id: recordData?._id,
-        })
+        try {
+          data = await updateLog({
+            ...res,
+            _id: recordData?._id,
+          })
+        } catch (e) {}
+
         setLoading(false)
       } else {
         data = await ExerciseApi.createLog(res).finally(() => setLoading(false))

@@ -97,5 +97,7 @@ module.exports = {
      */
     'import/no-unresolved': 0,
     'import/prefer-default-export': 1,
+
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
 }

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useReducerUpdate } from '@utils/ahook/useUpdate'
-import { Button, Card, Space, Input, List } from 'antd'
+import { Button, Card, Space, Input, List, Tag } from 'antd'
 import MultiSelectCheckbox from '@/components/MultiSelectCheckbox'
 import ListItem from './CopyListItem'
 import {
@@ -30,6 +30,13 @@ const options = [
   { label: 'Item Two' },
   { label: 'Item Three' },
 ]
+
+function ChildrenCom({ num: { num } }) {
+  useEffect(() => {
+    console.log('---  num  ---\n', num)
+  }, [num])
+  return <span>{num}</span>
+}
 
 function Dogs() {
   const history = useHistory()
@@ -69,8 +76,19 @@ function Dogs() {
     console.log('---  formValues  ---\n', formValues)
   }
 
+  const propRef = useRef(1)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      propRef.current += 1
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+  const refProps = useMemo(() => ({ num: propRef.current }), [propRef])
+
   return (
     <>
+      <ChildrenCom num={refProps} />
+
       <Space size="large" direction="vertical" style={{ display: 'flex' }}>
         <Button onClick={() => setVisible(true)}>Click me!</Button>
         <Card title="useUpdate">
