@@ -29,11 +29,13 @@ export default defineConfig({
       libraryDirectory: 'es',
       style: 'css',
     }),
+
     visualizer({
       open: true,
       gzipSize: true,
       brotliSize: true,
     }) as PluginOption,
+
     viteCompression({
       // gzip压缩
       verbose: true,
@@ -44,6 +46,10 @@ export default defineConfig({
     }),
   ],
   build: {
+    // minify: false, // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
+    // manifest: false, // 是否产出maifest.json
+    // sourcemap: false, // 是否产出soucemap.json
+    minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
@@ -51,24 +57,27 @@ export default defineConfig({
       },
     },
     // chunkSizeWarningLimit: 1500, // 大文件报警阈值设置,不建议使用,
-    rollupOptions: {
-      output: {
-        // 静态资源分类打包
-        chunkFileNames: 'static/js/[name]-[hash].js',
-        entryFileNames: 'static/js/[name]-[hash].js',
-        assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-        manualChunks(id) {
-          // 静态资源分拆打包
-          if (id.includes('node_modules')) {
-            return id
-              .toString()
-              .split('node_modules/')[1]
-              .split('/')[0]
-              .toString()
-          }
-        },
-      },
-    },
+
+    // FIXME: 这个分包会导致循环引用报错
+    // rollupOptions: {
+    //   output: {
+    //     // 静态资源分类打包
+    //     chunkFileNames: 'static/js/[name]-[hash].js',
+    //     entryFileNames: 'static/js/[name]-[hash].js',
+    //     assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+    //     manualChunks(id) {
+    //       // 静态资源分拆打包
+    //       if (id.includes('node_modules')) {
+    //         return id
+    //           .toString()
+    //           .split('node_modules/')[1]
+    //           .split('/')[0]
+    //           .toString()
+    //       }
+    //     },
+    //   },
+    // },
+
     // commonjsOptions: {
     //   esmExternals: true,
     // },
