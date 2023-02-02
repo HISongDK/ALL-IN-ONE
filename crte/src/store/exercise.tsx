@@ -1,40 +1,39 @@
-import React, { useContext, useMemo, useReducer } from 'react'
+import React, { useContext, useMemo, useReducer, createContext } from 'react'
 import { useGetExerciseLogs } from '@api/hooks/exercise'
 import { looseObj } from '@/constant'
 
-interface IExerciseContextProps {}
-
-const ExerciseContext = React.createContext<{
+interface IExerciseContext {
   data: any[]
   getLogs: (params: looseObj) => Promise<void>
   getLogsLoading: boolean
   update: any
   dispatchUpdate: () => void
-}>({})
+}
+const ExerciseContext = createContext<IExerciseContext>({} as IExerciseContext)
 
-const ExerciseContextCom: React.FC<IExerciseContextProps> = ({ children }) => {
+const ExerciseContextCom: React.FC = ({ children }) => {
   const { getLogs, data = [], loading: getLogsLoading } = useGetExerciseLogs()
 
   const [update, dispatchUpdate] = useReducer(() => ({}), {})
 
+  const value = useMemo(
+    () => ({
+      data,
+      getLogs,
+      getLogsLoading,
+      update,
+      dispatchUpdate,
+    }),
+    [data, getLogs, getLogsLoading, update, dispatchUpdate],
+  )
+
   return (
-    <ExerciseContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        data,
-        getLogs,
-        getLogsLoading,
-        update,
-        dispatchUpdate,
-      }}
-    >
+    <ExerciseContext.Provider value={value}>
       {children}
     </ExerciseContext.Provider>
   )
 }
 
-export const useExerciseContext = () => {
-  return useContext(ExerciseContext)
-}
-
 export default ExerciseContextCom
+
+export const useExerciseContext = () => useContext(ExerciseContext)

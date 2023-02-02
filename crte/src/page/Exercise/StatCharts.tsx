@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { Spin, Collapse, Row, Col, Card } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import { useStatLog } from '@api/hooks/exercise'
 import { useExerciseContext } from '@/store/exercise'
-import getOpts from './config'
 import useChartsData from './hooks/useChartsData'
 import useChartsOptions from './hooks/useChartsOptions'
 
