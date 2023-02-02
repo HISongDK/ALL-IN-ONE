@@ -66,7 +66,10 @@ function StatCharts(): JSX.Element {
                 bodyStyle={{ padding: 0 }}
                 style={{ height: 300, borderRadius: 5 }}
               >
-                <ReactECharts option={warmUpOptions} />
+                <ReactECharts
+                  option={warmUpOptions}
+                  style={{ width: '100%' }}
+                />
               </Card>
             </Col>
             <Col span={12}>
@@ -74,7 +77,10 @@ function StatCharts(): JSX.Element {
                 bodyStyle={{ padding: 0 }}
                 style={{ height: 300, borderRadius: 5 }}
               >
-                <ReactECharts option={exerciseOptions} />
+                <ReactECharts
+                  option={exerciseOptions}
+                  style={{ width: '100%' }}
+                />
               </Card>
             </Col>
           </Row>

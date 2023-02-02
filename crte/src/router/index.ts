@@ -20,6 +20,11 @@
 import Exercise from '@/page/Exercise'
 import AntvX6 from '@/page/AntvX6'
 
+// import React from 'react'
+
+// const Exercise = React.lazy(() => import('@/page/Exercise'))
+// const AntvX6 = React.lazy(() => import('@/page/AntvX6'))
+
 const routes = [
   {
     path: '/exercise',

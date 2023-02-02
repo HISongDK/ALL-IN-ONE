@@ -7,6 +7,8 @@ const getOpts = (title: string, data: any = []) => ({
       lineHeight: 30,
     },
   },
+  legend: { top: 15 },
+  tooltip: { trigger: 'axis' },
   xAxis: {
     // type: 'time',
     type: 'category',
@@ -36,8 +38,18 @@ const getOpts = (title: string, data: any = []) => ({
       lineStyle: { width: 1.5 },
     },
   ],
-  tooltip: { trigger: 'axis' },
-  legend: { top: 15 },
+  dataZoom: [
+    {
+      type: 'inside',
+      minSpan: 30,
+      // maxSpan: 30,
+      start: 100,
+    },
+    {
+      type: 'slider',
+      height: 20,
+    },
+  ],
 })
 
 export default getOpts
