@@ -32,7 +32,7 @@ const routes = [
     component: Exercise,
     title: '锻炼日志',
   },
-  { path: '/antvX6', route: '/antvX6', component: AntvX6, title: 'Antv/X6' },
+  // { path: '/antvX6', route: '/antvX6', component: AntvX6, title: 'Antv/X6' },
   // {
   //   path: '/50days',
   //   route: '/50days',

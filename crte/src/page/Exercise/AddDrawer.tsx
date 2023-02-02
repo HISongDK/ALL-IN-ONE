@@ -102,12 +102,12 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
   return (
     <Drawer
+      destroyOnClose
       title={`${isEdit ? '编辑' : '添加'}日志`}
       width={720}
+      open={visible}
       onClose={onClose}
-      visible={visible}
       bodyStyle={{ paddingBottom: 80 }}
-      destroyOnClose
       extra={
         <Space>
           <Button onClick={onClose} danger>

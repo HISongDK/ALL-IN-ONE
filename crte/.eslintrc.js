@@ -68,7 +68,7 @@ module.exports = {
     'react/require-default-props': 0,
     'react/no-array-index-key': 0,
     // camelcase: 0,
-    'react-hooks/exhaustive-deps': 1,
+    'react-hooks/exhaustive-deps': 0,
     'react/function-component-definition': 0,
     'react/button-has-type': 0,
 
