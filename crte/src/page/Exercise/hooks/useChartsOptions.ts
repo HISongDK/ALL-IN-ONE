@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import getOpts from '../config'
+import { getOpts } from '../config'
 
 const useChartsOptions = (warmUpData: any, exerciseData: any) =>
   useMemo(
