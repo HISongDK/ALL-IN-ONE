@@ -10,7 +10,7 @@ import { ColumnType } from 'antd/lib/table'
 import { dayMap, dayMapNum } from './constants'
 import PlusOneGroup from './components/PlusOneGroup'
 
-export const getOpts = (title: string, data: any = []) => ({
+export const getOpts = (title: string, data: any = [], range) => ({
   title: {
     text: title,
     textStyle: {
@@ -53,8 +53,10 @@ export const getOpts = (title: string, data: any = []) => ({
   dataZoom: [
     {
       type: 'inside',
-      minSpan: 30,
+      // minSpan: 30,
       // maxSpan: 30,
+      minSpan: range === 'custom' ? 3 : range,
+      maxSpan: range === 'custom' ? undefined : range,
       start: 100,
     },
     {
@@ -157,5 +159,32 @@ export const getColumns: ({}: any) => ColumnType<any>[] = ({
         </Space>
       )
     },
+  },
+]
+
+export const radioOptions = [
+  {
+    label: '自定义',
+    value: 'custom',
+  },
+  {
+    label: '近一年',
+    value: 365,
+  },
+  {
+    label: '近半年',
+    value: 184,
+  },
+  {
+    label: '近三月',
+    value: 90,
+  },
+  {
+    label: '近一月',
+    value: 30,
+  },
+  {
+    label: '近一周',
+    value: 7,
   },
 ]

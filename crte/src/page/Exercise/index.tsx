@@ -1,14 +1,14 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { Button, Tabs } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { useGetExerciseLogs } from '@api/hooks/exercise'
 import ExerciseContextCom, { useExerciseContext } from '@/store/exercise'
 import AddDrawer from './AddDrawer'
 import ExerciseTable from './ExerciseTable'
 import TimeLine from './TimeLine'
-import './index.scss'
 import StatCharts from './StatCharts'
+import { looseObj } from '@/constant'
+import './index.scss'
 
 function ExerciseFC() {
   const history = useHistory()
@@ -22,9 +22,11 @@ function ExerciseFC() {
     dispatchUpdate,
   } = useExerciseContext()
 
-  const [isAddVisible, setIsAddVisible] = useState(params.type === 'add')
-  const [record, setRecord] = useState()
+  const [record, setRecord] = useState<looseObj>()
   const [activeKey, setActiveKey] = useState(params.type || 'timeline')
+  const [isAddVisible, setIsAddVisible] = useState<boolean>(
+    params.type === 'add',
+  )
 
   useEffect(() => {
     getLogs({ sort: '-date' })
@@ -47,7 +49,15 @@ function ExerciseFC() {
     {
       label: '时间轴',
       key: 'timeline',
-      children: <TimeLine dataSource={data} logsLoading={getLogsLoading} />,
+      children: (
+        <TimeLine
+          dataSource={data}
+          logsLoading={getLogsLoading}
+          setRecord={setRecord}
+          // dispatchUpdate={dispatchUpdate}
+          setIsAddVisible={setIsAddVisible}
+        />
+      ),
     },
     {
       label: '图表',
@@ -80,9 +90,9 @@ function ExerciseFC() {
       />
 
       <AddDrawer
+        record={record}
         visible={isAddVisible}
         setVisible={setIsAddVisible}
-        record={record}
         emitUpdate={dispatchUpdate}
         onClose={() => setRecord(undefined)}
       />

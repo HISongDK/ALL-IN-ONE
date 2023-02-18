@@ -26,10 +26,11 @@ const PlusOneGroup: React.FC<Props> = ({
       emitLoading(false),
     )
 
-    if (data.status === SUCCESS) {
+    if ((data.status as unknown as string) === SUCCESS) {
       message.success('增加组数成功')
     }
   }
+
   return (
     <Popover
       content={

@@ -26,8 +26,9 @@ function ExerciseTable({
     setIsAddVisible(true)
     setRecord(record)
   }
+
   const handleClickDelete = (id: string) => {
-    deleteLog(id).then((res) => {
+    deleteLog(id).then(() => {
       dispatchUpdate()
     })
   }

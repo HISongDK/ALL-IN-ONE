@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { Dispatch, SetStateAction, useMemo } from 'react'
 import moment from 'moment'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
 import { BaseType } from 'antd/lib/typography/Base'
@@ -12,6 +12,8 @@ const { Text } = Typography
 interface ITimeline {
   dataSource: any[]
   logsLoading: boolean
+  setIsAddVisible: Dispatch<SetStateAction<Boolean>>
+  setRecord: Dispatch<SetStateAction<looseObj>>
 }
 
 interface IGetText {
@@ -21,7 +23,12 @@ interface IGetText {
   textType?: BaseType
 }
 
-function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
+function TimeLine({
+  dataSource = [],
+  logsLoading,
+  setIsAddVisible,
+  setRecord,
+}: ITimeline) {
   const { dispatchUpdate } = useExerciseContext()
 
   const data = useMemo(() => {
@@ -61,6 +68,14 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
 
     return finallyData
   }, [dataSource])
+
+  const handleClickEdit = (record: any) => {
+    setIsAddVisible(true)
+    setRecord({
+      ...record,
+      isAdd: !record.exercise, // 没有锻炼记录为新增
+    })
+  }
 
   const getText = ({ data, record, textType, type }: IGetText) => {
     return (
@@ -105,7 +120,8 @@ function TimeLine({ dataSource = [], logsLoading }: ITimeline) {
                       if (item.isDiscontinue) return 'default'
                       return 'processing'
                     })()}
-                    style={{ zoom: '.9' }}
+                    style={{ zoom: '.9', cursor: 'pointer' }}
+                    onClick={() => handleClickEdit(item)}
                   >
                     {dayMap[moment(item.date).day()]}
                   </Tag>

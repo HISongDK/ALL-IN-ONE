@@ -1,4 +1,4 @@
-export const dayMap = {
+export const dayMap: { [key: number]: string } = {
   0: '周日',
   1: '周一',
   2: '周二',

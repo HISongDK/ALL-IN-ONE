@@ -23,7 +23,7 @@ const showStatus = (status: keyof typeof statusMap, message?: string) => {
 
 // 接口防抖处理
 const queue: looseObj = {}
-const setQueue = (config: AxiosRequestConfig) => {
+const handleQueue = (config: AxiosRequestConfig) => {
   const url = getUrlString(config)
 
   const cancelToken = axios.CancelToken
@@ -44,7 +44,7 @@ const removeQueue = (config: AxiosRequestConfig = {}) => {
 // 请求拦截器
 Service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    setQueue(config)
+    handleQueue(config)
     return config
   },
   (error) => {

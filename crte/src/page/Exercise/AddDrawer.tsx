@@ -51,6 +51,10 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
   const [isEdit, recordData] = useMemo(() => {
     if (!record) return [false]
+
+    if (record.isAdd)
+      return [false, { ...initialValues, ...record, date: moment(record.date) }]
+
     return [!!record, { ...record, date: moment(record.date) }]
   }, [record])
 
@@ -79,14 +83,12 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 
       let data = {}
       if (isEdit) {
-        try {
-          data = await updateLog({
-            ...res,
-            _id: recordData?._id,
-          })
-        } catch (e) {}
-
-        setLoading(false)
+        data = await updateLog({
+          ...res,
+          _id: recordData?._id,
+        }).finally(() => {
+          setLoading(false)
+        })
       } else {
         data = await ExerciseApi.createLog(res).finally(() => setLoading(false))
       }
