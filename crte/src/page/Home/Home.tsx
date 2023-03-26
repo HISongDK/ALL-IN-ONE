@@ -29,10 +29,7 @@ export default function Home() {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  const selectKey = useMemo(
-    () => `/${pathname.split('/').slice(1).join('/')}`,
-    [pathname],
-  )
+  const selectKey = `/${pathname.split('/')[1]}`
 
   const pageJump = ({ key }: any) => {
     history.push(key)
@@ -68,13 +65,6 @@ export default function Home() {
               {/* 注册路由 */}
               <Switch>
                 {routesConfig.map((route: any) => (
-                  // <Route
-                  //   key={route.route}
-                  //   path={route.route}
-                  //   render={() => (
-                  //     <Route path={route.route} component={route.component} />
-                  //   )}
-                  // />
                   <Route
                     key={route.route}
                     path={route.route}
