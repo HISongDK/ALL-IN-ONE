@@ -17,13 +17,9 @@
 // import UseFetch from '@page/PlayGround'
 // import FiftyProjects from '@page/50Projects/index'
 // import { subMenus } from '@/page/50Projects/router'
+// import AntvX6 from '@/page/AntvX6'
 import Exercise from '@/page/Exercise'
-import AntvX6 from '@/page/AntvX6'
-
-// import React from 'react'
-
-// const Exercise = React.lazy(() => import('@/page/Exercise'))
-// const AntvX6 = React.lazy(() => import('@/page/AntvX6'))
+import Procrastination from '@/page/Procrastination'
 
 const routes = [
   {
@@ -31,6 +27,12 @@ const routes = [
     route: '/exercise/:type?',
     component: Exercise,
     title: '锻炼日志',
+  },
+  {
+    path: '/procrastination',
+    route: '/procrastination',
+    component: Procrastination,
+    title: '拖延列表',
   },
   // { path: '/antvX6', route: '/antvX6', component: AntvX6, title: 'Antv/X6' },
   // {

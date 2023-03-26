@@ -19,7 +19,6 @@ const firstRoute: any = routesConfig[0]
 const items = routesConfig.map((route) => ({
   key: route.path,
   label: route.title,
-  children: route.children,
 }))
 
 /**
@@ -66,6 +65,7 @@ export default function Home() {
               <Switch>
                 {routesConfig.map((route: any) => (
                   <Route
+                    exact
                     key={route.route}
                     path={route.route}
                     component={route.component}
