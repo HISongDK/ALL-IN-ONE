@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
-import moment from 'moment'
+import moment from 'dayjs'
 import {
   Button,
   Col,

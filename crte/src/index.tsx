@@ -9,7 +9,7 @@ import App from './App'
 import store from './store/store'
 
 // 引入 antd 样式
-import 'antd/dist/antd.min.css'
+// import 'antd/dist/antd.min.css'
 
 import './index.scss'
 

@@ -24,11 +24,11 @@ export default defineConfig({
   plugins: [
     react(),
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    usePluginImport({
-      libraryName: 'antd',
-      libraryDirectory: 'es',
-      style: 'css',
-    }),
+    // usePluginImport({
+    //   libraryName: 'antd',
+    //   libraryDirectory: 'es',
+    //   style: 'css',
+    // }),
 
     visualizer({
       open: true,

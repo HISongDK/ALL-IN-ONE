@@ -55,7 +55,7 @@ function ExerciseFC() {
           logsLoading={getLogsLoading}
           setRecord={setRecord}
           // dispatchUpdate={dispatchUpdate}
-          setIsAddVisible={setIsAddVisible}
+          setIsAddVisible={setIsAddVisible as any}
         />
       ),
     },

@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import moment from 'dayjs'
 import { Tag, Space, Popconfirm, Table } from 'antd'
 import {
   EditOutlined,

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useMemo } from 'react'
-import moment from 'moment'
+import moment from 'dayjs'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
 import { BaseType } from 'antd/lib/typography/Base'
 import PlusOneGroup from './components/PlusOneGroup'
