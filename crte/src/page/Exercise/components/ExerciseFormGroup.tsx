@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Col, Form, Row, Select, Divider, InputNumber } from 'antd'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import { exerciseOptions } from '../config'
 
 const { Option } = Select
 
@@ -55,10 +56,10 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
                           { required: true, message: 'Please select an owner' },
                         ]}
                       >
-                        <Select placeholder="请选择动作">
-                          <Option value="靠墙俯卧撑">靠墙俯卧撑</Option>
-                          <Option value="上斜俯卧撑">上斜俯卧撑</Option>
-                        </Select>
+                        <Select
+                          placeholder="请选择动作"
+                          options={exerciseOptions}
+                        />
                       </Form.Item>
                     </Col>
                   </Row>
