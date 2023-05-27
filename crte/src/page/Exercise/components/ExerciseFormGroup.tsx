@@ -3,8 +3,6 @@ import { Button, Col, Form, Row, Select, Divider, InputNumber } from 'antd'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { exerciseOptions } from '../config'
 
-const { Option } = Select
-
 interface IExerciseFormGroup {
   label: string
   name: string
@@ -16,13 +14,14 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
       <Button
         block
         type="primary"
-        onClick={() => add()}
+        onClick={() => add({ groupCounts: 1 })}
         icon={<PlusOutlined />}
       >
         添加{label}
       </Button>
     </Form.Item>
   )
+
   const removeBtn = (remove: any, removeIndex: number) => (
     <Form.Item>
       <Button
@@ -36,6 +35,7 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
       </Button>
     </Form.Item>
   )
+
   return (
     <Form.List name={name}>
       {(fields, { add, remove }) => {
@@ -57,6 +57,7 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
                         ]}
                       >
                         <Select
+                          showSearch
                           placeholder="请选择动作"
                           options={exerciseOptions}
                         />
@@ -114,7 +115,7 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
               </Row>
             )}
 
-            {!(fields.length > 1) && addBtn(add)}
+            {fields.length <= 1 && addBtn(add)}
           </>
         )
       }}

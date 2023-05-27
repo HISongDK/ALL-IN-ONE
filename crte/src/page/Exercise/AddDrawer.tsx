@@ -29,10 +29,7 @@ interface IAddDrawer {
 
 const initialValues = {
   date: moment(),
-  warmUp: [
-    { type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 5 },
-    { type: '上斜俯卧撑', groupCounts: 1, perGroupTimes: 3 },
-  ],
+  warmUp: [{ type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 5 }],
   exercise: [{ type: '靠墙俯卧撑', groupCounts: 1, perGroupTimes: 10 }],
 }
 
@@ -70,10 +67,28 @@ const AddDrawer: React.FC<IAddDrawer> = ({
   const onClose = () => {
     setVisible(false)
     form.setFieldsValue({})
-    // eslint-disable-next-line no-unused-expressions
-    onClearRecord && onClearRecord()
-    // eslint-disable-next-line no-unused-expressions
-    pathname.includes('/add') && history.replace('/exercise')
+    onClearRecord?.()
+
+    if (pathname.includes('/add')) {
+      history.replace('/exercise')
+    }
+  }
+
+  const handleValuesChange = (_: any, values: any) => {
+    const allWarmsType = values?.warmUp?.map((item: any) => item.type)
+    const allExerciseType = values?.exercise?.map((item: any) => item.type)
+
+    const extra =
+      allWarmsType
+        ?.filter((type: string) => type && !allExerciseType.includes(type))
+        .map((type: string) => ({ type, groupCounts: 1 })) || []
+
+    const result = {
+      ...values,
+      exercise: [...(values?.exercise || []), ...extra],
+    }
+
+    form.setFieldsValue(result)
   }
 
   const handleConfirmAdd = () => {
@@ -81,7 +96,7 @@ const AddDrawer: React.FC<IAddDrawer> = ({
       setLoading(true)
       res.date = res.date.startOf('day').valueOf()
 
-      let data = {}
+      let data: { status?: string } = {}
       if (isEdit) {
         data = await updateLog({
           ...res,
@@ -127,31 +142,12 @@ const AddDrawer: React.FC<IAddDrawer> = ({
     >
       <Form
         preserve
-        layout="vertical"
         form={form}
+        layout="vertical"
         initialValues={initialValues}
+        onValuesChange={handleValuesChange}
       >
-        <Row>
-          <Col span={24}>
-            <Form.Item
-              name="date"
-              label="日期"
-              rules={[{ required: true, message: '日期不能为空' }]}
-            >
-              <DatePicker style={{ width: '100%' }} placeholder="请选择日期" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24}>
-            <Form.Item name="description" label="状态描述">
-              <TextArea
-                style={{ width: '100%' }}
-                placeholder="请填写状态描述"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
+        <BasicInfoGroup />
         <ExerciseFormGroup name="warmUp" label="热身组" />
         <ExerciseFormGroup name="exercise" label="训练组" />
       </Form>
@@ -160,3 +156,28 @@ const AddDrawer: React.FC<IAddDrawer> = ({
 }
 
 export default AddDrawer
+
+function BasicInfoGroup() {
+  return (
+    <>
+      <Row>
+        <Col span={24}>
+          <Form.Item
+            name="date"
+            label="日期"
+            rules={[{ required: true, message: '日期不能为空' }]}
+          >
+            <DatePicker style={{ width: '100%' }} placeholder="请选择日期" />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <Form.Item name="description" label="状态描述">
+            <TextArea style={{ width: '100%' }} placeholder="请填写状态描述" />
+          </Form.Item>
+        </Col>
+      </Row>
+    </>
+  )
+}
