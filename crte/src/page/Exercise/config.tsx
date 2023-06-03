@@ -10,7 +10,7 @@ import { ColumnType } from 'antd/lib/table'
 import { dayMap, dayMapNum } from './constants'
 import PlusOneGroup from './components/PlusOneGroup'
 
-export const getOpts = (title: string, data: any = [], range) => ({
+export const getOpts = (title: string, data: any = [], range, keys) => ({
   title: {
     text: title,
     textStyle: {
@@ -35,21 +35,22 @@ export const getOpts = (title: string, data: any = [], range) => ({
     type: 'value',
   },
   dataset: {
-    dimensions: ['date', '靠墙俯卧撑', '上斜俯卧撑'],
+    // dimensions: ['date', '靠墙俯卧撑', '上斜俯卧撑'],
+    dimensions: keys,
     source: data,
   },
-  series: [
-    {
+  series: keys.slice(1).map(
+    (key: string) => ({
       type: 'line',
       smooth: true,
       lineStyle: { width: 1.5 },
-    },
-    {
-      type: 'line',
-      smooth: true,
-      lineStyle: { width: 1.5 },
-    },
-  ],
+    }),
+    // {
+    //   type: 'line',
+    //   smooth: true,
+    //   lineStyle: { width: 1.5 },
+    // },
+  ),
   dataZoom: [
     {
       type: 'inside',
@@ -281,3 +282,8 @@ export const exerciseOptions = [
     ],
   },
 ]
+
+export const actionTypeMap = exerciseOptions.map((item) => ({
+  title: item.label,
+  bounds: item.options.map(({ value }) => value),
+}))

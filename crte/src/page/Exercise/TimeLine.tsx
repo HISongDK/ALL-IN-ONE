@@ -105,7 +105,7 @@ function TimeLine({
 
   return (
     <Spin spinning={logsLoading}>
-      <Timeline mode="left" style={{ marginLeft: -500, minHeight: 300 }}>
+      <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
         {data?.map((item: looseObj) => {
           return (
             <Timeline.Item
@@ -113,7 +113,7 @@ function TimeLine({
               color={item.isDiscontinue && 'gray'}
               label={
                 <Space size={4}>
-                  {moment(item.date).format('YYYY-MM-DD')}{' '}
+                  {moment(item.date).format('YYYY-MM-DD')}
                   <Tag
                     color={(() => {
                       if (item.reasonableRest) return 'gold'

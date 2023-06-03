@@ -54,7 +54,6 @@ function ExerciseFC() {
           dataSource={data}
           logsLoading={getLogsLoading}
           setRecord={setRecord}
-          // dispatchUpdate={dispatchUpdate}
           setIsAddVisible={setIsAddVisible as any}
         />
       ),

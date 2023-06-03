@@ -6,6 +6,7 @@ import { useExerciseContext } from '@/store/exercise'
 import useChartsData from './hooks/useChartsData'
 import useChartsOptions from './hooks/useChartsOptions'
 import { radioOptions } from './config'
+import CollapseChart, { ICollapseChart } from './CollapseChart'
 
 function StatCharts(): JSX.Element {
   const { update } = useExerciseContext()
@@ -14,13 +15,10 @@ function StatCharts(): JSX.Element {
 
   const { getLogStat, loading, data } = useStatLog()
 
-  const [warmUpData, exerciseData] = useChartsData(data)
-
-  const [warmUpOptions, exerciseOptions] = useChartsOptions(
-    warmUpData,
-    exerciseData,
-    range,
-  )
+  // 数据分组
+  const allDataGroup = useChartsData(data)
+  // 图标配置
+  const allDataGroupOptions = useChartsOptions(allDataGroup, range)
 
   useEffect(() => {
     getLogStat({ sort: 'date' })
@@ -41,34 +39,9 @@ function StatCharts(): JSX.Element {
         />
       </div>
 
-      <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel header="俯卧撑" key="1">
-          <Row gutter={30}>
-            <Col span={12}>
-              <Card
-                bodyStyle={{ padding: 0 }}
-                style={{ height: 300, borderRadius: 5 }}
-              >
-                <ReactECharts
-                  option={warmUpOptions}
-                  style={{ width: '100%' }}
-                />
-              </Card>
-            </Col>
-            <Col span={12}>
-              <Card
-                bodyStyle={{ padding: 0 }}
-                style={{ height: 300, borderRadius: 5 }}
-              >
-                <ReactECharts
-                  option={exerciseOptions}
-                  style={{ width: '100%' }}
-                />
-              </Card>
-            </Col>
-          </Row>
-        </Collapse.Panel>
-      </Collapse>
+      {allDataGroupOptions.map((dataOption: ICollapseChart) => {
+        return <CollapseChart data={dataOption} />
+      })}
     </Spin>
   )
 }
