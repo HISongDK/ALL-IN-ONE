@@ -36,7 +36,16 @@
 
   .stat-radio-group {
     position: absolute;
-    top: -45px;
+    top: -50px;
     right: 150px;
+  }
+
+  @media (max-width: 1200px) {
+    .stat-radio-group {
+      position: relative;
+      top: 0;
+      right: 0;
+      margin-bottom: 24px;
+    }
   }
 }

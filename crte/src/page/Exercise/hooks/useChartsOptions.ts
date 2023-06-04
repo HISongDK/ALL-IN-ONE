@@ -9,19 +9,24 @@ const useChartsOptions = (allDataGroup: any, range: number | 'custom') =>
     const allDataGroupOpts = keys.map((key) => {
       const element = allDataGroup[key]
 
+      // 热身数据配置
       const warmUpData = element.map((item: any) => ({
         date: dayjs(item.date).format('YYYY-MM-DD'),
         ...item.warmUp,
       }))
+
       const keys = Object.keys(warmUpData[0])
 
+      const warmUpDataOpts = getOpts('热身：', range, keys, warmUpData)
+
+      // 锻炼数据配置
       const exerciseUpData = element.map((item: any) => ({
         date: dayjs(item.date).format('YYYY-MM-DD'),
         ...item.exercise,
       }))
+
       const exerciseKeys = Object.keys(exerciseUpData[0])
 
-      const warmUpDataOpts = getOpts('热身：', range, keys, exerciseUpData)
       const exerciseDataOpts = getOpts(
         '锻炼',
         range,

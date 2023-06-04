@@ -17,7 +17,8 @@ function CollapseChart({ data }: ICollapseChart) {
     <Collapse defaultActiveKey={['1']} style={{ marginBottom: 20 }}>
       <Collapse.Panel header={title} key="1">
         <Row gutter={30}>
-          <Col span={12}>
+          {/* 热身 */}
+          <Col span={12} key={title + 1}>
             <Card
               bodyStyle={{ padding: 0 }}
               style={{ height: 300, borderRadius: 5 }}
@@ -25,7 +26,8 @@ function CollapseChart({ data }: ICollapseChart) {
               <ReactECharts option={warmUpOptions} style={{ width: '100%' }} />
             </Card>
           </Col>
-          <Col span={12}>
+          {/* 锻炼 */}
+          <Col span={12} key={title + 2}>
             <Card
               bodyStyle={{ padding: 0 }}
               style={{ height: 300, borderRadius: 5 }}

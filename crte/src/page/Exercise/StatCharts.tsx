@@ -25,7 +25,6 @@ function StatCharts(): JSX.Element {
 
   const handleRadioChange = (e: any) => {
     const { value } = e.target
-    console.log('---  value  ---\n', value)
     setRange(value)
   }
 

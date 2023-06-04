@@ -43,6 +43,8 @@ function useChartsData(data: any) {
           if (!actionType.bounds.includes(action))
             delete currentExercise[action]
         })
+
+        // 将区分出对应的动作数据，放入对应数组
         ;(
           allDataGroup[actionType.title] ||
           (allDataGroup[actionType.title] = [])
