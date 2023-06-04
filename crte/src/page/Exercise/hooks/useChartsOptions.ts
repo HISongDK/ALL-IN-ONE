@@ -15,8 +15,6 @@ const useChartsOptions = (allDataGroup: any, range?: number) =>
       }))
       const keys = Object.keys(warmUpData[0])
 
-      console.log('keys', keys)
-
       const exerciseUpData = element.map((item: any) => ({
         date: dayjs(item.date).format('YYYY-MM-DD'),
         ...item.exercise,

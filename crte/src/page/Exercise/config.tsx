@@ -7,10 +7,16 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons'
 import { ColumnType } from 'antd/lib/table'
+import { EChartsOption } from 'echarts'
 import { dayMap, dayMapNum } from './constants'
 import PlusOneGroup from './components/PlusOneGroup'
 
-export const getOpts = (title: string, data: any = [], range, keys) => ({
+export const getOpts = (
+  title: string,
+  data: any = [],
+  range,
+  keys,
+): EChartsOption => ({
   title: {
     text: title,
     textStyle: {
@@ -20,7 +26,33 @@ export const getOpts = (title: string, data: any = [], range, keys) => ({
     },
   },
   legend: { left: 50, top: 0 },
-  tooltip: { trigger: 'axis' },
+  tooltip: {
+    trigger: 'axis',
+    formatter(params: any) {
+      const { date } = params?.[0]?.value || {}
+
+      let dataContentStr = ''
+      params?.forEach((item: any) => {
+        const value = item.value?.[item.seriesName]
+
+        if (!value) return
+
+        dataContentStr += `<div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+    					margin: '20px 0'
+            }}
+          >
+            <span>${item.marker + item.seriesName}</span>
+            <span>${value}</span>
+          </div>`
+      })
+
+      return `${date}<br/>${dataContentStr || '本日无数据 🙃'}`
+    },
+  },
   xAxis: {
     type: 'category',
     interval: 0,
