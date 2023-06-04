@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import dayjs from 'dayjs'
 import { getOpts } from '../config'
 
-const useChartsOptions = (allDataGroup: any, range?: number) =>
+const useChartsOptions = (allDataGroup: any, range: number | 'custom') =>
   useMemo(() => {
     const keys = Object.keys(allDataGroup)
 
@@ -21,12 +21,12 @@ const useChartsOptions = (allDataGroup: any, range?: number) =>
       }))
       const exerciseKeys = Object.keys(exerciseUpData[0])
 
-      const warmUpDataOpts = getOpts('热身：', exerciseUpData, range, keys)
+      const warmUpDataOpts = getOpts('热身：', range, keys, exerciseUpData)
       const exerciseDataOpts = getOpts(
         '锻炼',
-        exerciseUpData,
         range,
         exerciseKeys,
+        exerciseUpData,
       )
 
       return {

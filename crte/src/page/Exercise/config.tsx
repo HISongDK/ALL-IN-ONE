@@ -13,9 +13,9 @@ import PlusOneGroup from './components/PlusOneGroup'
 
 export const getOpts = (
   title: string,
+  range: number | 'custom',
+  keys: string[],
   data: any = [],
-  range,
-  keys,
 ): EChartsOption => ({
   title: {
     text: title,
@@ -78,10 +78,12 @@ export const getOpts = (
   dataZoom: [
     {
       type: 'inside',
-      // minSpan: 30,
-      // maxSpan: 30,
-      minSpan: range === 'custom' ? 3 : range,
-      maxSpan: range === 'custom' ? undefined : range,
+      minSpan: 30,
+      maxSpan: 30,
+      // minSpan: range === 'custom' ? 3 : range,
+      // maxSpan: range === 'custom' ? undefined : range,
+      minValueSpan: range === 'custom' ? 4 : range - 1,
+      maxValueSpan: range === 'custom' ? undefined : range - 1,
       start: 100,
     },
     {
@@ -91,7 +93,11 @@ export const getOpts = (
   ],
 })
 
-export const getColumns: ({}: any) => ColumnType<any>[] = ({
+export const getColumns: ({
+  setPlusLoading,
+  handleClickEdit,
+  handleClickDelete,
+}: any) => ColumnType<any>[] = ({
   setPlusLoading,
   handleClickEdit,
   handleClickDelete,

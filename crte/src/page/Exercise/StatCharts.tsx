@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Spin, Collapse, Row, Col, Card, Radio } from 'antd'
-import ReactECharts from 'echarts-for-react'
+import { Spin, Radio } from 'antd'
 import { useStatLog } from '@api/hooks/exercise'
 import { useExerciseContext } from '@/store/exercise'
 import useChartsData from './hooks/useChartsData'
@@ -26,6 +25,7 @@ function StatCharts(): JSX.Element {
 
   const handleRadioChange = (e: any) => {
     const { value } = e.target
+    console.log('---  value  ---\n', value)
     setRange(value)
   }
 
@@ -39,9 +39,11 @@ function StatCharts(): JSX.Element {
         />
       </div>
 
-      {allDataGroupOptions.map((dataOption: ICollapseChart) => {
-        return <CollapseChart data={dataOption} />
-      })}
+      <div style={{ minHeight: 300 }}>
+        {allDataGroupOptions.map((dataOption: ICollapseChart) => {
+          return <CollapseChart data={dataOption} />
+        })}
+      </div>
     </Spin>
   )
 }
