@@ -19,10 +19,9 @@ export const getOpts = (title: string, data: any = [], range, keys) => ({
       lineHeight: 30,
     },
   },
-  legend: { top: 15 },
+  legend: { left: 50, top: 0 },
   tooltip: { trigger: 'axis' },
   xAxis: {
-    // type: 'time',
     type: 'category',
     interval: 0,
     axisLabel: {
@@ -39,18 +38,11 @@ export const getOpts = (title: string, data: any = [], range, keys) => ({
     dimensions: keys,
     source: data,
   },
-  series: keys.slice(1).map(
-    (key: string) => ({
-      type: 'line',
-      smooth: true,
-      lineStyle: { width: 1.5 },
-    }),
-    // {
-    //   type: 'line',
-    //   smooth: true,
-    //   lineStyle: { width: 1.5 },
-    // },
-  ),
+  series: keys.slice(1).map((key: string) => ({
+    type: 'line',
+    smooth: true,
+    lineStyle: { width: 1.5 },
+  })),
   dataZoom: [
     {
       type: 'inside',
@@ -206,21 +198,21 @@ export const exerciseOptions = [
       { label: '单臂俯卧撑', value: '单臂俯卧撑' },
     ],
   },
-  {
-    label: '深蹲',
-    options: [
-      { label: '肩倒立深蹲', value: '肩倒立深蹲' },
-      { label: '折刀深蹲', value: '折刀深蹲' },
-      { label: '支撑深蹲', value: '支撑深蹲' },
-      { label: '半深蹲', value: '半深蹲' },
-      { label: '标准深蹲', value: '标准深蹲' },
-      { label: '窄距深蹲', value: '窄距深蹲' },
-      { label: '偏重深蹲', value: '偏重深蹲' },
-      { label: '单腿半深蹲', value: '单腿半深蹲' },
-      { label: '单腿辅助深蹲', value: '单腿辅助深蹲' },
-      { label: '单腿深蹲', value: '单腿深蹲' },
-    ],
-  },
+  // {
+  //   label: '深蹲',
+  //   options: [
+  //     { label: '肩倒立深蹲', value: '肩倒立深蹲' },
+  //     { label: '折刀深蹲', value: '折刀深蹲' },
+  //     { label: '支撑深蹲', value: '支撑深蹲' },
+  //     { label: '半深蹲', value: '半深蹲' },
+  //     { label: '标准深蹲', value: '标准深蹲' },
+  //     { label: '窄距深蹲', value: '窄距深蹲' },
+  //     { label: '偏重深蹲', value: '偏重深蹲' },
+  //     { label: '单腿半深蹲', value: '单腿半深蹲' },
+  //     { label: '单腿辅助深蹲', value: '单腿辅助深蹲' },
+  //     { label: '单腿深蹲', value: '单腿深蹲' },
+  //   ],
+  // },
   {
     label: '引体向上',
     options: [
@@ -266,24 +258,39 @@ export const exerciseOptions = [
       { label: '铁板桥', value: '铁板桥' },
     ],
   },
-  {
-    label: '倒立撑',
-    options: [
-      { label: '靠墙顶立', value: '靠墙顶立' },
-      { label: '乌鸦式', value: '乌鸦式' },
-      { label: '靠墙倒立', value: '靠墙倒立' },
-      { label: '半倒立撑', value: '半倒立撑' },
-      { label: '标准倒立撑', value: '标准倒立撑' },
-      { label: '窄距倒立撑', value: '窄距倒立撑' },
-      { label: '偏重倒立撑', value: '偏重倒立撑' },
-      { label: '单臂半倒立撑', value: '单臂半倒立撑' },
-      { label: '杠杆倒立撑', value: '杠杆倒立撑' },
-      { label: '单臂倒立撑', value: '单臂倒立撑' },
-    ],
-  },
+  // {
+  //   label: '倒立撑',
+  //   options: [
+  //     { label: '靠墙顶立', value: '靠墙顶立' },
+  //     { label: '乌鸦式', value: '乌鸦式' },
+  //     { label: '靠墙倒立', value: '靠墙倒立' },
+  //     { label: '半倒立撑', value: '半倒立撑' },
+  //     { label: '标准倒立撑', value: '标准倒立撑' },
+  //     { label: '窄距倒立撑', value: '窄距倒立撑' },
+  //     { label: '偏重倒立撑', value: '偏重倒立撑' },
+  //     { label: '单臂半倒立撑', value: '单臂半倒立撑' },
+  //     { label: '杠杆倒立撑', value: '杠杆倒立撑' },
+  //     { label: '单臂倒立撑', value: '单臂倒立撑' },
+  //   ],
+  // },
 ]
 
-export const actionTypeMap = exerciseOptions.map((item) => ({
-  title: item.label,
-  bounds: item.options.map(({ value }) => value),
-}))
+const allTypes: string[] = []
+
+export const actionTypeMap = exerciseOptions.map((item) => {
+  const bounds = item.options.map(({ value }) => value)
+
+  allTypes.push(...bounds)
+
+  return {
+    title: item.label,
+    bounds,
+  }
+})
+
+// 补空，全量类型数据
+export const allTypesMap: { [key: string]: number } = {}
+
+allTypes.forEach((type) => {
+  allTypesMap[type] = 0
+})

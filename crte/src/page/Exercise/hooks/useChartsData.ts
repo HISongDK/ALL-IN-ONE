@@ -1,6 +1,6 @@
 import moment from 'dayjs'
 import React, { useMemo } from 'react'
-import { actionTypeMap } from '../config'
+import { actionTypeMap, allTypesMap } from '../config'
 
 function useChartsData(data: any) {
   const chartRawData = useMemo(() => {
@@ -8,6 +8,27 @@ function useChartsData(data: any) {
 
     for (let i = 0; i < data.length; i++) {
       const item = data[i]
+
+      // 每项数据补空
+      item.warmUp = { ...allTypesMap, ...item.warmUp }
+      item.exercise = { ...allTypesMap, ...item.exercise }
+
+      // 隔天补空
+      if (i !== data.length - 1) {
+        const nextData = data[i + 1]
+        const realNextDay = moment(item.date).add(1, 'day')
+        const isDiscontinue = !realNextDay.isSame(moment(nextData.date))
+
+        if (isDiscontinue) {
+          data.splice(i + 1, 0, {
+            date: realNextDay.valueOf(),
+            exercise: allTypesMap,
+            warmUp: allTypesMap,
+          })
+        }
+      }
+
+      // 分组格式化数据
       actionTypeMap.forEach((actionType) => {
         const currentWarmUp = { ...item.warmUp }
         const currentExercise = { ...item.exercise }
@@ -31,41 +52,7 @@ function useChartsData(data: any) {
           exercise: currentExercise,
         })
       })
-
-      console.log('---  allDataGroup  ---\n', allDataGroup)
-
-      // 补空
-      // if (i !== data.length - 1) {
-      //   const nextData = data[i + 1]
-      //   const realNextDay = moment(item.date).add(1, 'day')
-      //   const isDiscontinue = !realNextDay.isSame(moment(nextData.date))
-      //   if (isDiscontinue) {
-      //     data.splice(i + 1, 0, {
-      //       date: realNextDay.valueOf(),
-      //       exercise: {
-      //         上斜俯卧撑: 0,
-      //         靠墙俯卧撑: 0,
-      //       },
-      //       warmUp: {
-      //         上斜俯卧撑: 0,
-      //         靠墙俯卧撑: 0,
-      //       },
-      //     })
-      //   }
-      // }
     }
-
-    // console.log('---  allDataGroup  ---\n', allDataGroup)
-
-    const warm = data.map((item: any) => ({
-      date: moment(item.date).format('YYYY-MM-DD'),
-      ...item.warmUp,
-    }))
-
-    const exercise = data.map((item: any) => ({
-      date: moment(item.date).format('YYYY-MM-DD'),
-      ...item.exercise,
-    }))
 
     return allDataGroup
   }, [data])

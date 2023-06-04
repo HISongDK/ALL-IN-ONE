@@ -12,6 +12,12 @@ export interface ICollapseChart {
 }
 function CollapseChart({ data }: ICollapseChart) {
   const { title, warmUpOptions, exerciseOptions } = data
+  console.log(
+    '---   title, warmUpOptions, exerciseOptions   ---\n',
+    title,
+    warmUpOptions,
+    exerciseOptions,
+  )
 
   return (
     <Collapse defaultActiveKey={['1']} style={{ marginBottom: 20 }}>
