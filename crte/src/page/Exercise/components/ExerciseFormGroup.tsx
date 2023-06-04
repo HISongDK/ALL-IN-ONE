@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Col, Form, Row, Select, Divider, InputNumber } from 'antd'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import _ from 'lodash'
 import { exerciseOptions } from '../config'
 
 interface IExerciseFormGroup {
@@ -36,6 +37,27 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
     </Form.Item>
   )
 
+  const handleFilter = (value: string, options: any) => {
+    // 数字按照索引搜索
+    if (/\d/g.test(value)) {
+      const first = value[0]
+      const second = value[1]
+
+      let filtered: any = []
+      if (first) {
+        filtered = exerciseOptions?.[first as unknown as number]
+      }
+      if (second) {
+        filtered = filtered?.options?.[second]
+      }
+
+      return _.isEqual(filtered, options)
+    }
+
+    // 包含文字
+    return options.label.includes(value)
+  }
+
   return (
     <Form.List name={name}>
       {(fields, { add, remove }) => {
@@ -60,6 +82,7 @@ function ExerciseFormGroup({ label, name }: IExerciseFormGroup) {
                           showSearch
                           placeholder="请选择动作"
                           options={exerciseOptions}
+                          filterOption={handleFilter}
                         />
                       </Form.Item>
                     </Col>
