@@ -1,7 +1,15 @@
-import React, { Dispatch, SetStateAction, useMemo } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import moment from 'dayjs'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
 import { BaseType } from 'antd/lib/typography/Base'
+import _ from 'lodash'
 import PlusOneGroup from './components/PlusOneGroup'
 import { looseObj } from '@/constant'
 import { dayMap } from './constants'
@@ -29,7 +37,12 @@ function TimeLine({
   setIsAddVisible,
   setRecord,
 }: ITimeline) {
+  const locateFlag = useRef()
+  const scrollContainer = useRef()
+
   const { dispatchUpdate } = useExerciseContext()
+
+  const [lazyLoadedData, setLazyLoadedData] = useState()
 
   const data = useMemo(() => {
     const data = dataSource.slice()
@@ -69,6 +82,31 @@ function TimeLine({
     return finallyData
   }, [dataSource])
 
+  useEffect(() => {
+    setLazyLoadedData(data.slice(0, 20))
+  }, [data])
+
+  const handleLazyLoad = () => {
+    const y = locateFlag.current?.getBoundingClientRect()?.y
+    const { clientHeight } = document.body
+    if (y - clientHeight < 200) {
+      setLazyLoadedData((prev: any) => {
+        return data.slice(0, prev.length + 20)
+      })
+    }
+  }
+
+  const throttledLazyLoadFn = _.throttle(handleLazyLoad, 20)
+
+  useEffect(() => {
+    scrollContainer.current?.addEventListener('scroll', throttledLazyLoadFn)
+    return () =>
+      scrollContainer.current?.removeEventListener(
+        'scroll',
+        throttledLazyLoadFn,
+      )
+  }, [data])
+
   const handleClickEdit = (record: any) => {
     setIsAddVisible(true)
     setRecord({
@@ -105,58 +143,61 @@ function TimeLine({
 
   return (
     <Spin spinning={logsLoading}>
-      <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
-        {data?.map((item: looseObj) => {
-          return (
-            <Timeline.Item
-              key={item.date}
-              color={item.isDiscontinue && 'gray'}
-              label={
-                <Space size={4}>
-                  {moment(item.date).format('YYYY-MM-DD')}
-                  <Tag
-                    color={(() => {
-                      if (item.reasonableRest) return 'gold'
-                      if (item.isDiscontinue) return 'default'
-                      return 'processing'
-                    })()}
-                    style={{ zoom: '.9', cursor: 'pointer' }}
-                    onClick={() => handleClickEdit(item)}
-                  >
-                    {dayMap[moment(item.date).day()]}
-                  </Tag>
-                </Space>
-              }
-            >
-              {item.isDiscontinue ? (
-                <br />
-              ) : (
-                <>
-                  热身：
-                  {getText({
-                    type: 'warmUp',
-                    data: item.warmUp,
-                    record: item,
-                    textType: 'secondary',
-                  })}
-                  锻炼：{' '}
-                  {getText({
-                    type: 'exercise',
-                    data: item.exercise,
-                    record: item,
-                  })}
-                  {!!item.description && (
-                    <>
-                      描述：
-                      <Text type="secondary">{item.description}</Text>
-                    </>
-                  )}
-                </>
-              )}
-            </Timeline.Item>
-          )
-        })}
-      </Timeline>
+      <div ref={scrollContainer} className="time_line_wrapper">
+        <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
+          {lazyLoadedData?.map((item: looseObj) => {
+            return (
+              <Timeline.Item
+                key={item.date}
+                color={item.isDiscontinue && 'gray'}
+                label={
+                  <Space size={4}>
+                    {moment(item.date).format('YYYY-MM-DD')}
+                    <Tag
+                      color={(() => {
+                        if (item.reasonableRest) return 'gold'
+                        if (item.isDiscontinue) return 'default'
+                        return 'processing'
+                      })()}
+                      style={{ zoom: '.9', cursor: 'pointer' }}
+                      onClick={() => handleClickEdit(item)}
+                    >
+                      {dayMap[moment(item.date).day()]}
+                    </Tag>
+                  </Space>
+                }
+              >
+                {item.isDiscontinue ? (
+                  <br />
+                ) : (
+                  <>
+                    热身：
+                    {getText({
+                      type: 'warmUp',
+                      data: item.warmUp,
+                      record: item,
+                      textType: 'secondary',
+                    })}
+                    锻炼：{' '}
+                    {getText({
+                      type: 'exercise',
+                      data: item.exercise,
+                      record: item,
+                    })}
+                    {!!item.description && (
+                      <>
+                        描述：
+                        <Text type="secondary">{item.description}</Text>
+                      </>
+                    )}
+                  </>
+                )}
+              </Timeline.Item>
+            )
+          })}
+        </Timeline>
+        <div ref={locateFlag} />
+      </div>
     </Spin>
   )
 }

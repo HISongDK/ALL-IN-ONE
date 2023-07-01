@@ -48,4 +48,9 @@
       margin-bottom: 24px;
     }
   }
+
+  .time_line_wrapper {
+    height: calc(100vh - 254px);
+    overflow-y: auto;
+  }
 }

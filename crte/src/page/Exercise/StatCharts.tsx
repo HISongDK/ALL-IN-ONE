@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Spin, Radio } from 'antd'
 import { useStatLog } from '@api/hooks/exercise'
+import { useLocalStorageState } from 'ahooks'
 import { useExerciseContext } from '@/store/exercise'
 import useChartsData from './hooks/useChartsData'
 import useChartsOptions from './hooks/useChartsOptions'
@@ -10,7 +11,9 @@ import CollapseChart, { ICollapseChart } from './CollapseChart'
 function StatCharts(): JSX.Element {
   const { update } = useExerciseContext()
 
-  const [range, setRange] = useState(30)
+  const [range, setRange] = useLocalStorageState('chartTimeRange', {
+    defaultValue: 30,
+  })
 
   const { getLogStat, loading, data } = useStatLog()
 

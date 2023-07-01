@@ -1,0 +1,49 @@
+@startuml hello plant uml
+
+actor me
+
+actor you as "what" <<(P,#ADD1B2)actor>>
+
+
+
+
+me -> 旧代码: 查看学习
+activate plantuml
+旧代码 -> plantuml: 预览图
+plantuml -> me: 向我展示可视化文本内容
+deactivate plantuml
+
+' newpage title text
+
+me -> Vscode: 新开窗口
+me -> Vscode: 编辑预览 
+
+alt 已知语法
+	me -> Vscode: 编辑预览 
+else 未知语法
+	me -> Chrome: 找 plantuml 官方文档查看	
+	Chrome --> me: 文档学习后
+	me -> me: 继续练习
+
+end
+
+
+
+
+
+@enduml
+
+' @startmindmap HyperlinkColor
+' *_ 卧槽
+
+' * 序列图学习 
+' 	* 起止语法（可省略）
+' 		* 起：@ startuml 
+' 		* 止：@ enduml 
+
+' 	* 参与者
+' 		* 角色 actor
+		
+
+
+' @endmindmap
