@@ -10,10 +10,13 @@ import moment from 'dayjs'
 import { Row, Spin, Timeline, Typography, Tag, Space } from 'antd'
 import { BaseType } from 'antd/lib/typography/Base'
 import _ from 'lodash'
+import duration from 'dayjs/plugin/duration'
 import PlusOneGroup from './components/PlusOneGroup'
 import { looseObj } from '@/constant'
 import { dayMap } from './constants'
 import { useExerciseContext } from '@/store/exercise'
+
+moment.extend(duration)
 
 const { Text } = Typography
 
@@ -37,12 +40,12 @@ function TimeLine({
   setIsAddVisible,
   setRecord,
 }: ITimeline) {
-  const locateFlag = useRef()
-  const scrollContainer = useRef()
+  const locateFlag = useRef<Element>()
+  const scrollContainer = useRef<Element>()
 
   const { dispatchUpdate } = useExerciseContext()
 
-  const [lazyLoadedData, setLazyLoadedData] = useState()
+  const [lazyLoadedData, setLazyLoadedData] = useState<any[]>()
 
   const data = useMemo(() => {
     const data = dataSource.slice()
@@ -70,14 +73,48 @@ function TimeLine({
     }
 
     // 空闲日合理休息标识
-    const finallyData = data.map((item, index) => {
-      if (item.isDiscontinue) {
-        const lastFiveDays = data.slice(index + 1, index + 6)
-        const hasDiscontinue = lastFiveDays.find((item) => item.isDiscontinue)
-        if (!hasDiscontinue) return { ...item, reasonableRest: true }
-      }
-      return item
-    })
+    const finallyData = data
+      .map((item, index) => {
+        if (item.isDiscontinue) {
+          // 当天中断，且前五天无中断为合理休息
+          const lastFiveDays = data.slice(index + 1, index + 6)
+          const hasDiscontinue = lastFiveDays.find((item) => item.isDiscontinue)
+          if (!hasDiscontinue) return { ...item, reasonableRest: true }
+
+          // 前五天中断，计算中断天数
+          const allDiscontinue = lastFiveDays.every(
+            (item) => item.isDiscontinue,
+          )
+          if (allDiscontinue) {
+            // 找出之前未中断的日期
+
+            // console.log('---  data  ---\n', data.slice(index + 6))
+
+            const nextContinueDay = data
+              .slice(index + 6)
+              .find((item) => !item.isDiscontinue)
+
+            const earlierDiscontinueDay = moment(nextContinueDay.date)
+              .add(1, 'day')
+              .valueOf()
+
+            console.log(
+              '---  earlierDiscontinueDay  ---\n',
+              moment(earlierDiscontinueDay).format('YYYY-MM-DD HH:mm:ss'),
+            )
+
+            const breakDurationMS =
+              moment(item.date).valueOf() - earlierDiscontinueDay
+
+            const day = moment?.duration?.(breakDurationMS).days()
+            console.log('---  day  ---\n', day)
+
+            // console.log('---  nextContinueDay  ---\n', nextContinueDay)
+          }
+        }
+        return item
+      })
+      .filter(Boolean)
 
     return finallyData
   }, [dataSource])
@@ -89,6 +126,7 @@ function TimeLine({
   const handleLazyLoad = () => {
     const y = locateFlag.current?.getBoundingClientRect()?.y
     const { clientHeight } = document.body
+    if (!y) return
     if (y - clientHeight < 200) {
       setLazyLoadedData((prev: any) => {
         return data.slice(0, prev.length + 20)
@@ -143,7 +181,7 @@ function TimeLine({
 
   return (
     <Spin spinning={logsLoading}>
-      <div ref={scrollContainer} className="time_line_wrapper">
+      <div ref={scrollContainer as any} className="time_line_wrapper">
         <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
           {lazyLoadedData?.map((item: looseObj) => {
             return (
@@ -157,6 +195,7 @@ function TimeLine({
                       color={(() => {
                         if (item.reasonableRest) return 'gold'
                         if (item.isDiscontinue) return 'default'
+                        if (item.isBreak) return 'red'
                         return 'processing'
                       })()}
                       style={{ zoom: '.9', cursor: 'pointer' }}
@@ -196,7 +235,7 @@ function TimeLine({
             )
           })}
         </Timeline>
-        <div ref={locateFlag} />
+        <div ref={locateFlag as any} />
       </div>
     </Spin>
   )

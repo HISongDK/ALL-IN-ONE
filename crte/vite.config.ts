@@ -50,6 +50,7 @@ export default defineConfig({
     // manifest: false, // 是否产出maifest.json
     // sourcemap: false, // 是否产出soucemap.json
     minify: 'terser',
+    // minify: 'esbuild',
     terserOptions: {
       compress: {
         drop_console: true,
