@@ -45,7 +45,7 @@ function TimeLine({
 
   const { dispatchUpdate } = useExerciseContext()
 
-  const [lazyLoadedData, setLazyLoadedData] = useState<any[]>()
+  // const [lazyLoadedData, setLazyLoadedData] = useState<any[]>()
 
   const data = useMemo(() => {
     const data = dataSource.slice()
@@ -73,77 +73,44 @@ function TimeLine({
     }
 
     // 空闲日合理休息标识
-    const finallyData = data
-      .map((item, index) => {
-        if (item.isDiscontinue) {
-          // 当天中断，且前五天无中断为合理休息
-          const lastFiveDays = data.slice(index + 1, index + 6)
-          const hasDiscontinue = lastFiveDays.find((item) => item.isDiscontinue)
-          if (!hasDiscontinue) return { ...item, reasonableRest: true }
-
-          // 前五天中断，计算中断天数
-          const allDiscontinue = lastFiveDays.every(
-            (item) => item.isDiscontinue,
-          )
-          if (allDiscontinue) {
-            // 找出之前未中断的日期
-
-            // console.log('---  data  ---\n', data.slice(index + 6))
-
-            const nextContinueDay = data
-              .slice(index + 6)
-              .find((item) => !item.isDiscontinue)
-
-            const earlierDiscontinueDay = moment(nextContinueDay.date)
-              .add(1, 'day')
-              .valueOf()
-
-            console.log(
-              '---  earlierDiscontinueDay  ---\n',
-              moment(earlierDiscontinueDay).format('YYYY-MM-DD HH:mm:ss'),
-            )
-
-            const breakDurationMS =
-              moment(item.date).valueOf() - earlierDiscontinueDay
-
-            const day = moment?.duration?.(breakDurationMS).days()
-            console.log('---  day  ---\n', day)
-
-            // console.log('---  nextContinueDay  ---\n', nextContinueDay)
-          }
-        }
-        return item
-      })
-      .filter(Boolean)
+    const finallyData = data.map((item, index) => {
+      if (item.isDiscontinue) {
+        // 当天中断，且前五天无中断为合理休息
+        const lastFiveDays = data.slice(index + 1, index + 6)
+        const hasDiscontinue = lastFiveDays.find((item) => item.isDiscontinue)
+        if (!hasDiscontinue) return { ...item, reasonableRest: true }
+      }
+      return item
+    })
 
     return finallyData
   }, [dataSource])
 
-  useEffect(() => {
-    setLazyLoadedData(data.slice(0, 20))
-  }, [data])
+  // useEffect(() => {
+  //   setLazyLoadedData(data.slice(0, 20))
+  // }, [data])
 
-  const handleLazyLoad = () => {
-    const y = locateFlag.current?.getBoundingClientRect()?.y
-    const { clientHeight } = document.body
-    if (!y) return
-    if (y - clientHeight < 200) {
-      setLazyLoadedData((prev: any) => {
-        return data.slice(0, prev.length + 20)
-      })
-    }
-  }
+  // const handleLazyLoad = () => {
+  //   const y = locateFlag.current?.getBoundingClientRect()?.y
+  //   const { clientHeight } = document.body
+  //   if (!y) return
+  //   if (y - clientHeight < 200) {
+  //     setLazyLoadedData((prev: any) => {
+  //       return data.slice(0, prev.length + 20)
+  //     })
+  //   }
+  // }
 
-  const throttledLazyLoadFn = _.throttle(handleLazyLoad, 20)
+  // const throttledLazyLoadFn = _.throttle(handleLazyLoad, 20)
 
-  useEffect(() => {
-    scrollContainer.current?.addEventListener('scroll', throttledLazyLoadFn)
-    return () =>
-      scrollContainer.current?.removeEventListener(
-        'scroll',
-        throttledLazyLoadFn,
-      )
-  }, [data])
+  // useEffect(() => {
+  //   scrollContainer.current?.addEventListener('scroll', throttledLazyLoadFn)
+  //   return () =>
+  //     scrollContainer.current?.removeEventListener(
+  //       'scroll',
+  //       throttledLazyLoadFn,
+  //     )
+  // }, [data])
 
   const handleClickEdit = (record: any) => {
     setIsAddVisible(true)
@@ -181,62 +148,63 @@ function TimeLine({
 
   return (
     <Spin spinning={logsLoading}>
-      <div ref={scrollContainer as any} className="time_line_wrapper">
-        <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
-          {lazyLoadedData?.map((item: looseObj) => {
-            return (
-              <Timeline.Item
-                key={item.date}
-                color={item.isDiscontinue && 'gray'}
-                label={
-                  <Space size={4}>
-                    {moment(item.date).format('YYYY-MM-DD')}
-                    <Tag
-                      color={(() => {
-                        if (item.reasonableRest) return 'gold'
-                        if (item.isDiscontinue) return 'default'
-                        if (item.isBreak) return 'red'
-                        return 'processing'
-                      })()}
-                      style={{ zoom: '.9', cursor: 'pointer' }}
-                      onClick={() => handleClickEdit(item)}
-                    >
-                      {dayMap[moment(item.date).day()]}
-                    </Tag>
-                  </Space>
-                }
-              >
-                {item.isDiscontinue ? (
-                  <br />
-                ) : (
-                  <>
-                    热身：
-                    {getText({
-                      type: 'warmUp',
-                      data: item.warmUp,
-                      record: item,
-                      textType: 'secondary',
-                    })}
-                    锻炼：{' '}
-                    {getText({
-                      type: 'exercise',
-                      data: item.exercise,
-                      record: item,
-                    })}
-                    {!!item.description && (
-                      <>
-                        描述：
-                        <Text type="secondary">{item.description}</Text>
-                      </>
-                    )}
-                  </>
-                )}
-              </Timeline.Item>
-            )
-          })}
-        </Timeline>
-        <div ref={locateFlag as any} />
-      </div>
+      {/* <div ref={scrollContainer as any} className="time_line_wrapper"> */}
+      <Timeline mode="left" style={{ minHeight: 300, width: '80%' }}>
+        {/* {lazyLoadedData?.map((item: looseObj) => { */}
+        {data?.map((item: looseObj) => {
+          return (
+            <Timeline.Item
+              key={item.date}
+              color={item.isDiscontinue && 'gray'}
+              label={
+                <Space size={4}>
+                  {moment(item.date).format('YYYY-MM-DD')}
+                  <Tag
+                    color={(() => {
+                      if (item.reasonableRest) return 'gold'
+                      if (item.isDiscontinue) return 'default'
+                      if (item.isBreak) return 'red'
+                      return 'processing'
+                    })()}
+                    style={{ zoom: '.9', cursor: 'pointer' }}
+                    onClick={() => handleClickEdit(item)}
+                  >
+                    {dayMap[moment(item.date).day()]}
+                  </Tag>
+                </Space>
+              }
+            >
+              {item.isDiscontinue ? (
+                <br />
+              ) : (
+                <>
+                  热身：
+                  {getText({
+                    type: 'warmUp',
+                    data: item.warmUp,
+                    record: item,
+                    textType: 'secondary',
+                  })}
+                  锻炼：{' '}
+                  {getText({
+                    type: 'exercise',
+                    data: item.exercise,
+                    record: item,
+                  })}
+                  {!!item.description && (
+                    <>
+                      描述：
+                      <Text type="secondary">{item.description}</Text>
+                    </>
+                  )}
+                </>
+              )}
+            </Timeline.Item>
+          )
+        })}
+      </Timeline>
+      <div ref={locateFlag as any} />
+      {/* </div> */}
     </Spin>
   )
 }
