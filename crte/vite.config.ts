@@ -11,6 +11,7 @@ export default defineConfig({
   // optimizeDeps: {
   //   include: ['echarts'],
   // },
+  assetsInclude: ['**/*.MP4'],
   resolve: {
     alias: {
       '@': pathResolve('src'),
