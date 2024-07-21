@@ -1,5 +1,5 @@
+import { Button, Transfer, Typography } from 'antd'
 import React, { useMemo } from 'react'
-import { Transfer, Button, Typography } from 'antd'
 import useStoragedProcrastinations from './hooks/useStorageProcrastinations'
 
 const App = () => {

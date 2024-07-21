@@ -9,6 +9,14 @@ body,
   margin: 0;
 }
 
+.suspense {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 // 滚动条
 @mixin scrollbar(
   $width: 2px,

@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useReducer, createContext } from 'react'
-import { useGetExerciseLogs } from '@api/hooks/exercise'
 import { looseObj } from '@/constant'
+import { useGetExerciseLogs } from '@api/hooks/exercise'
+import React, { useContext, useMemo, useReducer, createContext } from 'react'
 
 interface IExerciseContext {
   data: any[]
@@ -24,7 +24,13 @@ const ExerciseContextCom: React.FC = ({ children }) => {
       update,
       dispatchUpdate,
     }),
-    [data, getLogs, getLogsLoading, update, dispatchUpdate],
+    [
+      data,
+      getLogs,
+      getLogsLoading,
+      update,
+      // dispatchUpdate
+    ],
   )
 
   return (

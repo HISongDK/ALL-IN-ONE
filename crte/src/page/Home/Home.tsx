@@ -15,6 +15,7 @@ import './index.scss'
 const { Header, Sider, Content } = Layout
 
 const firstRoute: any = routesConfig[0]
+console.log('---  firstRoute  ---\n', firstRoute)
 
 const items = routesConfig.map((route) => ({
   key: route.path,
@@ -66,15 +67,15 @@ export default function Home() {
                 {routesConfig.map((route: any) => (
                   <Route
                     exact
-                    key={route.route}
-                    path={route.route}
+                    key={route.path}
+                    path={route.path}
                     component={route.component}
                   />
                 ))}
-                <Redirect exact from="/" to={routesConfig[0].path} />
-                <Route
-                  render={(props) => <firstRoute.component {...props} />}
-                />
+
+                <Redirect to={routesConfig[0].path} />
+
+                {/* <Route path="/" render={routesConfig[0].component} /> */}
               </Switch>
             </Card>
           </Content>

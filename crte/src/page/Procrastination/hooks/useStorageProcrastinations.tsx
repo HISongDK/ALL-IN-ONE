@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
-import procrastinationsList from '../config'
-import storage from '@/utils/storage'
 import { looseObj } from '@/constant'
+import storage from '@/utils/storage'
+import dayjs from 'dayjs'
+import React, { useEffect, useState } from 'react'
+import procrastinationsList from '../config'
 
 const key = 'PROCRASTINATIONS_LIST'
 

@@ -4,8 +4,8 @@ import { debounce } from '@/utils'
 // import img404 from '../../static/image/404.jpg'
 import './index.css'
 
-import video from './lubang.MP4'
-import audio from './audio.mp3'
+// import video from './lubang.MP4'
+// import audio from "./audio.mp3";
 
 // import { type } from '../../constant/index'
 import useAudioData from './useAudioData'
@@ -31,7 +31,7 @@ function ResultPage(props: IResult) {
 
   // useVideoAudioData()
 
-  useAudioData()
+  // useAudioData();
 
   return (
     <div className="result-page">
@@ -41,17 +41,17 @@ function ResultPage(props: IResult) {
 
         <video
           style={{ width: 600, height: 400, border: 'solid 1px #333' }}
-          src={video}
+          // src={video}
           // type="video/mp4"
           controls
         >
           <track kind="captions" {...props} />
         </video>
 
-        <audio controls src={audio}>
-          audio
-          <track kind="captions" />
-        </audio>
+        {/* <audio controls src={audio}>
+					audio
+					<track kind="captions" />
+				</audio> */}
       </div>
     </div>
   )

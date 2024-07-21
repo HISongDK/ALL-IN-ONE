@@ -80,8 +80,8 @@ function UserInfo() {
             onClick={handleClick}
             items={[
               { key: 'logout', label: '退出登录' },
-              { key: 'logoff', label: <Text type="danger">注销用户</Text> },
               { key: 'update', label: '修改信息' },
+              { key: 'logoff', label: <Text type="danger">注销用户</Text> },
             ]}
           />
         }
