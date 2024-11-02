@@ -76,6 +76,7 @@ function UserInfo() {
     <>
       <Dropdown
         overlay={
+          // menu={
           <Menu
             onClick={handleClick}
             items={[
@@ -93,7 +94,8 @@ function UserInfo() {
         </div>
       </Dropdown>
       <Modal
-        visible={updateVisible}
+        // visible={updateVisible}
+        open={updateVisible}
         centered
         okText="确认"
         cancelText="取消"
