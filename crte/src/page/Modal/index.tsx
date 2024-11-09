@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'antd'
+import { Button, Modal, Checkbox as CheckboxAntd } from 'antd'
+import { Checkbox as CheckboxSemi } from '@douyinfe/semi-ui'
+import { Checkbox as CheckboxTea } from 'tea-component'
 import {
   getConfirmStatus,
   getIntervalConfirmStatus,
@@ -25,6 +27,9 @@ function ModalConfirmPromise({}: Props) {
   const handleClose = () => {
     setVisible(false)
   }
+  const [antdCheckedValue, setAntdCheckedValue] = useState()
+  const [semiCheckedValue, setSemiCheckedValue] = useState()
+  const [teaCheckedValue, setTeaCheckedValue] = useState()
 
   return (
     <div>
@@ -48,6 +53,10 @@ function ModalConfirmPromise({}: Props) {
           </Button>
         </div>
       </Modal>
+      <CheckboxAntd checked={antdCheckedValue} />
+      <CheckboxSemi checked={semiCheckedValue} />
+
+      <CheckboxTea value={teaCheckedValue} />
     </div>
   )
 }
